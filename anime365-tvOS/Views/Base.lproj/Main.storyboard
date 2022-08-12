@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="20037" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i4K-W6-FhK">
+                                <rect key="frame" x="480" y="340" width="960" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="dcO-Qm-O5O"/>
+                                    <constraint firstAttribute="width" priority="1" id="imC-Cf-Ga8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="09N-3g-prt">
+                                <rect key="frame" x="480" y="460" width="960" height="80"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgq-2y-xi5">
+                                <rect key="frame" x="720" y="600" width="480" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Войти"/>
+                                <connections>
+                                    <action selector="pressLogin" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="31S-hE-qT9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wu6-TO-1qx"/>
+                        <constraints>
+                            <constraint firstItem="i4K-W6-FhK" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="8Vw-Wr-S22"/>
+                            <constraint firstItem="09N-3g-prt" firstAttribute="height" secondItem="i4K-W6-FhK" secondAttribute="height" id="BzZ-H5-dQL"/>
+                            <constraint firstItem="cgq-2y-xi5" firstAttribute="centerX" secondItem="09N-3g-prt" secondAttribute="centerX" id="MbR-JC-eSm"/>
+                            <constraint firstItem="09N-3g-prt" firstAttribute="width" secondItem="i4K-W6-FhK" secondAttribute="width" id="P18-mp-dm9"/>
+                            <constraint firstItem="cgq-2y-xi5" firstAttribute="width" secondItem="09N-3g-prt" secondAttribute="width" multiplier="0.5" id="aab-1q-m9M"/>
+                            <constraint firstItem="09N-3g-prt" firstAttribute="top" secondItem="i4K-W6-FhK" secondAttribute="bottom" constant="40" id="dGI-YL-e4v"/>
+                            <constraint firstItem="i4K-W6-FhK" firstAttribute="top" secondItem="wu6-TO-1qx" secondAttribute="centerY" constant="-200" id="fpb-O9-fG9"/>
+                            <constraint firstItem="i4K-W6-FhK" firstAttribute="centerX" secondItem="wu6-TO-1qx" secondAttribute="centerX" id="ju7-e0-4Nq"/>
+                            <constraint firstItem="cgq-2y-xi5" firstAttribute="top" secondItem="09N-3g-prt" secondAttribute="bottom" constant="60" id="uah-dc-fzg"/>
+                            <constraint firstItem="09N-3g-prt" firstAttribute="leading" secondItem="i4K-W6-FhK" secondAttribute="leading" id="yN2-9h-lhX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="i4K-W6-FhK" id="p7n-8b-m5k"/>
+                        <outlet property="loginButton" destination="cgq-2y-xi5" id="egs-sh-Y8a"/>
+                        <outlet property="passwordTextField" destination="09N-3g-prt" id="jmY-4U-bT4"/>
+                        <segue destination="wzB-U3-bAM" kind="presentation" identifier="fromLoginToMain" id="pUD-xa-sf6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-345" y="-40"/>
+        </scene>
+        <!--Серии к просмотру-->
+        <scene sceneID="V8r-wW-vx8">
+            <objects>
+                <viewController id="Wrq-JI-gbg" customClass="AnimeToWatchViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3k9-qW-ISU"/>
+                        <viewControllerLayoutGuide type="bottom" id="Uf4-PT-7nB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="R9U-WF-CPy">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tq5-Aq-3Wz">
+                                <rect key="frame" x="85" y="162" width="1750" height="853"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Qg4-N5-s5D"/>
+                        <constraints>
+                            <constraint firstItem="Qg4-N5-s5D" firstAttribute="trailing" secondItem="tq5-Aq-3Wz" secondAttribute="trailing" constant="5" id="Cit-kX-u8k"/>
+                            <constraint firstItem="tq5-Aq-3Wz" firstAttribute="leading" secondItem="Qg4-N5-s5D" secondAttribute="leading" constant="5" id="DaG-Mi-hKZ"/>
+                            <constraint firstItem="tq5-Aq-3Wz" firstAttribute="top" secondItem="Qg4-N5-s5D" secondAttribute="top" constant="5" id="fhn-UJ-cPh"/>
+                            <constraint firstItem="Qg4-N5-s5D" firstAttribute="bottom" secondItem="tq5-Aq-3Wz" secondAttribute="bottom" constant="5" id="xsn-zT-uhA"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Серии к просмотру" id="khV-m7-FSv"/>
+                    <connections>
+                        <outlet property="textField" destination="tq5-Aq-3Wz" id="LzR-r4-HIt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wZ0-Rr-zL7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="731" y="1594"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="94Z-u9-rSs">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wzB-U3-bAM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="R9R-xX-gfS">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Wrq-JI-gbg" kind="relationship" relationship="viewControllers" id="erD-Jy-863"/>
+                        <segue destination="MQ5-jJ-Cxg" kind="relationship" relationship="viewControllers" id="r8u-jo-Qow"/>
+                        <segue destination="lpQ-nq-Irw" kind="relationship" relationship="viewControllers" id="p9e-ll-nQA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fgO-6e-adU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2237" y="-40"/>
+        </scene>
+        <!--Рейтинг новых-->
+        <scene sceneID="dGh-b0-ihv">
+            <objects>
+                <viewController id="MQ5-jJ-Cxg" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yF7-Th-ixR"/>
+                        <viewControllerLayoutGuide type="bottom" id="28d-Vy-Cne"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DZL-CT-wvJ">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="i2e-ZG-aLq"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Рейтинг новых" id="XM4-vH-GZl"/>
+                    <navigationItem key="navigationItem" id="NGz-0B-WHH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TfA-YM-P6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3089" y="1622"/>
+        </scene>
+        <!--Новые серии-->
+        <scene sceneID="UBp-MR-aa9">
+            <objects>
+                <viewController id="lpQ-nq-Irw" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="quO-RF-Det"/>
+                        <viewControllerLayoutGuide type="bottom" id="4bo-Oc-fR4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4V3-Mp-iSZ">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ahi-Zl-pxf"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Новые серии" id="wFN-KY-RI2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P0q-6E-wzL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5274" y="1630"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
