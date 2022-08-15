@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="20037" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="Rz2-K0-ksD" customClass="TranslationCollectionViewCell" customModule="anime365_tvOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="453" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="453" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rZ-jz-JkR">
+                        <rect key="frame" x="80" y="60" width="373" height="60"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="7PP-Ag-gPX"/>
+            <constraints>
+                <constraint firstItem="5rZ-jz-JkR" firstAttribute="leading" secondItem="7PP-Ag-gPX" secondAttribute="leading" id="bFi-Qq-SJU"/>
+                <constraint firstItem="7PP-Ag-gPX" firstAttribute="trailing" secondItem="5rZ-jz-JkR" secondAttribute="trailing" id="fNO-sp-Hth"/>
+                <constraint firstItem="7PP-Ag-gPX" firstAttribute="bottom" secondItem="5rZ-jz-JkR" secondAttribute="bottom" id="j0r-mr-1zq"/>
+                <constraint firstItem="7PP-Ag-gPX" firstAttribute="top" secondItem="5rZ-jz-JkR" secondAttribute="top" id="kCa-eS-vza"/>
+            </constraints>
+            <size key="customSize" width="453" height="120"/>
+            <connections>
+                <outlet property="labelView" destination="5rZ-jz-JkR" id="PTR-mt-Kdf"/>
+            </connections>
+            <point key="canvasLocation" x="387.5" y="41"/>
+        </collectionViewCell>
+    </objects>
+</document>

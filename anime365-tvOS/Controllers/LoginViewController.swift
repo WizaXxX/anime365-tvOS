@@ -14,8 +14,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
-    var needLoginToSite: Bool = false
-    
     let sessionIdKeyName = "sessionId"
     let userIdKeyName = "userId"
     
@@ -52,24 +50,22 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        needLoginToSite = needLogin()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        if !needLoginToSite {
+      
+
+        if !needLogin() {
             goToMainView()
         }
     }
-    
+        
     private func needLogin() -> Bool {
         
         guard let sessionId = KeychainWrapper.standard.string(forKey: sessionIdKeyName) else { return true }
+        if sessionId.isEmpty { return true }
         Session.instance.sessionId = sessionId
         
         guard let userId = KeychainWrapper.standard.string(forKey: userIdKeyName) else { return true }
-        Session.instance.sessionId = userId
+        Session.instance.userId = userId
         
         return false
     }
@@ -91,7 +87,27 @@ class LoginViewController: UIViewController {
     
     private func goToMainView() {
         Networker.shared.setSessionId()
-        performSegue(withIdentifier: "fromLoginToMain", sender: nil)
+        
+        emailTextField.isHidden = true
+        passwordTextField.isHidden = true
+        loginButton.isHidden = true
+        
+        let spinner = UIActivityIndicatorView(style: .large)
+        view = UIView()
+        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.startAnimating()
+        view.addSubview(spinner)
+
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        let stb = UIStoryboard(name: "Main", bundle: .main)
+        let vc = stb.instantiateViewController(withIdentifier: "tab")
+        if let control = navigationController {
+            control.setViewControllers([vc], animated: true)
+        }
     }
 
 }
