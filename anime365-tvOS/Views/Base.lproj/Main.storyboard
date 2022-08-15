@@ -214,37 +214,18 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Wrq-JI-gbg" kind="relationship" relationship="viewControllers" destinationCreationSelector="Каталог аниме" id="nDl-pM-Liq"/>
+                        <segue destination="Wrq-JI-gbg" kind="relationship" relationship="viewControllers" id="nDl-pM-Liq"/>
+                        <segue destination="lpQ-nq-Irw" kind="relationship" relationship="viewControllers" id="NeP-e2-TFb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgO-6e-adU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2327" y="-40"/>
         </scene>
-        <!--Рейтинг новых-->
-        <scene sceneID="dGh-b0-ihv">
-            <objects>
-                <viewController id="MQ5-jJ-Cxg" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yF7-Th-ixR"/>
-                        <viewControllerLayoutGuide type="bottom" id="28d-Vy-Cne"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="DZL-CT-wvJ">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="i2e-ZG-aLq"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Рейтинг новых" id="XM4-vH-GZl"/>
-                    <navigationItem key="navigationItem" id="NGz-0B-WHH"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TfA-YM-P6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5221" y="1622"/>
-        </scene>
         <!--Новые серии-->
         <scene sceneID="UBp-MR-aa9">
             <objects>
-                <viewController id="lpQ-nq-Irw" sceneMemberID="viewController">
+                <viewController id="lpQ-nq-Irw" customClass="NewEpisodesViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="quO-RF-Det"/>
                         <viewControllerLayoutGuide type="bottom" id="4bo-Oc-fR4"/>
@@ -252,13 +233,44 @@
                     <view key="view" contentMode="scaleToFill" id="4V3-Mp-iSZ">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sI2-RV-e7O">
+                                <rect key="frame" x="80" y="157" width="1760" height="863"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="J3R-a8-aRp">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="Sfd-ta-080">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EeT-tE-vfl">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ahi-Zl-pxf"/>
+                        <constraints>
+                            <constraint firstItem="ahi-Zl-pxf" firstAttribute="bottom" secondItem="sI2-RV-e7O" secondAttribute="bottom" id="StG-tJ-CCt"/>
+                            <constraint firstItem="sI2-RV-e7O" firstAttribute="top" secondItem="ahi-Zl-pxf" secondAttribute="top" id="b9g-GC-LEQ"/>
+                            <constraint firstItem="sI2-RV-e7O" firstAttribute="leading" secondItem="ahi-Zl-pxf" secondAttribute="leading" id="cSU-hy-Ynq"/>
+                            <constraint firstItem="ahi-Zl-pxf" firstAttribute="trailing" secondItem="sI2-RV-e7O" secondAttribute="trailing" id="crZ-a5-QEz"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Новые серии" id="wFN-KY-RI2"/>
+                    <navigationItem key="navigationItem" id="lWh-pV-vnM"/>
+                    <connections>
+                        <outlet property="collectionView" destination="sI2-RV-e7O" id="9zi-mS-arS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0q-6E-wzL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7406" y="1630"/>
+            <point key="canvasLocation" x="5091" y="1675"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jIJ-7b-UXA">

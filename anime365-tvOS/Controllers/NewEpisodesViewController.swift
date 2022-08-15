@@ -1,44 +1,40 @@
 //
-//  AnimeViewController.swift
+//  NewEpisodesViewController.swift
 //  anime365-tvOS
 //
-//  Created by Илья Козырев on 14.08.2022.
+//  Created by Илья Козырев on 15.08.2022.
 //
 
 import UIKit
 
-class AnimeViewController: UIViewController {
+class NewEpisodesViewController: UIViewController {
 
-    @IBOutlet weak var labelView: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var anime: Anime?
+    var episodeIds = [[String: String]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelView.text = anime?.title
-        imageView.image = anime?.posterUrl.getImage()
+        Networker.shared.getEpisoodesToWath { [weak self] data in
+            self?.episodeIds = data
+            self?.collectionView.reloadData()
+        }
         
         collectionView.register(
-            UINib(nibName: "EpisodeCollectionViewCell", bundle: nil),
-            forCellWithReuseIdentifier: "EpisodeCollectionViewCell")
+            UINib(nibName: "EpisodeToWatchCollectionViewCell", bundle: nil),
+            forCellWithReuseIdentifier: "EpisodeToWatchCollectionViewCell")
         
         collectionView.dataSource = self
         collectionView.delegate = self
         
     }
-    
-    func configure(from anime: Anime) {
-        self.anime = anime
-    }
 }
 
-extension AnimeViewController: UICollectionViewDelegate {
+extension NewEpisodesViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? EpisodeCollectionViewCell else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? EpisodeToWatchCollectionViewCell else { return }
         guard let episode = cell.episode else { return }
 
         let stb = UIStoryboard(name: "Main", bundle: .main)
@@ -69,31 +65,31 @@ extension AnimeViewController: UICollectionViewDelegate {
     }
 }
 
-extension AnimeViewController: UICollectionViewDataSource {
+extension NewEpisodesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return anime?.episodes?.count ?? 0
+        return episodeIds.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "EpisodeCollectionViewCell",
-            for: indexPath) as! EpisodeCollectionViewCell
+            withReuseIdentifier: "EpisodeToWatchCollectionViewCell",
+            for: indexPath) as! EpisodeToWatchCollectionViewCell
         
-        guard let episode = anime?.episodes?[indexPath.row] else { return cell }
+        let episodeId = episodeIds[indexPath.row]
+        cell.configure(from: episodeId)
         
-        cell.configure(from: episode)
         return cell
     }
 }
 
-extension AnimeViewController: UICollectionViewDelegateFlowLayout {
+extension NewEpisodesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let width = collectionView.bounds.width
         let whiteSpaces: CGFloat = 10
         let cellWidth = width / 4 - whiteSpaces
 
-        return CGSize(width: 250, height: 120)
+        return CGSize(width: cellWidth, height: cellWidth * 1.5)
     }
 }

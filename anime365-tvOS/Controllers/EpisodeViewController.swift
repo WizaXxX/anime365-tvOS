@@ -20,18 +20,15 @@ class EpisodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Networker.shared.getEpisodeWithTranslations(
-            episodeId: episode!.id) { [weak self] data in
-                self?.episodeWithTranslations = data
-                
-                var setOfTypes = Set<TypeOfTranslation>()
-                data.translations.forEach({setOfTypes.insert($0.type)})
-                setOfTypes.forEach({self?.typesOfTranslations.append($0)})
-                self?.typesOfTranslations.sort(by: {$0.getIndex() < $1.getIndex()})
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+        if let episodeDone = episodeWithTranslations {
+            loadData()
+        } else {
+            Networker.shared.getEpisodeWithTranslations(
+                episodeId: episode!.id) { [weak self] data in
+                    self?.episodeWithTranslations = data
+                    self?.loadData()
                 }
-            }
+        }
         
         tableView.register(
             UINib(nibName: "TypeOfTraslationTableViewCell", bundle: nil),
@@ -51,6 +48,23 @@ class EpisodeViewController: UIViewController {
     func configure(from episode: Episode) {
         self.episode = episode
     }
+    
+    func configure(from episode: EpisodeWithTranslations) {
+        self.episodeWithTranslations = episode
+    }
+    
+    func loadData() {
+        
+        var setOfTypes = Set<TypeOfTranslation>()
+        episodeWithTranslations?.translations.forEach({setOfTypes.insert($0.type)})
+        setOfTypes.forEach({typesOfTranslations.append($0)})
+        typesOfTranslations.sort(by: {$0.getIndex() < $1.getIndex()})
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+        
+    }
+    
 }
 
 extension EpisodeViewController: UITableViewDataSource {

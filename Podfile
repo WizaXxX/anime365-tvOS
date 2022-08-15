@@ -9,5 +9,6 @@ target 'anime365-tvOS' do
   pod 'SwiftKeychainWrapper'
   pod 'Alamofire'
   pod 'RealmSwift', '~>10'
+  pod 'SwiftSoup'
 
 end

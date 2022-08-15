@@ -12,5 +12,5 @@ struct Anime {
     var title: String
     var posterUrlSmall: ImageFromInternet
     var posterUrl: ImageFromInternet
-    var episodes: [Episode]
+    var episodes: [Episode]?
 }

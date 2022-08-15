@@ -11,14 +11,18 @@ import AVFoundation
 
 class PlayerViewController: AVPlayerViewController {
     
+    var url: String?
+    var subUrl: String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        player?.play()
-    }
-    
-    func configure(url: String, subUrl: String?) {
-        guard let videoUrl = URL(string: url) else { return }
+        guard let urlToVideo = url else { return }
+        guard let videoUrl = URL(string: urlToVideo) else { return }
         
         let videoAsset = AVURLAsset(url: videoUrl)
 
@@ -58,7 +62,12 @@ class PlayerViewController: AVPlayerViewController {
         }
         
         self.player = AVPlayer(playerItem: AVPlayerItem(asset: mixComposition))
-      
+        player?.play()
+    }
+    
+    func configure(url: String, subUrl: String?) {
+        self.url = url
+        self.subUrl = subUrl
     }
     
 }

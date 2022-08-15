@@ -9,11 +9,14 @@ import Foundation
 import Alamofire
 import RealmSwift
 import SwiftKeychainWrapper
+import SwiftSoup
 
 enum Methods {
     case login, getSerieses
     case getEpisodeWithTranslation(id: String)
     case getTranslationData(id: String)
+    case main
+    case getAnime(id: String)
     
     var value: String {
         switch self {
@@ -25,6 +28,10 @@ enum Methods {
             return "api/episodes/\(id)"
         case .getTranslationData(let id):
             return "api/translations/embed/\(id)"
+        case .main:
+            return ""
+        case .getAnime(let id):
+            return "api/series/\(id)"
         }
     }
     
@@ -115,6 +122,24 @@ class Networker {
             }
             guard let result = response.value else { return }
             completion(result)
+        }
+    }
+    
+    private func sendGetRequest(
+        url: String,
+        completion: @escaping (String)->()) {
+        
+        let headers: HTTPHeaders = ["User-Agent": "anime-365-tvOS"]
+        AF.request(url, method: .get, headers: headers).response { response in
+            if response.error != nil {
+                guard let isContain = String(data: response.data!, encoding: .utf8)?.contains("You should login first") else { return }
+                if isContain {
+                    KeychainWrapper.standard.set("", forKey: "sessionId")
+                    exit(1)
+                }
+            }
+            guard let bodyString = String(data: response.data!, encoding: .utf8) else { return }
+            completion(bodyString)
         }
     }
         
@@ -254,5 +279,52 @@ extension Networker {
             guard let data = result?.data else { return }
             completion(data)
         }
+    }
+}
+
+extension Networker {
+    func getEpisoodesToWath(completion: @escaping ([[String: String]]) -> Void) {
+        guard let url = getUrl(method: .main) else { return }
+        sendGetRequest(url: url) { body in
+            let doc = try? SwiftSoup.parse(body)
+            let allDiv = try? doc?.select("div")
+            let animeList = allDiv?.filter({ element in
+                let id = try? element.attr("id")
+                return id == "m-index-personal-episodes"
+            })
+            
+            var episodesData: [String] = [String]()
+            animeList?.map({ element in
+                let link = try? element.select("h5").select("a")
+                link?.forEach({ linkElement in
+                    if let url = try? linkElement.attr("href") {
+                        episodesData.append(url)
+                    }
+                })
+            })
+            var episodes = [[String: String]]()
+            for url in episodesData {
+                var partOfData = url.groups(for: "-([0-9]*)/.*seriya-([0-9]*)")
+                let episodeId = partOfData[0].popLast()
+                let animeId = partOfData[0].popLast()
+                episodes.append([animeId!: episodeId!])
+            }
+            completion(episodes)
+        }
+    }
+}
+
+extension Networker {
+    func getAnime(id: String, completion: @escaping (Anime) -> Void) {
+        guard let url = getUrl(method: .getAnime(id: id)) else { return }
+        sendGetRequestJSON(url: url, type: SiteResponse<SiteAnime>.self) { [weak self] result in
+            guard let data = result?.data else { return }
+            completion(Anime(
+                id: data.id,
+                title: data.title,
+                posterUrlSmall: ImageFromInternet(url: data.posterUrlSmall),
+                posterUrl: ImageFromInternet(url: data.posterUrl)))
+        }
+        
     }
 }
