@@ -69,7 +69,7 @@
             </objects>
             <point key="canvasLocation" x="-205" y="-40"/>
         </scene>
-        <!--Каталог аниме-->
+        <!--Catalog View Controller-->
         <scene sceneID="V8r-wW-vx8">
             <objects>
                 <viewController id="Wrq-JI-gbg" customClass="CatalogViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -121,7 +121,7 @@
                             <constraint firstItem="Qg4-N5-s5D" firstAttribute="bottom" secondItem="ZK8-Nl-d2w" secondAttribute="bottom" id="ofh-jY-Q6O"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Каталог аниме" id="JSr-Qw-3cd"/>
+                    <tabBarItem key="tabBarItem" title="" systemItem="search" id="JSr-Qw-3cd"/>
                     <navigationItem key="navigationItem" id="LCB-vh-dai"/>
                     <connections>
                         <outlet property="collectionView" destination="ZK8-Nl-d2w" id="DTH-vH-H47"/>
@@ -203,10 +203,10 @@
             </objects>
             <point key="canvasLocation" x="2874" y="1675"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="94Z-u9-rSs">
             <objects>
-                <tabBarController restorationIdentifier="1" storyboardIdentifier="tab" automaticallyAdjustsScrollViewInsets="NO" id="wzB-U3-bAM" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tab" automaticallyAdjustsScrollViewInsets="NO" id="wzB-U3-bAM" customClass="TabBarViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="R9R-xX-gfS">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -214,8 +214,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Wrq-JI-gbg" kind="relationship" relationship="viewControllers" id="nDl-pM-Liq"/>
                         <segue destination="lpQ-nq-Irw" kind="relationship" relationship="viewControllers" id="NeP-e2-TFb"/>
+                        <segue destination="Wrq-JI-gbg" kind="relationship" relationship="viewControllers" id="Hl7-SY-4S1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgO-6e-adU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -327,17 +327,26 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5H-Yv-yGx">
+                                <rect key="frame" x="80" y="974" width="528" height="46"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Eub-SM-IQA"/>
                         <constraints>
                             <constraint firstItem="XAk-i5-eRP" firstAttribute="top" secondItem="Eub-SM-IQA" secondAttribute="top" id="2AV-l9-1PM"/>
+                            <constraint firstItem="Q5H-Yv-yGx" firstAttribute="leading" secondItem="It7-w2-B4R" secondAttribute="leading" id="5rV-sT-lMM"/>
                             <constraint firstItem="Eub-SM-IQA" firstAttribute="bottom" secondItem="XAk-i5-eRP" secondAttribute="bottom" id="Ced-O1-luF"/>
                             <constraint firstItem="It7-w2-B4R" firstAttribute="width" secondItem="Eub-SM-IQA" secondAttribute="width" multiplier="0.3" id="JXr-7h-lKR"/>
                             <constraint firstItem="Eub-SM-IQA" firstAttribute="bottom" secondItem="It7-w2-B4R" secondAttribute="bottom" id="JY2-fM-vN8"/>
                             <constraint firstItem="It7-w2-B4R" firstAttribute="leading" secondItem="Eub-SM-IQA" secondAttribute="leading" id="RFb-25-pay"/>
                             <constraint firstItem="Eub-SM-IQA" firstAttribute="trailing" secondItem="XAk-i5-eRP" secondAttribute="trailing" id="T5O-Ge-q9w"/>
+                            <constraint firstItem="Q5H-Yv-yGx" firstAttribute="trailing" secondItem="It7-w2-B4R" secondAttribute="trailing" id="e5L-CI-IME"/>
                             <constraint firstItem="XAk-i5-eRP" firstAttribute="leading" secondItem="It7-w2-B4R" secondAttribute="trailing" constant="20" id="lop-2a-UMb"/>
                             <constraint firstItem="It7-w2-B4R" firstAttribute="top" secondItem="Eub-SM-IQA" secondAttribute="top" id="qhK-x7-jEe"/>
+                            <constraint firstItem="Q5H-Yv-yGx" firstAttribute="top" secondItem="It7-w2-B4R" secondAttribute="bottom" constant="-46" id="vln-2x-hjD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4GH-p3-lgR"/>

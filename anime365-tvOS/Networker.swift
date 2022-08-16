@@ -34,7 +34,6 @@ enum Methods {
             return "api/series/\(id)"
         }
     }
-    
 }
 
 enum ErrorOfRequest: Error {
@@ -189,7 +188,7 @@ extension Networker {
     
     func getAnimeFromSite(searchString: String, completion: @escaping () -> Void) {
         
-        var params = ["limit": "100"]
+        var params = ["limit": "20"]
         if !searchString.isEmpty {
             params["query"] = searchString
         }

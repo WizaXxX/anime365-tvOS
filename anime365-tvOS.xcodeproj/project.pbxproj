@@ -50,6 +50,7 @@
 		E98A4EA528A9800C000295CD /* SiteStreamTranslationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4EA428A9800C000295CD /* SiteStreamTranslationData.swift */; };
 		E98A4EA728A98A2D000295CD /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4EA628A98A2D000295CD /* PlayerViewController.swift */; };
 		E9A4B75A28A6F336001A58DD /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A4B75928A6F336001A58DD /* CatalogViewController.swift */; };
+		E9F1453E28AB872A00C3A5B2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		E98A4EA428A9800C000295CD /* SiteStreamTranslationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteStreamTranslationData.swift; sourceTree = "<group>"; };
 		E98A4EA628A98A2D000295CD /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		E9A4B75928A6F336001A58DD /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
+		E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				E9134C8428A6A62B001D25EC /* LoginViewController.swift */,
 				E95DB93028AAB13800D3791B /* NewEpisodesViewController.swift */,
 				E9A4B75928A6F336001A58DD /* CatalogViewController.swift */,
+				E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */,
 				E98A4E8028A93CAF000295CD /* AnimeViewController.swift */,
 				E98A4E9228A9649C000295CD /* EpisodeViewController.swift */,
 				E98A4EA628A98A2D000295CD /* PlayerViewController.swift */,
@@ -407,6 +410,7 @@
 				E98A4E6F28A91847000295CD /* RealmEpisode.swift in Sources */,
 				E98A4E6828A905D5000295CD /* SiteGenre.swift in Sources */,
 				E98A4E8D28A95C73000295CD /* SiteEpisodeWithTranslations.swift in Sources */,
+				E9F1453E28AB872A00C3A5B2 /* TabBarViewController.swift in Sources */,
 				E98A4E9E28A9734F000295CD /* TranslationCollectionViewCell.swift in Sources */,
 				E968976828A6B57900C62ACA /* Session.swift in Sources */,
 				E98A4E8528A94E30000295CD /* Episode.swift in Sources */,

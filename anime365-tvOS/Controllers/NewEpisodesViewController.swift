@@ -12,15 +12,19 @@ class NewEpisodesViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var episodeIds = [[String: String]]()
+    var needLoadData = false
+    var spinner = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Networker.shared.getEpisoodesToWath { [weak self] data in
-            self?.episodeIds = data
-            self?.collectionView.reloadData()
-        }
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(spinner)
+
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
+        loadData()
         collectionView.register(
             UINib(nibName: "EpisodeToWatchCollectionViewCell", bundle: nil),
             forCellWithReuseIdentifier: "EpisodeToWatchCollectionViewCell")
@@ -28,6 +32,26 @@ class NewEpisodesViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if needLoadData {
+            loadData()
+        }
+    }
+    
+    func loadData() {
+        
+        spinner.startAnimating()
+        needLoadData = false
+        episodeIds = [[String: String]]()
+        collectionView.reloadData()
+        
+        Networker.shared.getEpisoodesToWath { [weak self] data in
+            self?.episodeIds = data
+            self?.spinner.stopAnimating()
+            self?.collectionView.reloadData()
+        }
     }
 }
 

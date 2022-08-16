@@ -20,7 +20,7 @@ class EpisodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let episodeDone = episodeWithTranslations {
+        if episodeWithTranslations != nil {
             loadData()
         } else {
             Networker.shared.getEpisodeWithTranslations(
