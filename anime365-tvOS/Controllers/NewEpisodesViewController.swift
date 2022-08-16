@@ -60,10 +60,11 @@ extension NewEpisodesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? EpisodeToWatchCollectionViewCell else { return }
         guard let episode = cell.episode else { return }
+        guard let currentAnime = cell.anime else { return }
 
         let stb = UIStoryboard(name: "Main", bundle: .main)
         guard let vc = stb.instantiateViewController(withIdentifier: "EpisodeViewController") as? EpisodeViewController else { return }
-        vc.configure(from: episode)
+        vc.configure(from: episode, anime: currentAnime)
         if let control = navigationController {
             control.pushViewController(vc, animated: true)
         }

@@ -6,67 +6,74 @@
 //
 
 import UIKit
-import RealmSwift
+
+protocol CatalogViewControllerDelegate: AnyObject {
+    
+    func showChildView(viewController: UIViewController)
+    
+}
 
 class CatalogViewController: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchTextField: UITextField!
+    weak var delegate: CatalogViewControllerDelegate?
     
-    var animes: Results<RealmAnime>?
-    var token: NotificationToken?
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var animes: [Anime] = [Anime]()
+    var spinner = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        connectTableToRealm()
-        getData()
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(spinner)
+
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         collectionView.register(
             UINib(nibName: "AnimeCollectionViewCell", bundle: nil),
             forCellWithReuseIdentifier: "AnimeCollectionViewCell")
-        
+
         collectionView.dataSource = self
         collectionView.delegate = self
     }
         
-    @IBAction func endEdit() {
-        getData()
-    }
     
-    private func getData() {
-        guard let search = searchTextField.text else { return }
-        Networker.shared.getAnimeFromSite(searchString: search, completion: {})
-    }
-    
-    private func connectTableToRealm() {
-        guard let realm = try? Realm() else { return }
-        animes = realm.objects(RealmAnime.self)
-        token = animes?.observe( { [weak self] changes in
-            switch changes {
-            case .initial:
-                self?.collectionView.reloadData()
-            case .error(let error): print(error)
-            case .update(_, _, _, _):
-                DispatchQueue.main.async { [weak self] in
-                    self?.collectionView.reloadData()
-                }
+    func loadData(searchString: String) {
+        
+        animes.removeAll()
+        spinner.startAnimating()
+        collectionView.reloadData()
+        
+        Networker.shared.getAnimeFromSite(searchString: searchString) { [weak self] siteAnimes in
+            siteAnimes.forEach { anime in
+                self?.animes.append(Anime(
+                    id: anime.id,
+                    title: anime.title,
+                    posterUrlSmall: ImageFromInternet(url: anime.posterUrlSmall),
+                    posterUrl: ImageFromInternet(url: anime.posterUrl),
+                    episodes: self?.getEpisodes(from: anime)))
             }
-        })
+            
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+                self?.spinner.stopAnimating()
+            }
+        }
     }
-    
-    private func getEpisodes(anime: RealmAnime) -> [Episode] {
+        
+    private func getEpisodes(from anime: SiteAnime) -> [Episode] {
         
         var episodes: [Episode] = [Episode]()
-        
-        for realmEpisode in anime.episodes {
+        guard let siteEpisodes = anime.episodes else { return episodes }
+        for siteEpisode in siteEpisodes {
             episodes.append(Episode(
-                id: realmEpisode.id,
-                numerOfEpisode: Int(realmEpisode.numerOfEpisode),
-                tittle: realmEpisode.tittle,
-                episodeType: realmEpisode.episodeType))
+                id: siteEpisode.id,
+                numerOfEpisode: Int(siteEpisode.numerOfEpisode) ?? 0,
+                tittle: siteEpisode.tittle,
+                episodeType: siteEpisode.episodeType))
         }
-        
         return episodes
     }
 }
@@ -79,11 +86,9 @@ extension CatalogViewController: UICollectionViewDelegate {
         
         let stb = UIStoryboard(name: "Main", bundle: .main)
         guard let vc = stb.instantiateViewController(withIdentifier: "AnimeViewController") as? AnimeViewController else { return }
-        vc.configure(from: anime)
-        if let control = navigationController {
-            control.pushViewController(vc, animated: true)
-        }
         
+        vc.configure(from: anime)
+        delegate?.showChildView(viewController: vc)
     }
     
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
@@ -108,7 +113,7 @@ extension CatalogViewController: UICollectionViewDelegate {
 extension CatalogViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return animes?.count ?? 0
+        return animes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -116,14 +121,8 @@ extension CatalogViewController: UICollectionViewDataSource {
             withReuseIdentifier: "AnimeCollectionViewCell",
             for: indexPath) as! AnimeCollectionViewCell
         
-        guard let realmAnime = animes?[indexPath.row] else { return cell }
-        
-        cell.configure(from: Anime(
-            id: realmAnime.id,
-            title: realmAnime.title,
-            posterUrlSmall: ImageFromInternet(url: realmAnime.posterUrlSmall),
-            posterUrl: ImageFromInternet(url: realmAnime.posterUrl),
-            episodes: getEpisodes(anime: realmAnime)))
+        let anime = animes[indexPath.row]
+        cell.configure(from: anime)
         
         return cell
     }

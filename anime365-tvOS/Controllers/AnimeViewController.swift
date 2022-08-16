@@ -18,6 +18,7 @@ class AnimeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.insetsLayoutMarginsFromSafeArea = false
         labelView.text = anime?.title
         imageView.image = anime?.posterUrl.getImage()
         
@@ -40,10 +41,11 @@ extension AnimeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? EpisodeCollectionViewCell else { return }
         guard let episode = cell.episode else { return }
-
+        guard let currentAnime = anime else { return }
+        
         let stb = UIStoryboard(name: "Main", bundle: .main)
         guard let vc = stb.instantiateViewController(withIdentifier: "EpisodeViewController") as? EpisodeViewController else { return }
-        vc.configure(from: episode)
+        vc.configure(from: episode, anime: currentAnime)
         if let control = navigationController {
             control.pushViewController(vc, animated: true)
         }

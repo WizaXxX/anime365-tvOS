@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import RealmSwift
 import SwiftKeychainWrapper
 import SwiftSoup
 
@@ -17,6 +16,7 @@ enum Methods {
     case getTranslationData(id: String)
     case main
     case getAnime(id: String)
+    case episodeWatched(id: String)
     
     var value: String {
         switch self {
@@ -32,6 +32,8 @@ enum Methods {
             return ""
         case .getAnime(let id):
             return "api/series/\(id)"
+        case .episodeWatched(let id):
+            return "animelist/edit/\(id)"
         }
     }
 }
@@ -186,7 +188,7 @@ class Networker {
 
 extension Networker {
     
-    func getAnimeFromSite(searchString: String, completion: @escaping () -> Void) {
+    func getAnimeFromSite(searchString: String, completion: @escaping ([SiteAnime]) -> Void) {
         
         var params = ["limit": "20"]
         if !searchString.isEmpty {
@@ -196,49 +198,8 @@ extension Networker {
         guard let url = getUrl(method: .getSerieses, params: params) else { return }
         sendGetRequestJSON(url: url, type: SiteResponse<[SiteAnime]>.self) { [weak self] result in
             guard let data = result?.data else { return }
-            self?.writeAnimeToDB(animes: data)
-            completion()
+            completion(data)
         }
-    }
-    
-    private func writeAnimeToDB(animes: [SiteAnime]) {
-        guard let realm = try? Realm(configuration: .init(deleteRealmIfMigrationNeeded: true)) else { return }
-        
-        try? realm.write({
-            realm.deleteAll()
-            animes.forEach({ anime in
-                let realmAnime = RealmAnime()
-                realmAnime.id = anime.id
-                realmAnime.title = anime.title
-                realmAnime.season = anime.season
-                realmAnime.year = anime.year
-                realmAnime.type = anime.type
-                realmAnime.posterUrl = anime.posterUrl
-                realmAnime.posterUrlSmall = anime.posterUrlSmall
-
-                anime.episodes?.forEach({ episode in
-                    let realmEpisode = RealmEpisode()
-                    realmEpisode.id = episode.id
-                    if let number = Int(episode.numerOfEpisode) {
-                        realmEpisode.numerOfEpisode = number
-                    } else {
-                        realmEpisode.numerOfEpisode = 0
-                    }
-                    realmEpisode.tittle = episode.tittle
-                    realmAnime.episodes.append(realmEpisode)
-                })
-
-                anime.genres?.forEach({ genre in
-                    let realmGenre = RealmGenre()
-                    realmGenre.id = genre.id
-                    realmGenre.tittle = genre.title
-                    realmGenre.url = genre.url
-                    realmAnime.genres.append(realmGenre)
-                })
-
-                realm.add(realmAnime, update: .all)
-            })
-        })
     }
 }
 
@@ -247,7 +208,7 @@ extension Networker {
     func getEpisodeWithTranslations(episodeId: Int, completion: @escaping (EpisodeWithTranslations) -> Void) {
         
         guard let url = getUrl(method: .getEpisodeWithTranslation(id: String(episodeId))) else { return }
-        sendGetRequestJSON(url: url, type: SiteResponse<SiteEpisodeWithTranslations>.self) { [weak self] result in
+        sendGetRequestJSON(url: url, type: SiteResponse<SiteEpisodeWithTranslations>.self) { result in
             guard let data = result?.data else { return }
             var translations = [Translation]()
             data.translations.forEach({ siteTranslation in
@@ -274,7 +235,7 @@ extension Networker {
 extension Networker {
     func getTranslationData(translationId: Int, completion: @escaping (SiteTranslationData) -> Void) {
         guard let url = getUrl(method: .getTranslationData(id: String(translationId))) else { return }
-        sendGetRequestJSON(url: url, type: SiteResponse<SiteTranslationData>.self) { [weak self] result in
+        sendGetRequestJSON(url: url, type: SiteResponse<SiteTranslationData>.self) { result in
             guard let data = result?.data else { return }
             completion(data)
         }
@@ -293,7 +254,7 @@ extension Networker {
             })
             
             var episodesData: [String] = [String]()
-            animeList?.map({ element in
+            animeList?.forEach({ element in
                 let link = try? element.select("h5").select("a")
                 link?.forEach({ linkElement in
                     if let url = try? linkElement.attr("href") {
@@ -316,7 +277,7 @@ extension Networker {
 extension Networker {
     func getAnime(id: String, completion: @escaping (Anime) -> Void) {
         guard let url = getUrl(method: .getAnime(id: id)) else { return }
-        sendGetRequestJSON(url: url, type: SiteResponse<SiteAnime>.self) { [weak self] result in
+        sendGetRequestJSON(url: url, type: SiteResponse<SiteAnime>.self) { result in
             guard let data = result?.data else { return }
             completion(Anime(
                 id: data.id,
@@ -325,5 +286,37 @@ extension Networker {
                 posterUrl: ImageFromInternet(url: data.posterUrl)))
         }
         
+    }
+}
+
+extension Networker {
+    func episodeWatched(animeId: String, episodeNumber: Int) {
+        guard let url = getUrl(method: .episodeWatched(id: animeId), params: ["mode": "mini"]) else { return }
+        
+        let uuid = UUID().uuidString
+        setCookie(name: "csrf", value: uuid)
+        
+        let headers: HTTPHeaders = [
+            "User-Agent": "anime-365-tvOS",
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
+        
+        let parameters = [
+            "UsersRates[episodes]": "\(episodeNumber)",
+            "csrf": uuid
+        ]
+        
+        AF.request(
+            url,
+            method: .post,
+            parameters: parameters,
+            encoder: .urlEncodedForm,
+            headers: headers).response { response in
+                switch response.result {
+                case let .failure(error):
+                    print(error)
+                default: return
+                }
+        }
     }
 }

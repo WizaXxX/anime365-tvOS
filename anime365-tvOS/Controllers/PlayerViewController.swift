@@ -14,10 +14,9 @@ class PlayerViewController: AVPlayerViewController {
     var url: String?
     var subUrl: String?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+    var episodeNumber = 0
+    var anime: Anime?
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -63,11 +62,33 @@ class PlayerViewController: AVPlayerViewController {
         
         self.player = AVPlayer(playerItem: AVPlayerItem(asset: mixComposition))
         player?.play()
+        
+        player?.addPeriodicTimeObserver(
+            forInterval: CMTime(seconds: 30.0, preferredTimescale: 1),
+            queue: DispatchQueue.global(),
+            using: { [weak self] time in
+                
+                guard let durationCM = self?.player?.currentItem?.duration else { return }
+                guard let currentTimeCM = self?.player?.currentTime() else { return }
+                
+                let duration = CMTimeGetSeconds(durationCM)
+                let currentTime = CMTimeGetSeconds(currentTimeCM)
+                let partOfVideo = (duration - currentTime) / duration * 100
+                
+                if partOfVideo < 16 {
+                    guard let animeId = self?.anime?.id else { return }
+                    Networker.shared.episodeWatched(
+                        animeId: String(animeId),
+                        episodeNumber: self!.episodeNumber)
+                }
+        })
     }
     
-    func configure(url: String, subUrl: String?) {
+    func configure(url: String, subUrl: String?, anime: Anime, episodeNumber: Int) {
         self.url = url
         self.subUrl = subUrl
+        self.anime = anime
+        self.episodeNumber = episodeNumber
     }
     
 }

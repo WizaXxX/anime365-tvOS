@@ -51,6 +51,8 @@
 		E98A4EA728A98A2D000295CD /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4EA628A98A2D000295CD /* PlayerViewController.swift */; };
 		E9A4B75A28A6F336001A58DD /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A4B75928A6F336001A58DD /* CatalogViewController.swift */; };
 		E9F1453E28AB872A00C3A5B2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */; };
+		E9F1454028ABAE8200C3A5B2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */; };
+		E9F1454428ABCDE100C3A5B2 /* AllControlles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +103,8 @@
 		E98A4EA628A98A2D000295CD /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		E9A4B75928A6F336001A58DD /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllControlles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,7 @@
 				E968977028A6E73600C62ACA /* Models */,
 				E968976F28A6E4E000C62ACA /* Extensions */,
 				E968976928A6C0E500C62ACA /* Networker.swift */,
+				E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */,
 			);
 			path = "anime365-tvOS";
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 				E9A4B75928A6F336001A58DD /* CatalogViewController.swift */,
 				E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */,
 				E98A4E8028A93CAF000295CD /* AnimeViewController.swift */,
+				E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */,
 				E98A4E9228A9649C000295CD /* EpisodeViewController.swift */,
 				E98A4EA628A98A2D000295CD /* PlayerViewController.swift */,
 			);
@@ -420,8 +426,10 @@
 				E98A4E8828A9507E000295CD /* EpisodeCollectionViewCell.swift in Sources */,
 				E95DB93128AAB13800D3791B /* NewEpisodesViewController.swift in Sources */,
 				E98A4E6428A903F1000295CD /* SiteEpisode.swift in Sources */,
+				E9F1454428ABCDE100C3A5B2 /* AllControlles.swift in Sources */,
 				E98A4EA528A9800C000295CD /* SiteStreamTranslationData.swift in Sources */,
 				E98A4E7128A918B2000295CD /* RealmGenre.swift in Sources */,
+				E9F1454028ABAE8200C3A5B2 /* SearchViewController.swift in Sources */,
 				E968976A28A6C0E500C62ACA /* Networker.swift in Sources */,
 				E98A4E6A28A911DF000295CD /* SiteResult.swift in Sources */,
 				E95DB93428AABEED00D3791B /* EpisodeToWatchCollectionViewCell.swift in Sources */,

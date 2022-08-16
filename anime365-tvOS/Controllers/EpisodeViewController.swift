@@ -14,6 +14,7 @@ class EpisodeViewController: UIViewController {
     
     var episodeWithTranslations: EpisodeWithTranslations?
     var episode: Episode?
+    var anime: Anime?
     var typesOfTranslations: [TypeOfTranslation] = [TypeOfTranslation]()
     var translations: [Translation] = [Translation]()
     
@@ -45,12 +46,14 @@ class EpisodeViewController: UIViewController {
         collectionView.delegate = self
     }
     
-    func configure(from episode: Episode) {
+    func configure(from episode: Episode, anime: Anime) {
         self.episode = episode
+        self.anime = anime
     }
     
-    func configure(from episode: EpisodeWithTranslations) {
+    func configure(from episode: EpisodeWithTranslations, anime: Anime) {
         self.episodeWithTranslations = episode
+        self.anime = anime
     }
     
     func loadData() {
@@ -126,7 +129,15 @@ extension EpisodeViewController: UICollectionViewDelegate {
                     let stb = UIStoryboard(name: "Main", bundle: .main)
                     guard let vc = stb.instantiateViewController(withIdentifier: "PlayerViewController") as? PlayerViewController else { return }
                     
-                    vc.configure(url: stream.urls[0], subUrl: result.subtitlesVttUrl)
+                    guard let currentAnime = self?.anime else { return }
+                    guard let numberOfEpisode = self?.episodeWithTranslations?.episodeInt else { return }
+                    
+                    vc.configure(
+                        url: stream.urls[0],
+                        subUrl: result.subtitlesVttUrl,
+                        anime: currentAnime,
+                        episodeNumber: numberOfEpisode)
+                    
                     if let control = self?.navigationController {
                         control.pushViewController(vc, animated: true)
                     }
