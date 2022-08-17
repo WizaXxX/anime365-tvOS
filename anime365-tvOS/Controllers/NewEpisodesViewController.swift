@@ -15,19 +15,20 @@ class NewEpisodesViewController: UIViewController {
     var needLoadData = false
     var spinner = UIActivityIndicatorView(style: .large)
     
+    let cellName = "EpisodeToWatchCollectionViewCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        spinner.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(spinner)
-
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         loadData()
         collectionView.register(
-            UINib(nibName: "EpisodeToWatchCollectionViewCell", bundle: nil),
-            forCellWithReuseIdentifier: "EpisodeToWatchCollectionViewCell")
+            UINib(nibName: cellName, bundle: nil),
+            forCellWithReuseIdentifier: cellName)
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -62,31 +63,13 @@ extension NewEpisodesViewController: UICollectionViewDelegate {
         guard let episode = cell.episode else { return }
         guard let currentAnime = cell.anime else { return }
 
-        let stb = UIStoryboard(name: "Main", bundle: .main)
-        guard let vc = stb.instantiateViewController(withIdentifier: "EpisodeViewController") as? EpisodeViewController else { return }
+        let vc = AllControlles.getEpisodeViewController()
         vc.configure(from: episode, anime: currentAnime)
-        if let control = navigationController {
-            control.pushViewController(vc, animated: true)
-        }
-        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        if let pindex  = context.previouslyFocusedIndexPath, let cell = collectionView.cellForItem(at: pindex) {
-            cell.contentView.layer.borderWidth = 0.0
-            cell.contentView.layer.shadowRadius = 0.0
-            cell.contentView.layer.shadowOpacity = 0.0
-        }
-
-        if let index  = context.nextFocusedIndexPath, let cell = collectionView.cellForItem(at: index) {
-            cell.contentView.layer.borderWidth = 8.0
-            cell.contentView.layer.borderColor = UIColor.white.cgColor
-            cell.contentView.layer.shadowColor = UIColor.white.cgColor
-            cell.contentView.layer.shadowRadius = 10.0
-            cell.contentView.layer.shadowOpacity = 0.9
-            cell.contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            collectionView.scrollToItem(at: index, at: [.centeredHorizontally, .centeredVertically], animated: true)
-        }
+        collectionView.updateFocus(context: context)
     }
 }
 
@@ -98,7 +81,7 @@ extension NewEpisodesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "EpisodeToWatchCollectionViewCell",
+            withReuseIdentifier: cellName,
             for: indexPath) as! EpisodeToWatchCollectionViewCell
         
         let episodeId = episodeIds[indexPath.row]

@@ -18,6 +18,9 @@ class EpisodeViewController: UIViewController {
     var typesOfTranslations: [TypeOfTranslation] = [TypeOfTranslation]()
     var translations: [Translation] = [Translation]()
     
+    let cellNameTypeOfTraslationTableViewCell = "TypeOfTraslationTableViewCell"
+    let cellNameTranslationCollectionViewCell = "TranslationCollectionViewCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,15 +35,15 @@ class EpisodeViewController: UIViewController {
         }
         
         tableView.register(
-            UINib(nibName: "TypeOfTraslationTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "TypeOfTraslationTableViewCell")
+            UINib(nibName: cellNameTypeOfTraslationTableViewCell, bundle: nil),
+            forCellReuseIdentifier: cellNameTypeOfTraslationTableViewCell)
         
         tableView.dataSource = self
         tableView.delegate = self
         
         collectionView.register(
-            UINib(nibName: "TranslationCollectionViewCell", bundle: nil),
-            forCellWithReuseIdentifier: "TranslationCollectionViewCell")
+            UINib(nibName: cellNameTranslationCollectionViewCell, bundle: nil),
+            forCellWithReuseIdentifier: cellNameTranslationCollectionViewCell)
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -78,7 +81,7 @@ extension EpisodeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: "TypeOfTraslationTableViewCell",
+            withIdentifier: cellNameTypeOfTraslationTableViewCell,
             for: indexPath) as! TypeOfTraslationTableViewCell
         
         let type = typesOfTranslations[indexPath.row]
@@ -125,22 +128,16 @@ extension EpisodeViewController: UICollectionViewDelegate {
             for data in result.stream {
                 alert.addAction(UIAlertAction(title: String(data.height), style: UIAlertAction.Style.default, handler: { action in
                     guard let stream = result.stream.first(where: {$0.height == Int(action.title!)!}) else { return }
-                    
-                    let stb = UIStoryboard(name: "Main", bundle: .main)
-                    guard let vc = stb.instantiateViewController(withIdentifier: "PlayerViewController") as? PlayerViewController else { return }
-                    
                     guard let currentAnime = self?.anime else { return }
                     guard let numberOfEpisode = self?.episodeWithTranslations?.episodeInt else { return }
                     
+                    let vc = AllControlles.getPlayerViewController()
                     vc.configure(
                         url: stream.urls[0],
                         subUrl: result.subtitlesVttUrl,
                         anime: currentAnime,
                         episodeNumber: numberOfEpisode)
-                    
-                    if let control = self?.navigationController {
-                        control.pushViewController(vc, animated: true)
-                    }
+                    self?.navigationController?.pushViewController(vc, animated: true)
                     
                 }))
             }
@@ -154,21 +151,7 @@ extension EpisodeViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        if let pindex  = context.previouslyFocusedIndexPath, let cell = collectionView.cellForItem(at: pindex) {
-            cell.contentView.layer.borderWidth = 0.0
-            cell.contentView.layer.shadowRadius = 0.0
-            cell.contentView.layer.shadowOpacity = 0.0
-        }
-
-        if let index  = context.nextFocusedIndexPath, let cell = collectionView.cellForItem(at: index) {
-            cell.contentView.layer.borderWidth = 8.0
-            cell.contentView.layer.borderColor = UIColor.white.cgColor
-            cell.contentView.layer.shadowColor = UIColor.white.cgColor
-            cell.contentView.layer.shadowRadius = 10.0
-            cell.contentView.layer.shadowOpacity = 0.9
-            cell.contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            collectionView.scrollToItem(at: index, at: [.centeredHorizontally, .centeredVertically], animated: true)
-        }
+        collectionView.updateFocus(context: context)
     }
 }
 
@@ -180,7 +163,7 @@ extension EpisodeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "TranslationCollectionViewCell",
+            withReuseIdentifier: cellNameTranslationCollectionViewCell,
             for: indexPath) as! TranslationCollectionViewCell
         
         let translation = translations[indexPath.row]
@@ -191,11 +174,6 @@ extension EpisodeViewController: UICollectionViewDataSource {
 
 extension EpisodeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let width = collectionView.bounds.width
-        let whiteSpaces: CGFloat = 10
-        let cellWidth = width / 3 - whiteSpaces
-
         return CGSize(width: 350, height: 120)
     }
 }

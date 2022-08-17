@@ -196,7 +196,7 @@ extension Networker {
         }
         
         guard let url = getUrl(method: .getSerieses, params: params) else { return }
-        sendGetRequestJSON(url: url, type: SiteResponse<[SiteAnime]>.self) { [weak self] result in
+        sendGetRequestJSON(url: url, type: SiteResponse<[SiteAnime]>.self) { result in
             guard let data = result?.data else { return }
             completion(data)
         }

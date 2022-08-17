@@ -7,12 +7,6 @@
 
 import UIKit
 
-protocol CatalogViewControllerDelegate: AnyObject {
-    
-    func showChildView(viewController: UIViewController)
-    
-}
-
 class CatalogViewController: UIViewController {
     
     weak var delegate: CatalogViewControllerDelegate?
@@ -22,18 +16,19 @@ class CatalogViewController: UIViewController {
     var animes: [Anime] = [Anime]()
     var spinner = UIActivityIndicatorView(style: .large)
     
+    let cellName = "AnimeCollectionViewCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        spinner.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(spinner)
-
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         collectionView.register(
-            UINib(nibName: "AnimeCollectionViewCell", bundle: nil),
-            forCellWithReuseIdentifier: "AnimeCollectionViewCell")
+            UINib(nibName: cellName, bundle: nil),
+            forCellWithReuseIdentifier: cellName)
 
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -84,29 +79,13 @@ extension CatalogViewController: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? AnimeCollectionViewCell else { return }
         guard let anime = cell.anime else { return }
         
-        let stb = UIStoryboard(name: "Main", bundle: .main)
-        guard let vc = stb.instantiateViewController(withIdentifier: "AnimeViewController") as? AnimeViewController else { return }
-        
+        let vc = AllControlles.getAnimeViewController()
         vc.configure(from: anime)
         delegate?.showChildView(viewController: vc)
     }
     
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        if let pindex  = context.previouslyFocusedIndexPath, let cell = collectionView.cellForItem(at: pindex) {
-            cell.contentView.layer.borderWidth = 0.0
-            cell.contentView.layer.shadowRadius = 0.0
-            cell.contentView.layer.shadowOpacity = 0.0
-        }
-
-        if let index  = context.nextFocusedIndexPath, let cell = collectionView.cellForItem(at: index) {
-            cell.contentView.layer.borderWidth = 8.0
-            cell.contentView.layer.borderColor = UIColor.white.cgColor
-            cell.contentView.layer.shadowColor = UIColor.white.cgColor
-            cell.contentView.layer.shadowRadius = 10.0
-            cell.contentView.layer.shadowOpacity = 0.9
-            cell.contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            collectionView.scrollToItem(at: index, at: [.centeredHorizontally, .centeredVertically], animated: true)
-        }
+        collectionView.updateFocus(context: context)
     }
 }
 
@@ -118,7 +97,7 @@ extension CatalogViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "AnimeCollectionViewCell",
+            withReuseIdentifier: cellName,
             for: indexPath) as! AnimeCollectionViewCell
         
         let anime = animes[indexPath.row]

@@ -15,7 +15,7 @@ class SearchViewController: UIViewController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 
-        self.searchResultController = AllControlles.shared.getCatalogController()
+        self.searchResultController = AllControlles.getCatalogViewController()
         self.searchController = UISearchController(searchResultsController: searchResultController)
         self.searchContainerViewController = UISearchContainerViewController(searchController: searchController)
 
@@ -25,7 +25,7 @@ class SearchViewController: UIViewController {
 
     required init?(coder: NSCoder) {
         
-        self.searchResultController = AllControlles.shared.getCatalogController()
+        self.searchResultController = AllControlles.getCatalogViewController()
         self.searchController = UISearchController(searchResultsController: searchResultController)
         self.searchContainerViewController = UISearchContainerViewController(searchController: searchController)
 

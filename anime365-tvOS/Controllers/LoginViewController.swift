@@ -101,11 +101,8 @@ class LoginViewController: UIViewController {
         spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        let stb = UIStoryboard(name: "Main", bundle: .main)
-        let vc = stb.instantiateViewController(withIdentifier: "tab")
-        if let control = navigationController {
-            control.setViewControllers([vc], animated: true)
-        }
+        let vc = AllControlles.getTabBarViewController()
+        navigationController?.setViewControllers([vc], animated: true)
     }
 
 }
