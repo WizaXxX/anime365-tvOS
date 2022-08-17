@@ -48,6 +48,7 @@ class CatalogViewController: UIViewController {
                     title: anime.title,
                     posterUrlSmall: ImageFromInternet(url: anime.posterUrlSmall),
                     posterUrl: ImageFromInternet(url: anime.posterUrl),
+                    titles: anime.titles,
                     episodes: self?.getEpisodes(from: anime)))
             }
             

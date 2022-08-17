@@ -95,22 +95,23 @@ extension EpisodeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? TypeOfTraslationTableViewCell else { return }
-        
-        translations = [Translation]()
-        episodeWithTranslations?.translations.filter({$0.type == cell.typeOfTranslation}).forEach({
-            translations.append($0)
-        })
-        collectionView.reloadData()
+        cell.selectionStyle = .none
     }
     
     func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         
-        if let pindex  = context.previouslyFocusedIndexPath, let cell = tableView.cellForRow(at: pindex) {
-            (cell as! TypeOfTraslationTableViewCell).labelView.textColor = .white
+        if let pindex  = context.previouslyFocusedIndexPath, let cell = tableView.cellForRow(at: pindex) as? TypeOfTraslationTableViewCell {
+            cell.labelView.textColor = .white
         }
 
-        if let index  = context.nextFocusedIndexPath, let cell = tableView.cellForRow(at: index) {
-            (cell as! TypeOfTraslationTableViewCell).labelView.textColor = .black
+        if let index  = context.nextFocusedIndexPath, let cell = tableView.cellForRow(at: index) as? TypeOfTraslationTableViewCell {
+            cell.labelView.textColor = .black
+            
+            translations = [Translation]()
+            episodeWithTranslations?.translations.filter({$0.type == cell.typeOfTranslation}).forEach({
+                translations.append($0)
+            })
+            collectionView.reloadData()
         }
     }
 }
@@ -120,33 +121,12 @@ extension EpisodeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? TranslationCollectionViewCell else { return }
         Networker.shared.getTranslationData(translationId: cell.translation!.id) { [weak self] result in
+            guard let currentAnime = self?.anime else { return }
+            guard let currentEpisode = self?.episodeWithTranslations else { return }
             
-            let alert = UIAlertController(
-                title: "Запуск видео", message: "Выберите качество",
-                preferredStyle: UIAlertController.Style.actionSheet)
-            
-            for data in result.stream {
-                alert.addAction(UIAlertAction(title: String(data.height), style: UIAlertAction.Style.default, handler: { action in
-                    guard let stream = result.stream.first(where: {$0.height == Int(action.title!)!}) else { return }
-                    guard let currentAnime = self?.anime else { return }
-                    guard let numberOfEpisode = self?.episodeWithTranslations?.episodeInt else { return }
-                    
-                    let vc = AllControlles.getPlayerViewController()
-                    vc.configure(
-                        url: stream.urls[0],
-                        subUrl: result.subtitlesVttUrl,
-                        anime: currentAnime,
-                        episodeNumber: numberOfEpisode)
-                    self?.navigationController?.pushViewController(vc, animated: true)
-                    
-                }))
-            }
-            
-            alert.addAction(UIAlertAction(title: "Отмена", style: UIAlertAction.Style.cancel, handler: nil))
-            DispatchQueue.main.async { [weak self] in
-                
-                self?.present(alert, animated: true, completion: nil)
-            }
+            let vc = AllControlles.getPlayerViewController()
+            vc.configure(anime: currentAnime, episode: currentEpisode, translationData: result)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

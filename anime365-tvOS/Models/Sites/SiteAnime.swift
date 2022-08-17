@@ -15,6 +15,7 @@ struct SiteAnime: Decodable {
     var type: String
     var posterUrl: String
     var posterUrlSmall: String
+    var titles: [String: String]
     var episodes: [SiteEpisode]?
     var genres: [SiteGenre]?
 }

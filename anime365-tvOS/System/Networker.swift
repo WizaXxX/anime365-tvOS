@@ -283,7 +283,8 @@ extension Networker {
                 id: data.id,
                 title: data.title,
                 posterUrlSmall: ImageFromInternet(url: data.posterUrlSmall),
-                posterUrl: ImageFromInternet(url: data.posterUrl)))
+                posterUrl: ImageFromInternet(url: data.posterUrl),
+                titles: data.titles))
         }
         
     }

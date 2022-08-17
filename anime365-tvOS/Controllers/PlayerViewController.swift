@@ -11,16 +11,15 @@ import AVFoundation
 
 class PlayerViewController: AVPlayerViewController {
     
-    var url: String?
-    var subUrl: String?
-    
-    var episodeNumber = 0
+    var episode: EpisodeWithTranslations?
     var anime: Anime?
+    var translationData: SiteTranslationData?
+    var stream: SiteStreamTranslationData?
         
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard let urlToVideo = url else { return }
+        guard let urlToVideo = stream?.urls.first else { return }
         guard let videoUrl = URL(string: urlToVideo) else { return }
         
         let videoAsset = AVURLAsset(url: videoUrl)
@@ -30,8 +29,8 @@ class PlayerViewController: AVPlayerViewController {
         let videoTrack = mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: .max)
         let audioTrack = mixComposition.addMutableTrack(withMediaType: .audio, preferredTrackID: .max)
 
-        if subUrl != nil {
-            guard let subtitleUrl = URL(string: subUrl!) else { return }
+        if let urlOfSub = translationData?.subtitlesVttUrl {
+            guard let subtitleUrl = URL(string: urlOfSub) else { return }
             guard let subtitleData = try? Data(contentsOf: subtitleUrl) else { return }
             
             guard let dir = try? FileManager.default.url(
@@ -45,8 +44,9 @@ class PlayerViewController: AVPlayerViewController {
             let pathToFile = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("sub.vtt").absoluteURL
             let subtitleAsset = AVURLAsset(url: pathToFile)
             let subtitleTrack = mixComposition.addMutableTrack(withMediaType: .text, preferredTrackID: .max)
-            try? subtitleTrack?.insertTimeRange(CMTimeRangeMake(start: .zero, duration: subtitleAsset.duration),
-                                                           of: subtitleAsset.tracks(withMediaType: .text).first!, at: .zero)
+            try? subtitleTrack?.insertTimeRange(
+                CMTimeRangeMake(start: .zero, duration: subtitleAsset.duration),
+                of: subtitleAsset.tracks(withMediaType: .text).first!, at: .zero)
         }
 
         do {
@@ -60,8 +60,10 @@ class PlayerViewController: AVPlayerViewController {
             print(err.localizedDescription)
         }
         
+        
         self.player = AVPlayer(playerItem: AVPlayerItem(asset: mixComposition))
         player?.play()
+        title = ""
         
         player?.addPeriodicTimeObserver(
             forInterval: CMTime(seconds: 30.0, preferredTimescale: 1),
@@ -77,18 +79,24 @@ class PlayerViewController: AVPlayerViewController {
                 
                 if partOfVideo < 16 {
                     guard let animeId = self?.anime?.id else { return }
+                    guard let episodeId = self?.episode?.episodeInt else { return }
                     Networker.shared.episodeWatched(
                         animeId: String(animeId),
-                        episodeNumber: self!.episodeNumber)
+                        episodeNumber: episodeId)
                 }
         })
     }
     
-    func configure(url: String, subUrl: String?, anime: Anime, episodeNumber: Int) {
-        self.url = url
-        self.subUrl = subUrl
+    func configure(anime: Anime, episode: EpisodeWithTranslations, translationData: SiteTranslationData) {
         self.anime = anime
-        self.episodeNumber = episodeNumber
+        self.episode = episode
+        self.translationData = translationData
+        
+        self.translationData?.stream.sort(by: {$0.height > $1.height})
+        self.stream = self.translationData?.stream.first
+        
+        guard let currentStream = self.stream, let animeTitle = anime.titles["ru"] else { return }
+        title = "\(currentStream.height)p - \(animeTitle)"
     }
     
 }
