@@ -10,6 +10,8 @@ import UIKit
 class EpisodeViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var typeOfSubtitleCollectionView: UICollectionView!
+    
     @IBOutlet weak var tableView: UITableView!
     
     var episodeWithTranslations: EpisodeWithTranslations?
@@ -18,7 +20,7 @@ class EpisodeViewController: UIViewController {
     var typesOfTranslations: [TypeOfTranslation] = [TypeOfTranslation]()
     var translations: [Translation] = [Translation]()
     
-    let cellNameTypeOfTraslationTableViewCell = "TypeOfTraslationTableViewCell"
+    let cellNameTypeOfTraslationCollectionViewCell = "TypeOfTraslationCollectionViewCell"
     let cellNameTranslationCollectionViewCell = "TranslationCollectionViewCell"
     
     override func viewDidLoad() {
@@ -34,13 +36,13 @@ class EpisodeViewController: UIViewController {
                 }
         }
         
-        tableView.register(
-            UINib(nibName: cellNameTypeOfTraslationTableViewCell, bundle: nil),
-            forCellReuseIdentifier: cellNameTypeOfTraslationTableViewCell)
+        typeOfSubtitleCollectionView.register(
+            UINib(nibName: cellNameTypeOfTraslationCollectionViewCell, bundle: nil),
+            forCellWithReuseIdentifier: cellNameTypeOfTraslationCollectionViewCell)
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
+        typeOfSubtitleCollectionView.dataSource = self
+        typeOfSubtitleCollectionView.delegate = self
+
         collectionView.register(
             UINib(nibName: cellNameTranslationCollectionViewCell, bundle: nil),
             forCellWithReuseIdentifier: cellNameTranslationCollectionViewCell)
@@ -66,54 +68,11 @@ class EpisodeViewController: UIViewController {
         setOfTypes.forEach({typesOfTranslations.append($0)})
         typesOfTranslations.sort(by: {$0.getIndex() < $1.getIndex()})
         DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
+            self?.typeOfSubtitleCollectionView.reloadData()
         }
         
     }
     
-}
-
-extension EpisodeViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return typesOfTranslations.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: cellNameTypeOfTraslationTableViewCell,
-            for: indexPath) as! TypeOfTraslationTableViewCell
-        
-        let type = typesOfTranslations[indexPath.row]
-        cell.configure(typeOfTranslation: type)
-        
-        return cell
-    }
-}
-
-extension EpisodeViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? TypeOfTraslationTableViewCell else { return }
-        cell.selectionStyle = .none
-    }
-    
-    func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        
-        if let pindex  = context.previouslyFocusedIndexPath, let cell = tableView.cellForRow(at: pindex) as? TypeOfTraslationTableViewCell {
-            cell.labelView.textColor = .white
-        }
-
-        if let index  = context.nextFocusedIndexPath, let cell = tableView.cellForRow(at: index) as? TypeOfTraslationTableViewCell {
-            cell.labelView.textColor = .black
-            
-            translations = [Translation]()
-            episodeWithTranslations?.translations.filter({$0.type == cell.typeOfTranslation}).forEach({
-                translations.append($0)
-            })
-            collectionView.reloadData()
-        }
-    }
 }
 
 extension EpisodeViewController: UICollectionViewDelegate {
@@ -131,29 +90,62 @@ extension EpisodeViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        collectionView.updateFocus(context: context)
+        if collectionView == self.collectionView {
+            return
+        }
+        
+        if let index  = context.nextFocusedIndexPath, let cell = typeOfSubtitleCollectionView.cellForItem(at: index) as? TypeOfTraslationCollectionViewCell {
+            translations = [Translation]()
+            episodeWithTranslations?.translations.filter({$0.type == cell.typeOfTranslation}).forEach({
+                translations.append($0)
+            })
+            self.collectionView.reloadData()
+        }
     }
 }
 
 extension EpisodeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return translations.count
+        if collectionView == self.collectionView {
+            return translations.count
+        } else {
+            return typesOfTranslations.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: cellNameTranslationCollectionViewCell,
-            for: indexPath) as! TranslationCollectionViewCell
-        
-        let translation = translations[indexPath.row]
-        cell.configure(from: translation)
-        return cell
+        if collectionView == self.collectionView {
+            
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: cellNameTranslationCollectionViewCell,
+                for: indexPath) as! TranslationCollectionViewCell
+            
+            let translation = translations[indexPath.row]
+            cell.configure(from: translation)
+            return cell
+            
+        } else {
+            
+            let cell = typeOfSubtitleCollectionView.dequeueReusableCell(
+                withReuseIdentifier: cellNameTypeOfTraslationCollectionViewCell,
+                for: indexPath) as! TypeOfTraslationCollectionViewCell
+           
+            let type = typesOfTranslations[indexPath.row]
+            cell.configure(typeOfTranslation: type)
+            return cell
+            
+        }
     }
 }
 
 extension EpisodeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 350, height: 120)
+        if collectionView == self.collectionView {
+            return CGSize(width: 400, height: 120)
+        } else {
+            return CGSize(width: 400, height: 60)
+        }
     }
 }

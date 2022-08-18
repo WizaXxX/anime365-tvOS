@@ -39,8 +39,8 @@
 		E98A4E8F28A95E7A000295CD /* SiteTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E8E28A95E7A000295CD /* SiteTranslation.swift */; };
 		E98A4E9128A95F19000295CD /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E9028A95F19000295CD /* Translation.swift */; };
 		E98A4E9328A9649C000295CD /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E9228A9649C000295CD /* EpisodeViewController.swift */; };
-		E98A4E9A28A96EDA000295CD /* TypeOfTraslationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E9828A96EDA000295CD /* TypeOfTraslationTableViewCell.swift */; };
-		E98A4E9B28A96EDA000295CD /* TypeOfTraslationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98A4E9928A96EDA000295CD /* TypeOfTraslationTableViewCell.xib */; };
+		E98A4E9A28A96EDA000295CD /* TypeOfTraslationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E9828A96EDA000295CD /* TypeOfTraslationCollectionViewCell.swift */; };
+		E98A4E9B28A96EDA000295CD /* TypeOfTraslationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98A4E9928A96EDA000295CD /* TypeOfTraslationCollectionViewCell.xib */; };
 		E98A4E9E28A9734F000295CD /* TranslationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E9C28A9734F000295CD /* TranslationCollectionViewCell.swift */; };
 		E98A4E9F28A9734F000295CD /* TranslationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98A4E9D28A9734F000295CD /* TranslationCollectionViewCell.xib */; };
 		E98A4EA128A97EF5000295CD /* SiteTranslationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4EA028A97EF5000295CD /* SiteTranslationData.swift */; };
@@ -91,8 +91,8 @@
 		E98A4E8E28A95E7A000295CD /* SiteTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteTranslation.swift; sourceTree = "<group>"; };
 		E98A4E9028A95F19000295CD /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		E98A4E9228A9649C000295CD /* EpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
-		E98A4E9828A96EDA000295CD /* TypeOfTraslationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeOfTraslationTableViewCell.swift; sourceTree = "<group>"; };
-		E98A4E9928A96EDA000295CD /* TypeOfTraslationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TypeOfTraslationTableViewCell.xib; sourceTree = "<group>"; };
+		E98A4E9828A96EDA000295CD /* TypeOfTraslationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeOfTraslationCollectionViewCell.swift; sourceTree = "<group>"; };
+		E98A4E9928A96EDA000295CD /* TypeOfTraslationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TypeOfTraslationCollectionViewCell.xib; sourceTree = "<group>"; };
 		E98A4E9C28A9734F000295CD /* TranslationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationCollectionViewCell.swift; sourceTree = "<group>"; };
 		E98A4E9D28A9734F000295CD /* TranslationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TranslationCollectionViewCell.xib; sourceTree = "<group>"; };
 		E98A4EA028A97EF5000295CD /* SiteTranslationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteTranslationData.swift; sourceTree = "<group>"; };
@@ -248,8 +248,8 @@
 				E98A4E7A28A92320000295CD /* AnimeCollectionViewCell.xib */,
 				E98A4E9C28A9734F000295CD /* TranslationCollectionViewCell.swift */,
 				E98A4E9D28A9734F000295CD /* TranslationCollectionViewCell.xib */,
-				E98A4E9828A96EDA000295CD /* TypeOfTraslationTableViewCell.swift */,
-				E98A4E9928A96EDA000295CD /* TypeOfTraslationTableViewCell.xib */,
+				E98A4E9828A96EDA000295CD /* TypeOfTraslationCollectionViewCell.swift */,
+				E98A4E9928A96EDA000295CD /* TypeOfTraslationCollectionViewCell.xib */,
 				E98A4E8628A9507E000295CD /* EpisodeCollectionViewCell.swift */,
 				E98A4E8728A9507E000295CD /* EpisodeCollectionViewCell.xib */,
 				E95DB93228AABEED00D3791B /* EpisodeToWatchCollectionViewCell.swift */,
@@ -340,7 +340,7 @@
 			files = (
 				E9134C8D28A6A62C001D25EC /* LaunchScreen.storyboard in Resources */,
 				E98A4E9F28A9734F000295CD /* TranslationCollectionViewCell.xib in Resources */,
-				E98A4E9B28A96EDA000295CD /* TypeOfTraslationTableViewCell.xib in Resources */,
+				E98A4E9B28A96EDA000295CD /* TypeOfTraslationCollectionViewCell.xib in Resources */,
 				E98A4E8928A9507E000295CD /* EpisodeCollectionViewCell.xib in Resources */,
 				E98A4E7C28A92320000295CD /* AnimeCollectionViewCell.xib in Resources */,
 				E9134C8A28A6A62C001D25EC /* Assets.xcassets in Resources */,
@@ -400,7 +400,7 @@
 			files = (
 				E968976C28A6E45F00C62ACA /* String+Groups.swift in Sources */,
 				E98A4EA728A98A2D000295CD /* PlayerViewController.swift in Sources */,
-				E98A4E9A28A96EDA000295CD /* TypeOfTraslationTableViewCell.swift in Sources */,
+				E98A4E9A28A96EDA000295CD /* TypeOfTraslationCollectionViewCell.swift in Sources */,
 				E968976E28A6E4B200C62ACA /* UITextField+ShowError.swift in Sources */,
 				E98A4E6128A9029D000295CD /* SiteAnime.swift in Sources */,
 				E9134C8528A6A62B001D25EC /* LoginViewController.swift in Sources */,

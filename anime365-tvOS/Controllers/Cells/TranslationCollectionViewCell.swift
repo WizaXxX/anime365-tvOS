@@ -7,13 +7,15 @@
 
 import UIKit
 
-class TranslationCollectionViewCell: UICollectionViewCell {
+class TranslationCollectionViewCell: MainCollectionViewCell {
     
     @IBOutlet weak var labelView: UILabel!
     
     var translation: Translation?
     
     func configure(from translation: Translation) {
+        super.configure()
+        
         self.translation = translation
         
         if translation.author.isEmpty {

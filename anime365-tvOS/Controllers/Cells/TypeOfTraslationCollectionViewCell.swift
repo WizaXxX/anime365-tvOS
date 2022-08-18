@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import ParallaxView
 
-class TypeOfTraslationTableViewCell: UITableViewCell {
+class TypeOfTraslationCollectionViewCell: MainCollectionViewCell {
 
     @IBOutlet weak var labelView: UILabel!
     
@@ -20,7 +21,10 @@ class TypeOfTraslationTableViewCell: UITableViewCell {
     }
     
     func configure(typeOfTranslation: TypeOfTranslation) {
+        super.configure()
+        
         self.typeOfTranslation = typeOfTranslation
         self.labelView.text = typeOfTranslation.rawValue
+                
     }
 }
