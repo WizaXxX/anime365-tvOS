@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EpisodeToWatchCollectionViewCell: UICollectionViewCell {
+class EpisodeToWatchCollectionViewCell: MainCollectionViewCell {
     
     @IBOutlet weak var labelView: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -24,10 +24,12 @@ class EpisodeToWatchCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
         labelView.text = nil
         episodeLabelView.text = nil
-        
+    
     }
     
     func configure(from data: [String: String]) {
+        super.configure()
+        
         self.imageView.contentMode = .scaleAspectFill
         
         self.animeId = data.first?.key

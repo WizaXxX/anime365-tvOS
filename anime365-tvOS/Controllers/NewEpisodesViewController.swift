@@ -67,10 +67,6 @@ extension NewEpisodesViewController: UICollectionViewDelegate {
         vc.configure(from: episode, anime: currentAnime)
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        collectionView.updateFocus(context: context)
-    }
 }
 
 extension NewEpisodesViewController: UICollectionViewDataSource {
@@ -86,7 +82,6 @@ extension NewEpisodesViewController: UICollectionViewDataSource {
         
         let episodeId = episodeIds[indexPath.row]
         cell.configure(from: episodeId)
-        
         return cell
     }
 }
@@ -95,7 +90,7 @@ extension NewEpisodesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let width = collectionView.bounds.width
-        let whiteSpaces: CGFloat = 10
+        let whiteSpaces: CGFloat = 8
         let cellWidth = width / 4 - whiteSpaces
 
         return CGSize(width: cellWidth, height: cellWidth * 1.5)

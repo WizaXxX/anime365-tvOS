@@ -30,6 +30,10 @@ struct AllControlles {
         return getViewControllerInstance(viewController: PlayerViewController(), name: "PlayerViewController")
     }
     
+    static func getNewEpisodesViewController() -> NewEpisodesViewController {
+        return getViewControllerInstance(viewController: NewEpisodesViewController(), name: "NewEpisodesViewController")
+    }
+    
     private static func getViewControllerInstance<T>(viewController: T, name: String) -> T {
         let storyBoard = UIStoryboard(name: "Main", bundle: .main)
         let viewController = storyBoard.instantiateViewController(withIdentifier: name) as! T

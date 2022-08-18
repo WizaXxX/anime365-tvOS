@@ -84,10 +84,6 @@ extension CatalogViewController: UICollectionViewDelegate {
         vc.configure(from: anime)
         delegate?.showChildView(viewController: vc)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        collectionView.updateFocus(context: context)
-    }
 }
 
 extension CatalogViewController: UICollectionViewDataSource {

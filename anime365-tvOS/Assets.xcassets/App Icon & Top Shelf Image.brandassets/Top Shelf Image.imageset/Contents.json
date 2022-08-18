@@ -1,18 +1,22 @@
 {
   "images" : [
     {
+      "filename" : "mega-creator (1).png",
       "idiom" : "tv",
       "scale" : "1x"
     },
     {
+      "filename" : "mega-creator (2).png",
       "idiom" : "tv",
       "scale" : "2x"
     },
     {
+      "filename" : "mega-creator (1)-1.png",
       "idiom" : "tv-marketing",
       "scale" : "1x"
     },
     {
+      "filename" : "mega-creator (2)-1.png",
       "idiom" : "tv-marketing",
       "scale" : "2x"
     }

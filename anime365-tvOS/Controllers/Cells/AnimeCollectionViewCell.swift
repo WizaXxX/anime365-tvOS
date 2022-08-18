@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AnimeCollectionViewCell: UICollectionViewCell {
+class AnimeCollectionViewCell: MainCollectionViewCell {
     
     @IBOutlet weak var labelView: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -23,6 +23,8 @@ class AnimeCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(from anime: Anime) {
+        super.configure()
+        
         self.anime = anime
         self.labelView.text = anime.title
         DispatchQueue.global().async {

@@ -3,6 +3,7 @@
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -200,8 +201,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="lpQ-nq-Irw" kind="relationship" relationship="viewControllers" id="NeP-e2-TFb"/>
                         <segue destination="6ju-lR-jU0" kind="relationship" relationship="viewControllers" id="faS-sy-diI"/>
+                        <segue destination="lpQ-nq-Irw" kind="relationship" relationship="viewControllers" id="Zrj-DD-UUK"/>
+                        <segue destination="MlK-iN-YvM" kind="relationship" relationship="viewControllers" id="Fxt-RE-T5z"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgO-6e-adU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -211,7 +213,7 @@
         <!--Новые серии-->
         <scene sceneID="UBp-MR-aa9">
             <objects>
-                <viewController id="lpQ-nq-Irw" customClass="NewEpisodesViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewEpisodesViewController" id="lpQ-nq-Irw" customClass="NewEpisodesViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="quO-RF-Det"/>
                         <viewControllerLayoutGuide type="bottom" id="4bo-Oc-fR4"/>
@@ -257,6 +259,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0q-6E-wzL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-205" y="1971"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="RJc-NC-u7A">
+            <objects>
+                <viewController id="MlK-iN-YvM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Klv-SA-cp8"/>
+                        <viewControllerLayoutGuide type="bottom" id="J5j-Dc-Gsk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RkI-DN-rph">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="aYp-19-afy"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" id="Y8E-T4-iJ3">
+                        <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AM3-ZO-kfX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-205" y="3479"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="jby-Ws-FPh">
@@ -368,4 +391,7 @@
             <point key="canvasLocation" x="5228" y="5713"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gearshape.fill" catalog="system" width="128" height="128"/>
+    </resources>
 </document>

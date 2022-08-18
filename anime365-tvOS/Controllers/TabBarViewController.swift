@@ -11,7 +11,9 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.delegate = self
+        self.selectedIndex = 1        
     }
 }
 
@@ -23,5 +25,4 @@ extension TabBarViewController: UITabBarControllerDelegate {
         vc.needLoadData = true
         return nil
     }
-
 }

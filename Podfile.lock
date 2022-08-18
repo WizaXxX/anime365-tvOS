@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.6.2)
+  - ParallaxView (3.1.2)
   - Realm (10.28.5):
     - Realm/Headers (= 10.28.5)
   - Realm/Headers (10.28.5)
@@ -10,6 +11,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - ParallaxView
   - RealmSwift (~> 10)
   - SwiftKeychainWrapper
   - SwiftSoup
@@ -17,6 +19,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - ParallaxView
     - Realm
     - RealmSwift
     - SwiftKeychainWrapper
@@ -24,11 +27,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  ParallaxView: 1a97d3ff4752f1b1009b30c96235cee3221db012
   Realm: eb7f6a7a8395906822e6fab71eb8496d6d52b318
   RealmSwift: 6b54904d4a236de143f3411a757641fd74e9cb3d
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftSoup: 3384f2e618cfc1b3cbc7852c16692fe8de13fb8f
 
-PODFILE CHECKSUM: 1ffc0328a883961575e625f9ac2a35b24bae9667
+PODFILE CHECKSUM: f76117084f2cd605587dd0d5cf5d8d0e3d7c3fbd
 
 COCOAPODS: 1.11.3

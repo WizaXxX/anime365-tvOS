@@ -10,5 +10,6 @@ target 'anime365-tvOS' do
   pod 'Alamofire'
   pod 'RealmSwift', '~>10'
   pod 'SwiftSoup'
+  pod 'ParallaxView'
 
 end
