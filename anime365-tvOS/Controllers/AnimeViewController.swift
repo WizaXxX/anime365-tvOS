@@ -49,10 +49,6 @@ extension AnimeViewController: UICollectionViewDelegate {
         vc.configure(from: episode, anime: currentAnime)
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        collectionView.updateFocus(context: context)
-    }
 }
 
 extension AnimeViewController: UICollectionViewDataSource {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EpisodeCollectionViewCell: UICollectionViewCell {
+class EpisodeCollectionViewCell: MainCollectionViewCell {
     
     @IBOutlet weak var labelView: UILabel!
     
@@ -20,6 +20,8 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(from episode: Episode) {
+        super.configure()
+        
         self.episode = episode
         self.labelView.text = episode.tittle
     }
