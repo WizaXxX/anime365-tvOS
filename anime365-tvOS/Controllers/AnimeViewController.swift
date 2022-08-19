@@ -12,6 +12,7 @@ class AnimeViewController: UIViewController {
     @IBOutlet weak var labelView: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var genresLabel: UILabel!
     
     var anime: Anime?
     
@@ -21,8 +22,9 @@ class AnimeViewController: UIViewController {
         super.viewDidLoad()
         
         view.insetsLayoutMarginsFromSafeArea = false
-        labelView.text = anime?.title
+        labelView.text = anime?.titles["ru"]
         imageView.image = anime?.posterUrl.getImage()
+        anime?.genres?.forEach({genresLabel.text! += "\($0.title)       "})
         
         collectionView.register(
             UINib(nibName: cellName, bundle: nil),

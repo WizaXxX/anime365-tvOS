@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BD1F91D5717B71D2226B79F1 /* Pods_anime365_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66ABA2E1145093E04EE69BFD /* Pods_anime365_tvOS.framework */; };
+		E90CBB3228AFFCE600FB1692 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90CBB3128AFFCE600FB1692 /* Genre.swift */; };
 		E9134C8328A6A62B001D25EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9134C8228A6A62B001D25EC /* AppDelegate.swift */; };
 		E9134C8528A6A62B001D25EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9134C8428A6A62B001D25EC /* LoginViewController.swift */; };
 		E9134C8828A6A62B001D25EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9134C8628A6A62B001D25EC /* Main.storyboard */; };
@@ -50,6 +51,8 @@
 		E9A4B75A28A6F336001A58DD /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A4B75928A6F336001A58DD /* CatalogViewController.swift */; };
 		E9C035D528AD526200B924B1 /* CatalogViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C035D428AD526200B924B1 /* CatalogViewControllerDelegate.swift */; };
 		E9C035D728AD57E400B924B1 /* UICollectionView+UpdateFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C035D628AD57E400B924B1 /* UICollectionView+UpdateFocus.swift */; };
+		E9C92E6028B01EB300AB2DD4 /* SiteAnimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C92E5F28B01EB300AB2DD4 /* SiteAnimeDescription.swift */; };
+		E9C92E6228B01EF400AB2DD4 /* AnimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C92E6128B01EF400AB2DD4 /* AnimeDescription.swift */; };
 		E9F1453E28AB872A00C3A5B2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */; };
 		E9F1454028ABAE8200C3A5B2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */; };
 		E9F1454428ABCDE100C3A5B2 /* AllControlles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */; };
@@ -59,6 +62,7 @@
 		66ABA2E1145093E04EE69BFD /* Pods_anime365_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_anime365_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8956EF48CD7B572188958574 /* Pods-anime365-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anime365-tvOS.release.xcconfig"; path = "Target Support Files/Pods-anime365-tvOS/Pods-anime365-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		8A6025DBE0121808A8DE9E74 /* Pods-anime365-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anime365-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-anime365-tvOS/Pods-anime365-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E90CBB3128AFFCE600FB1692 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		E9134C7F28A6A62B001D25EC /* anime365-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "anime365-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9134C8228A6A62B001D25EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9134C8428A6A62B001D25EC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 		E9A4B75928A6F336001A58DD /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		E9C035D428AD526200B924B1 /* CatalogViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewControllerDelegate.swift; sourceTree = "<group>"; };
 		E9C035D628AD57E400B924B1 /* UICollectionView+UpdateFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+UpdateFocus.swift"; sourceTree = "<group>"; };
+		E9C92E5F28B01EB300AB2DD4 /* SiteAnimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteAnimeDescription.swift; sourceTree = "<group>"; };
+		E9C92E6128B01EF400AB2DD4 /* AnimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDescription.swift; sourceTree = "<group>"; };
 		E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllControlles.swift; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 				E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */,
 				E968976928A6C0E500C62ACA /* Networker.swift */,
 				E968976728A6B57900C62ACA /* Session.swift */,
+				E90CBB3128AFFCE600FB1692 /* Genre.swift */,
 				E9134C8228A6A62B001D25EC /* AppDelegate.swift */,
 			);
 			path = System;
@@ -234,6 +241,7 @@
 				E98A4EA428A9800C000295CD /* SiteStreamTranslationData.swift */,
 				E98A4EA028A97EF5000295CD /* SiteTranslationData.swift */,
 				E98A4E6328A903F1000295CD /* SiteEpisode.swift */,
+				E9C92E5F28B01EB300AB2DD4 /* SiteAnimeDescription.swift */,
 				E98A4E8C28A95C73000295CD /* SiteEpisodeWithTranslations.swift */,
 				E98A4E8E28A95E7A000295CD /* SiteTranslation.swift */,
 				E98A4E6728A905D5000295CD /* SiteGenre.swift */,
@@ -264,6 +272,7 @@
 			children = (
 				E98A4E7E28A92501000295CD /* Anime.swift */,
 				E98A4E8428A94E30000295CD /* Episode.swift */,
+				E9C92E6128B01EF400AB2DD4 /* AnimeDescription.swift */,
 				E98A4E8A28A95A40000295CD /* EpisodeWithTranslations.swift */,
 				E98A4E9028A95F19000295CD /* Translation.swift */,
 			);
@@ -400,11 +409,13 @@
 			files = (
 				E968976C28A6E45F00C62ACA /* String+Groups.swift in Sources */,
 				E98A4EA728A98A2D000295CD /* PlayerViewController.swift in Sources */,
+				E9C92E6228B01EF400AB2DD4 /* AnimeDescription.swift in Sources */,
 				E98A4E9A28A96EDA000295CD /* TypeOfTraslationCollectionViewCell.swift in Sources */,
 				E968976E28A6E4B200C62ACA /* UITextField+ShowError.swift in Sources */,
 				E98A4E6128A9029D000295CD /* SiteAnime.swift in Sources */,
 				E9134C8528A6A62B001D25EC /* LoginViewController.swift in Sources */,
 				E98A4E8F28A95E7A000295CD /* SiteTranslation.swift in Sources */,
+				E90CBB3228AFFCE600FB1692 /* Genre.swift in Sources */,
 				E968977228A6E74400C62ACA /* SessionData.swift in Sources */,
 				E98A4E6628A90549000295CD /* ImageFromInternet.swift in Sources */,
 				E9A4B75A28A6F336001A58DD /* CatalogViewController.swift in Sources */,
@@ -421,6 +432,7 @@
 				E98A4E8528A94E30000295CD /* Episode.swift in Sources */,
 				E98A4E7F28A92501000295CD /* Anime.swift in Sources */,
 				E98A4EA128A97EF5000295CD /* SiteTranslationData.swift in Sources */,
+				E9C92E6028B01EB300AB2DD4 /* SiteAnimeDescription.swift in Sources */,
 				E98A4E8B28A95A40000295CD /* EpisodeWithTranslations.swift in Sources */,
 				E98A4E8828A9507E000295CD /* EpisodeCollectionViewCell.swift in Sources */,
 				E95DB93128AAB13800D3791B /* NewEpisodesViewController.swift in Sources */,
@@ -591,7 +603,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "wizaxxx.anime365-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -617,7 +629,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "wizaxxx.anime365-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

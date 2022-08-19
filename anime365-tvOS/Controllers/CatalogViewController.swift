@@ -49,7 +49,9 @@ class CatalogViewController: UIViewController {
                     posterUrlSmall: ImageFromInternet(url: anime.posterUrlSmall),
                     posterUrl: ImageFromInternet(url: anime.posterUrl),
                     titles: anime.titles,
-                    episodes: self?.getEpisodes(from: anime)))
+                    episodes: self?.getEpisodes(from: anime),
+                    genres: anime.genres?.map({Genre(id: $0.id, title: $0.title, url: $0.url)}),
+                    desc: anime.descriptions?.map({AnimeDescription(source: $0.source, value: $0.value)})))
             }
             
             DispatchQueue.main.async {

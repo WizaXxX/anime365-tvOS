@@ -14,4 +14,6 @@ struct Anime {
     var posterUrl: ImageFromInternet
     var titles: [String: String]
     var episodes: [Episode]?
+    var genres: [Genre]?
+    var desc: [AnimeDescription]?
 }

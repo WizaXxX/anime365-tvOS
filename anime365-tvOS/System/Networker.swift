@@ -204,7 +204,6 @@ extension Networker {
 }
 
 extension Networker {
-    
     func getEpisodeWithTranslations(episodeId: Int, completion: @escaping (EpisodeWithTranslations) -> Void) {
         
         guard let url = getUrl(method: .getEpisodeWithTranslation(id: String(episodeId))) else { return }
