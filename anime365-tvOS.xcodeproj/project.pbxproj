@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E5EB1BF529939E0022E4C19 /* Pods_TopShelf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84188013BC0DB4D8113E565 /* Pods_TopShelf.framework */; };
 		BD1F91D5717B71D2226B79F1 /* Pods_anime365_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66ABA2E1145093E04EE69BFD /* Pods_anime365_tvOS.framework */; };
 		E90CBB3228AFFCE600FB1692 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90CBB3128AFFCE600FB1692 /* Genre.swift */; };
 		E9134C8328A6A62B001D25EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9134C8228A6A62B001D25EC /* AppDelegate.swift */; };
@@ -14,6 +15,32 @@
 		E9134C8828A6A62B001D25EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9134C8628A6A62B001D25EC /* Main.storyboard */; };
 		E9134C8A28A6A62C001D25EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9134C8928A6A62C001D25EC /* Assets.xcassets */; };
 		E9134C8D28A6A62C001D25EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9134C8B28A6A62C001D25EC /* LaunchScreen.storyboard */; };
+		E93D0BFD28B27FAE00DAC11B /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93D0BFC28B27FAE00DAC11B /* TVServices.framework */; };
+		E93D0C0028B27FAE00DAC11B /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93D0BFF28B27FAE00DAC11B /* ContentProvider.swift */; };
+		E93D0C0428B27FAE00DAC11B /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E93D0C0B28B2831100DAC11B /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968976728A6B57900C62ACA /* Session.swift */; };
+		E93D0C0C28B283EE00DAC11B /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968976928A6C0E500C62ACA /* Networker.swift */; };
+		E93D0C0D28B2855800DAC11B /* SessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968977128A6E74400C62ACA /* SessionData.swift */; };
+		E93D0C0E28B2855B00DAC11B /* ImageFromInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E6528A90549000295CD /* ImageFromInternet.swift */; };
+		E93D0C0F28B2855F00DAC11B /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E7E28A92501000295CD /* Anime.swift */; };
+		E93D0C1028B2856400DAC11B /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E9028A95F19000295CD /* Translation.swift */; };
+		E93D0C1128B2856400DAC11B /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E8428A94E30000295CD /* Episode.swift */; };
+		E93D0C1228B2856400DAC11B /* AnimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C92E6128B01EF400AB2DD4 /* AnimeDescription.swift */; };
+		E93D0C1328B2856400DAC11B /* EpisodeWithTranslations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E8A28A95A40000295CD /* EpisodeWithTranslations.swift */; };
+		E93D0C1428B2856900DAC11B /* SiteDownloadTranslationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4EA228A97FAB000295CD /* SiteDownloadTranslationData.swift */; };
+		E93D0C1528B2856900DAC11B /* SiteEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E6328A903F1000295CD /* SiteEpisode.swift */; };
+		E93D0C1628B2856900DAC11B /* SiteEpisodeWithTranslations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E8C28A95C73000295CD /* SiteEpisodeWithTranslations.swift */; };
+		E93D0C1728B2856900DAC11B /* SiteAnimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C92E5F28B01EB300AB2DD4 /* SiteAnimeDescription.swift */; };
+		E93D0C1828B2856900DAC11B /* SiteGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E6728A905D5000295CD /* SiteGenre.swift */; };
+		E93D0C1928B2856900DAC11B /* SiteAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E6028A9029D000295CD /* SiteAnime.swift */; };
+		E93D0C1A28B2856900DAC11B /* SiteTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E8E28A95E7A000295CD /* SiteTranslation.swift */; };
+		E93D0C1B28B2856900DAC11B /* SiteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4E6928A911DF000295CD /* SiteResult.swift */; };
+		E93D0C1C28B2856900DAC11B /* SiteStreamTranslationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4EA428A9800C000295CD /* SiteStreamTranslationData.swift */; };
+		E93D0C1D28B2856900DAC11B /* SiteTranslationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4EA028A97EF5000295CD /* SiteTranslationData.swift */; };
+		E93D0C1E28B2858000DAC11B /* UITextField+ShowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968976D28A6E4B200C62ACA /* UITextField+ShowError.swift */; };
+		E93D0C1F28B2858000DAC11B /* UICollectionView+UpdateFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C035D628AD57E400B924B1 /* UICollectionView+UpdateFocus.swift */; };
+		E93D0C2028B2858000DAC11B /* String+Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968976B28A6E45F00C62ACA /* String+Groups.swift */; };
+		E93D0C2228B2859E00DAC11B /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90CBB3128AFFCE600FB1692 /* Genre.swift */; };
 		E95DB93128AAB13800D3791B /* NewEpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95DB93028AAB13800D3791B /* NewEpisodesViewController.swift */; };
 		E95DB93428AABEED00D3791B /* EpisodeToWatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95DB93228AABEED00D3791B /* EpisodeToWatchCollectionViewCell.swift */; };
 		E95DB93528AABEED00D3791B /* EpisodeToWatchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E95DB93328AABEED00D3791B /* EpisodeToWatchCollectionViewCell.xib */; };
@@ -58,10 +85,37 @@
 		E9F1454428ABCDE100C3A5B2 /* AllControlles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E93D0C0228B27FAE00DAC11B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9134C7728A6A62B001D25EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E93D0BFA28B27FAE00DAC11B;
+			remoteInfo = TopShelf;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E93D0C0528B27FAE00DAC11B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E93D0C0428B27FAE00DAC11B /* TopShelf.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		4A9716A40973B0EE80D5B0A9 /* Pods-TopShelf.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopShelf.debug.xcconfig"; path = "Target Support Files/Pods-TopShelf/Pods-TopShelf.debug.xcconfig"; sourceTree = "<group>"; };
 		66ABA2E1145093E04EE69BFD /* Pods_anime365_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_anime365_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8956EF48CD7B572188958574 /* Pods-anime365-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anime365-tvOS.release.xcconfig"; path = "Target Support Files/Pods-anime365-tvOS/Pods-anime365-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		8A6025DBE0121808A8DE9E74 /* Pods-anime365-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anime365-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-anime365-tvOS/Pods-anime365-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		A84188013BC0DB4D8113E565 /* Pods_TopShelf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TopShelf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5E25695AD81E98D7568417A /* Pods-TopShelf.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopShelf.release.xcconfig"; path = "Target Support Files/Pods-TopShelf/Pods-TopShelf.release.xcconfig"; sourceTree = "<group>"; };
 		E90CBB3128AFFCE600FB1692 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		E9134C7F28A6A62B001D25EC /* anime365-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "anime365-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9134C8228A6A62B001D25EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,10 +123,17 @@
 		E9134C8728A6A62B001D25EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E9134C8928A6A62C001D25EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9134C8C28A6A62C001D25EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E93D0BFC28B27FAE00DAC11B /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
+		E93D0BFF28B27FAE00DAC11B /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
+		E93D0C0128B27FAE00DAC11B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E93D0C0928B27FBF00DAC11B /* anime365-tvOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "anime365-tvOS.entitlements"; sourceTree = "<group>"; };
+		E93D0C0A28B2807300DAC11B /* TopShelf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TopShelf.entitlements; sourceTree = "<group>"; };
 		E95DB93028AAB13800D3791B /* NewEpisodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEpisodesViewController.swift; sourceTree = "<group>"; };
 		E95DB93228AABEED00D3791B /* EpisodeToWatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeToWatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		E95DB93328AABEED00D3791B /* EpisodeToWatchCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeToWatchCollectionViewCell.xib; sourceTree = "<group>"; };
 		E96646FE28AEA6850031E4EF /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		E968829B28B299CC0042D45B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E968976728A6B57900C62ACA /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		E968976928A6C0E500C62ACA /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
 		E968976B28A6E45F00C62ACA /* String+Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Groups.swift"; sourceTree = "<group>"; };
@@ -122,6 +183,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E93D0BF828B27FAE00DAC11B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E93D0BFD28B27FAE00DAC11B /* TVServices.framework in Frameworks */,
+				1E5EB1BF529939E0022E4C19 /* Pods_TopShelf.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -130,6 +200,8 @@
 			children = (
 				8A6025DBE0121808A8DE9E74 /* Pods-anime365-tvOS.debug.xcconfig */,
 				8956EF48CD7B572188958574 /* Pods-anime365-tvOS.release.xcconfig */,
+				4A9716A40973B0EE80D5B0A9 /* Pods-TopShelf.debug.xcconfig */,
+				E5E25695AD81E98D7568417A /* Pods-TopShelf.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -138,6 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				66ABA2E1145093E04EE69BFD /* Pods_anime365_tvOS.framework */,
+				E93D0BFC28B27FAE00DAC11B /* TVServices.framework */,
+				A84188013BC0DB4D8113E565 /* Pods_TopShelf.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -146,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				E9134C8128A6A62B001D25EC /* anime365-tvOS */,
+				E93D0BFE28B27FAE00DAC11B /* TopShelf */,
 				E9134C8028A6A62B001D25EC /* Products */,
 				837F0E0BCD25E2E9C0D54CDA /* Pods */,
 				9A2BC9A9DC101DA1D590D699 /* Frameworks */,
@@ -156,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				E9134C7F28A6A62B001D25EC /* anime365-tvOS.app */,
+				E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +239,8 @@
 		E9134C8128A6A62B001D25EC /* anime365-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				E968829B28B299CC0042D45B /* Info.plist */,
+				E93D0C0928B27FBF00DAC11B /* anime365-tvOS.entitlements */,
 				E9134C9528A6A6B2001D25EC /* Controllers */,
 				E9134C9428A6A69B001D25EC /* Views */,
 				E9134C9328A6A68A001D25EC /* System */,
@@ -180,7 +258,6 @@
 				E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */,
 				E968976928A6C0E500C62ACA /* Networker.swift */,
 				E968976728A6B57900C62ACA /* Session.swift */,
-				E90CBB3128AFFCE600FB1692 /* Genre.swift */,
 				E9134C8228A6A62B001D25EC /* AppDelegate.swift */,
 			);
 			path = System;
@@ -209,6 +286,16 @@
 				E98A4EA628A98A2D000295CD /* PlayerViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E93D0BFE28B27FAE00DAC11B /* TopShelf */ = {
+			isa = PBXGroup;
+			children = (
+				E93D0C0A28B2807300DAC11B /* TopShelf.entitlements */,
+				E93D0BFF28B27FAE00DAC11B /* ContentProvider.swift */,
+				E93D0C0128B27FAE00DAC11B /* Info.plist */,
+			);
+			path = TopShelf;
 			sourceTree = "<group>";
 		};
 		E968976F28A6E4E000C62ACA /* Extensions */ = {
@@ -275,6 +362,7 @@
 				E9C92E6128B01EF400AB2DD4 /* AnimeDescription.swift */,
 				E98A4E8A28A95A40000295CD /* EpisodeWithTranslations.swift */,
 				E98A4E9028A95F19000295CD /* Translation.swift */,
+				E90CBB3128AFFCE600FB1692 /* Genre.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -299,15 +387,35 @@
 				E9134C7C28A6A62B001D25EC /* Frameworks */,
 				E9134C7D28A6A62B001D25EC /* Resources */,
 				AF8B0FCFE6BCB754C172FAD0 /* [CP] Embed Pods Frameworks */,
+				E93D0C0528B27FAE00DAC11B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E93D0C0328B27FAE00DAC11B /* PBXTargetDependency */,
 			);
 			name = "anime365-tvOS";
 			productName = "anime365-tvOS";
 			productReference = E9134C7F28A6A62B001D25EC /* anime365-tvOS.app */;
 			productType = "com.apple.product-type.application";
+		};
+		E93D0BFA28B27FAE00DAC11B /* TopShelf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E93D0C0828B27FAE00DAC11B /* Build configuration list for PBXNativeTarget "TopShelf" */;
+			buildPhases = (
+				303638B6C9BC00FF430DDDBC /* [CP] Check Pods Manifest.lock */,
+				E93D0BF728B27FAE00DAC11B /* Sources */,
+				E93D0BF828B27FAE00DAC11B /* Frameworks */,
+				E93D0BF928B27FAE00DAC11B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TopShelf;
+			productName = TopShelf;
+			productReference = E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -320,6 +428,9 @@
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					E9134C7E28A6A62B001D25EC = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					E93D0BFA28B27FAE00DAC11B = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
 				};
@@ -338,6 +449,7 @@
 			projectRoot = "";
 			targets = (
 				E9134C7E28A6A62B001D25EC /* anime365-tvOS */,
+				E93D0BFA28B27FAE00DAC11B /* TopShelf */,
 			);
 		};
 /* End PBXProject section */
@@ -355,6 +467,13 @@
 				E9134C8A28A6A62C001D25EC /* Assets.xcassets in Resources */,
 				E9134C8828A6A62B001D25EC /* Main.storyboard in Resources */,
 				E95DB93528AABEED00D3791B /* EpisodeToWatchCollectionViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E93D0BF928B27FAE00DAC11B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +496,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-anime365-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		303638B6C9BC00FF430DDDBC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TopShelf-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -450,7 +591,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E93D0BF728B27FAE00DAC11B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E93D0C1C28B2856900DAC11B /* SiteStreamTranslationData.swift in Sources */,
+				E93D0C0B28B2831100DAC11B /* Session.swift in Sources */,
+				E93D0C1328B2856400DAC11B /* EpisodeWithTranslations.swift in Sources */,
+				E93D0C1728B2856900DAC11B /* SiteAnimeDescription.swift in Sources */,
+				E93D0C1F28B2858000DAC11B /* UICollectionView+UpdateFocus.swift in Sources */,
+				E93D0C1528B2856900DAC11B /* SiteEpisode.swift in Sources */,
+				E93D0C1128B2856400DAC11B /* Episode.swift in Sources */,
+				E93D0C1D28B2856900DAC11B /* SiteTranslationData.swift in Sources */,
+				E93D0C1E28B2858000DAC11B /* UITextField+ShowError.swift in Sources */,
+				E93D0C1228B2856400DAC11B /* AnimeDescription.swift in Sources */,
+				E93D0C0028B27FAE00DAC11B /* ContentProvider.swift in Sources */,
+				E93D0C2028B2858000DAC11B /* String+Groups.swift in Sources */,
+				E93D0C0F28B2855F00DAC11B /* Anime.swift in Sources */,
+				E93D0C1828B2856900DAC11B /* SiteGenre.swift in Sources */,
+				E93D0C1928B2856900DAC11B /* SiteAnime.swift in Sources */,
+				E93D0C2228B2859E00DAC11B /* Genre.swift in Sources */,
+				E93D0C1428B2856900DAC11B /* SiteDownloadTranslationData.swift in Sources */,
+				E93D0C0D28B2855800DAC11B /* SessionData.swift in Sources */,
+				E93D0C1028B2856400DAC11B /* Translation.swift in Sources */,
+				E93D0C1A28B2856900DAC11B /* SiteTranslation.swift in Sources */,
+				E93D0C0E28B2855B00DAC11B /* ImageFromInternet.swift in Sources */,
+				E93D0C0C28B283EE00DAC11B /* Networker.swift in Sources */,
+				E93D0C1628B2856900DAC11B /* SiteEpisodeWithTranslations.swift in Sources */,
+				E93D0C1B28B2856900DAC11B /* SiteResult.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E93D0C0328B27FAE00DAC11B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E93D0BFA28B27FAE00DAC11B /* TopShelf */;
+			targetProxy = E93D0C0228B27FAE00DAC11B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E9134C8628A6A62B001D25EC /* Main.storyboard */ = {
@@ -590,12 +770,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8A6025DBE0121808A8DE9E74 /* Pods-anime365-tvOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "anime365-tvOS/anime365-tvOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T485BBUDS7;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "anime365-tvOS/Info.plist";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -616,12 +799,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8956EF48CD7B572188958574 /* Pods-anime365-tvOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "anime365-tvOS/anime365-tvOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T485BBUDS7;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "anime365-tvOS/Info.plist";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -632,6 +818,60 @@
 				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "wizaxxx.anime365-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Release;
+		};
+		E93D0C0628B27FAE00DAC11B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A9716A40973B0EE80D5B0A9 /* Pods-TopShelf.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TopShelf/TopShelf.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T485BBUDS7;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TopShelf;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "wizaxxx.anime365-tvOS.TopShelf";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+		E93D0C0728B27FAE00DAC11B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5E25695AD81E98D7568417A /* Pods-TopShelf.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TopShelf/TopShelf.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T485BBUDS7;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TopShelf;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "wizaxxx.anime365-tvOS.TopShelf";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -655,6 +895,15 @@
 			buildConfigurations = (
 				E9134C9128A6A62C001D25EC /* Debug */,
 				E9134C9228A6A62C001D25EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E93D0C0828B27FAE00DAC11B /* Build configuration list for PBXNativeTarget "TopShelf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E93D0C0628B27FAE00DAC11B /* Debug */,
+				E93D0C0728B27FAE00DAC11B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

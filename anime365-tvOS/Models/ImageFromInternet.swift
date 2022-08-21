@@ -21,6 +21,7 @@ struct ImageFromInternet {
     let url: String
     private let md5: String
     
+    
     func getImage() -> UIImage {
         
         if let savedImage = getSavedImage() {
@@ -33,6 +34,20 @@ struct ImageFromInternet {
         
         saveImage(imageData)
         return currentImage
+    }
+    
+    func getLocalUrl() -> URL? {
+        
+        getImage()
+        guard let dir = try? FileManager.default.url(
+            for: .cachesDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false)
+        else { return nil }
+
+        return URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(md5)
+        
     }
     
     private func getSavedImage() -> UIImage? {
@@ -55,7 +70,6 @@ struct ImageFromInternet {
             appropriateFor: nil,
             create: false)
         else { return }
-        
         try? imageData.write(to: dir.appendingPathComponent(md5))
     }
     

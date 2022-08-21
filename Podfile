@@ -1,15 +1,21 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'anime365-tvOS' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
 
-  # Pods for anime365-tvOS
+target 'anime365-tvOS' do
+  use_frameworks!
+  
   pod 'SwiftKeychainWrapper'
   pod 'Alamofire'
   pod 'RealmSwift', '~>10'
   pod 'SwiftSoup'
   pod 'ParallaxView'
+end
 
+target 'TopShelf' do
+  use_frameworks!
+  
+  pod 'SwiftKeychainWrapper'
+  pod 'Alamofire'
+  pod 'SwiftSoup'
 end

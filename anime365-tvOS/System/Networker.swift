@@ -113,17 +113,30 @@ class Networker {
         completion: @escaping (TypeOfResponse?)->()) {
         
         let headers: HTTPHeaders = ["User-Agent": "anime-365-tvOS"]
-        AF.request(url, method: .get, headers: headers).responseDecodable(of: TypeOfResponse.self) { response in
+        AF.request(url, method: .get, headers: headers).responseDecodable(of: TypeOfResponse.self) { [weak self] response in
             if response.error != nil {
                 guard let isContain = String(data: response.data!, encoding: .utf8)?.contains("You should login first") else { return }
                 if isContain {
-                    KeychainWrapper.standard.set("", forKey: "sessionId")
-                    exit(1)
+                    self?.logout()
                 }
             }
             guard let result = response.value else { return }
             completion(result)
         }
+    }
+    
+    private func sendGetRequestJSONAsync<TypeOfResponse: Decodable>(url: String, type: TypeOfResponse.Type) async -> TypeOfResponse? {
+        
+        let headers: HTTPHeaders = ["User-Agent": "anime-365-tvOS"]
+        let response = await AF.request(url, method: .get, headers: headers)
+            .serializingDecodable(TypeOfResponse.self)
+            .response
+        
+        if response.error != nil {
+           return nil
+        }
+        guard let result = response.value else { return nil }
+        return result
     }
     
     private func sendGetRequest(
@@ -188,7 +201,8 @@ class Networker {
     }
     
     private func logout() {
-        KeychainWrapper.standard.set("", forKey: "sessionId")
+        let wrapper = Session.instance.getKeyChainWrapper()
+        wrapper.set("", forKey: "sessionId")
         exit(1)
     }
 }
@@ -236,6 +250,29 @@ extension Networker {
                 translations: translations))
         }
     }
+    
+    func getEpisodeWithTranslationsAsync(episodeId: Int) async -> EpisodeWithTranslations? {
+        guard let url = getUrl(method: .getEpisodeWithTranslation(id: String(episodeId))) else { return nil }
+        let result = await sendGetRequestJSONAsync(url: url, type: SiteResponse<SiteEpisodeWithTranslations>.self)
+        guard let data = result?.data else { return nil }
+        
+        return EpisodeWithTranslations(
+            id: data.id,
+            episodeFull: data.episodeFull,
+            episodeInt: Int(data.episodeInt) ?? 0,
+            episodeType: data.episodeType,
+            isActive: data.isActive == 1 ? true : false,
+            translations: data.translations.map({Translation(
+                id: $0.id,
+                type: .init(type: $0.type),
+                typeKind: $0.typeKind,
+                typeLang: $0.typeLang,
+                author: $0.authorsSummary,
+                width: $0.width,
+                height: $0.height)}))
+        
+    }
+    
 }
 
 extension Networker {
@@ -292,7 +329,18 @@ extension Networker {
                 posterUrl: ImageFromInternet(url: data.posterUrl),
                 titles: data.titles))
         }
-        
+    }
+    
+    func getAnimeAsync(id: String) async -> Anime? {
+        guard let url = getUrl(method: .getAnime(id: id)) else { return nil }
+        let result = await sendGetRequestJSONAsync(url: url, type: SiteResponse<SiteAnime>.self)
+        guard let data = result?.data else { return nil }
+        return Anime(
+            id: data.id,
+            title: data.title,
+            posterUrlSmall: ImageFromInternet(url: data.posterUrlSmall),
+            posterUrl: ImageFromInternet(url: data.posterUrl),
+            titles: data.titles)
     }
 }
 
@@ -326,4 +374,32 @@ extension Networker {
                 }
         }
     }
+}
+
+extension Networker {
+    func getNewEpisodesData(episodes: [[String: String]]) async -> [(Anime, EpisodeWithTranslations)] {
+        
+        var newEpisodesData = [(Anime, EpisodeWithTranslations)]()
+        
+        for item in episodes {
+            
+            guard let animeId = item.keys.first else { continue }
+            guard let episodeId = item.values.first else { continue }
+            guard let data = await getNewEpisodeData(episodeId: episodeId, animeId: animeId) else { continue }
+            newEpisodesData.append(data)
+        }
+        
+        return newEpisodesData
+    }
+    
+    func getNewEpisodeData(episodeId: String, animeId: String) async -> (Anime, EpisodeWithTranslations)? {
+        guard let episodeIdInt = Int(episodeId) else { return nil }
+        
+        guard let episode = await getEpisodeWithTranslationsAsync(episodeId: episodeIdInt) else { return nil }
+        guard let anime = await getAnimeAsync(id: animeId) else { return nil }
+        
+        return (anime, episode)
+        
+    }
+    
 }

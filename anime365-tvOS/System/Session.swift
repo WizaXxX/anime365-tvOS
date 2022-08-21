@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class Session {
     private init() {}
@@ -14,5 +15,11 @@ class Session {
     
     var sessionId: String = ""
     var userId: String = ""
+    
+    func getKeyChainWrapper() -> KeychainWrapper {
+        return KeychainWrapper(
+            serviceName: "anime365",
+            accessGroup: "wizaxxx.anime365-tvOS.keychain")
+    }
     
 }

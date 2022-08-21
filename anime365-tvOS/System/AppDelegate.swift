@@ -11,11 +11,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var rootNavControl: UINavigationController?
+    var rootNavControl = AllControlles.getTabBarViewController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        print(Realm.Configuration.defaultConfiguration.fileURL)
         return true
     }
 
@@ -36,6 +35,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        guard let navController = window?.rootViewController as? UINavigationController else { return false }
+        let urlComponents = URLComponents(string: url.absoluteString)
+        
+        guard let episodeId = urlComponents?.queryItems?.first(where: {$0.name == "episodeId"})?.value else { return false }
+        guard let animeId = urlComponents?.queryItems?.first(where: {$0.name == "animeId"})?.value else { return false }
+        
+        Task {
+            guard let data = await Networker.shared.getNewEpisodeData(episodeId: episodeId, animeId: animeId) else { return }
+            let vc = AllControlles.getEpisodeViewController()
+            vc.configure(from: data.1, anime: data.0)
+            navController.pushViewController(vc, animated: true)
+        }
+        
+        return true
+    }
 
 }
 
