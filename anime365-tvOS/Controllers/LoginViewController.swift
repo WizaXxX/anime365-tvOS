@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         if !needLogin() {
             goToMainView()
         }
@@ -58,11 +58,13 @@ class LoginViewController: UIViewController {
         
     private func needLogin() -> Bool {
         
-        guard let sessionId = KeychainWrapper.standard.string(forKey: sessionIdKeyName) else { return true }
+        let wrapper = Session.instance.getKeyChainWrapper()
+        
+        guard let sessionId = wrapper.string(forKey: sessionIdKeyName) else { return true }
         if sessionId.isEmpty { return true }
         Session.instance.sessionId = sessionId
         
-        guard let userId = KeychainWrapper.standard.string(forKey: userIdKeyName) else { return true }
+        guard let userId = wrapper.string(forKey: userIdKeyName) else { return true }
         Session.instance.userId = userId
         
         setSessionData(sessionId: sessionId, userId: userId)

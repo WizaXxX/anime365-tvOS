@@ -19,7 +19,7 @@ class Session {
     func getKeyChainWrapper() -> KeychainWrapper {
         return KeychainWrapper(
             serviceName: "anime365",
-            accessGroup: "wizaxxx.anime365-tvOS.keychain")
+            accessGroup: "T485BBUDS7.wizaxxx.anime365-tvOS")
     }
     
 }

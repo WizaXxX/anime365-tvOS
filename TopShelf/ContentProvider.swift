@@ -24,14 +24,15 @@ class ContentProvider: TVTopShelfContentProvider {
                     item.imageShape = .poster
                     item.title = data.1.episodeFull
                     
-                    let localUrl = data.0.posterUrl.getLocalUrl()
-                    item.setImageURL(localUrl, for: .screenScale1x)
-                    item.setImageURL(localUrl, for: .screenScale2x)
+                    let url = URL(string: data.0.posterUrl.url)
+                    item.setImageURL(url, for: .screenScale1x)
+                    item.setImageURL(url, for: .screenScale2x)
                     item.displayAction = URL(string: "anime365-episode-watch://episode?episodeId=\(data.1.id)&animeId=\(data.0.id)").map { TVTopShelfAction(url: $0) }
                     return item
                 }
                 
                 let collection = TVTopShelfItemCollection(items: items)
+                collection.title = "Новые серии"
                 let content = TVTopShelfSectionedContent(sections: [collection])
                 completionHandler(content);
                 
