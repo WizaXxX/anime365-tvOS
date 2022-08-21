@@ -131,15 +131,17 @@ class Networker {
         completion: @escaping (String)->()) {
         
         let headers: HTTPHeaders = ["User-Agent": "anime-365-tvOS"]
-        AF.request(url, method: .get, headers: headers).response { response in
+        AF.request(url, method: .get, headers: headers).response { [weak self] response in
             if response.error != nil {
                 guard let isContain = String(data: response.data!, encoding: .utf8)?.contains("You should login first") else { return }
                 if isContain {
-                    KeychainWrapper.standard.set("", forKey: "sessionId")
-                    exit(1)
+                    self?.logout()
                 }
             }
             guard let bodyString = String(data: response.data!, encoding: .utf8) else { return }
+            if bodyString.contains("Чтобы им пользоваться, нужно войти на сайт.") {
+                self?.logout()
+            }
             completion(bodyString)
         }
     }
@@ -183,6 +185,11 @@ class Networker {
         
         guard let sessionId = sessionIdCookie?.value else { return nil }
         return sessionId
+    }
+    
+    private func logout() {
+        KeychainWrapper.standard.set("", forKey: "sessionId")
+        exit(1)
     }
 }
 
