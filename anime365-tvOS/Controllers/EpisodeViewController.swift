@@ -11,7 +11,6 @@ class EpisodeViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var typeOfSubtitleCollectionView: UICollectionView!
-    
     @IBOutlet weak var tableView: UITableView!
     
     var episodeWithTranslations: EpisodeWithTranslations?

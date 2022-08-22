@@ -80,9 +80,11 @@ class PlayerViewController: AVPlayerViewController {
                 if partOfVideo < 16 {
                     guard let animeId = self?.anime?.id else { return }
                     guard let episodeId = self?.episode?.episodeInt else { return }
+                    
                     Networker.shared.episodeWatched(
                         animeId: String(animeId),
                         episodeNumber: episodeId)
+                    NotificationCenter.default.post(name: .init(rawValue: "NeedReloadNewEpisodeData"), object: nil)
                 }
         })
     }

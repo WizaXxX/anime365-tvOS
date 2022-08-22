@@ -17,6 +17,7 @@ enum Methods {
     case main
     case getAnime(id: String)
     case episodeWatched(id: String)
+    case getSubscriptionData
     
     var value: String {
         switch self {
@@ -34,6 +35,8 @@ enum Methods {
             return "api/series/\(id)"
         case .episodeWatched(let id):
             return "animelist/edit/\(id)"
+        case .getSubscriptionData:
+            return "users/profile"
         }
     }
 }
@@ -158,6 +161,22 @@ class Networker {
             completion(bodyString)
         }
     }
+    
+    private func sendGetRequestAsync(url: String) async -> String? {
+        
+        let headers: HTTPHeaders = ["User-Agent": "anime-365-tvOS"]
+        let response = await AF.request(url, method: .get, headers: headers)
+            .serializingData()
+            .response
+        
+        if response.error != nil {
+           return nil
+        }
+        guard let responseData = response.data else { return nil }
+        guard let body = String(data: responseData, encoding: .utf8) else { return nil }
+        
+        return body
+    }
         
     private func getUrl(method: Methods, params: [String: String] = [String: String]()) -> String? {
         var urlComponents = URLComponents()
@@ -256,7 +275,8 @@ extension Networker {
         let result = await sendGetRequestJSONAsync(url: url, type: SiteResponse<SiteEpisodeWithTranslations>.self)
         guard let data = result?.data else { return nil }
         
-        return EpisodeWithTranslations(
+        
+        let episode = EpisodeWithTranslations(
             id: data.id,
             episodeFull: data.episodeFull,
             episodeInt: Int(data.episodeInt) ?? 0,
@@ -270,6 +290,17 @@ extension Networker {
                 author: $0.authorsSummary,
                 width: $0.width,
                 height: $0.height)}))
+        
+        if Session.instance.settings.showNewEpisodesOnlyWithComfortTypeOfTranslation,
+           let typeOfTranslation = Session.instance.settings.comfortTypeOfTranslation  {
+            
+            let neededTranslation = episode.translations.first(where: {$0.type == typeOfTranslation})
+            if neededTranslation == nil {
+                return nil
+            }
+        }
+        
+        return episode
         
     }
     
@@ -401,5 +432,33 @@ extension Networker {
         return (anime, episode)
         
     }
+}
+
+extension Networker {
+    func getSubscriptionData() async -> (String, String)? {
+        guard let url = getUrl(method: .getSubscriptionData) else { return nil }
+        guard let body = await sendGetRequestAsync(url: url) else { return nil }
+        
+        guard let doc = try? SwiftSoup.parse(body) else { return nil }
+        guard let elementsWithH2 = try? doc.select("h2") else { return nil }
+        guard let element = getElementWithSubscriptionData(elements: elementsWithH2) else { return nil }
+        guard var regData = try? element.html().groups(for: "<p>(\\w*). ([\\w0-2 \\W]*).<br>") else { return nil }
+        
+        guard let desc = regData[0].popLast() else { return nil }
+        guard let status = regData[0].popLast() else { return nil }
+        
+        return (status, desc)
+    }
     
+    private func getElementWithSubscriptionData(elements: Elements) -> Element? {
+        
+        for item in elements {
+            guard let contain = try? item.text().contains("Подписка") else { continue }
+            if contain {
+                return item.parent()
+            }
+        }
+        
+        return nil
+    }
 }

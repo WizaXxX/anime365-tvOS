@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="20037" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Subscription View Controller-->
+        <scene sceneID="9lE-WX-96o">
+            <objects>
+                <viewController storyboardIdentifier="SubscriptionViewController" id="Xgj-up-wSf" customClass="SubscriptionViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aTn-mJ-5lt"/>
+                        <viewControllerLayoutGuide type="bottom" id="BrO-eL-FPV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Oo6-ab-TCE">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подписка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UV-TL-hzj">
+                                <rect key="frame" x="845" y="78.5" width="230" height="59"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Состояние:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scz-fS-ihD">
+                                <rect key="frame" x="753" y="177.5" width="214" height="47"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" systemColor="placeholderTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оплачена" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ny-2z-nWy">
+                                <rect key="frame" x="997" y="177.5" width="174" height="47"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="38"/>
+                                <color key="textColor" systemColor="separatorColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID аккаунта:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sP3-LP-bXe">
+                                <rect key="frame" x="738" y="244.5" width="229" height="47"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" systemColor="placeholderTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1370202" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38g-7K-BRM">
+                                <rect key="frame" x="997" y="244.5" width="148" height="47"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="38"/>
+                                <color key="textColor" systemColor="separatorColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Осталось 2 года 1 месяц подписки (до 25.09.2024 16:57)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpd-px-kQ7">
+                                <rect key="frame" x="96" y="321.5" width="1728" height="45"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="38"/>
+                                <color key="textColor" systemColor="separatorColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Rbh-h3-eDf"/>
+                        <constraints>
+                            <constraint firstItem="scz-fS-ihD" firstAttribute="centerX" secondItem="9UV-TL-hzj" secondAttribute="centerX" constant="-100" id="49C-XX-Nfw"/>
+                            <constraint firstItem="jpd-px-kQ7" firstAttribute="centerX" secondItem="9UV-TL-hzj" secondAttribute="centerX" id="64y-3N-UUe"/>
+                            <constraint firstItem="2ny-2z-nWy" firstAttribute="leading" secondItem="scz-fS-ihD" secondAttribute="trailing" constant="30" id="Cx0-cy-MAz"/>
+                            <constraint firstItem="38g-7K-BRM" firstAttribute="leading" secondItem="sP3-LP-bXe" secondAttribute="trailing" constant="30" id="DZk-hl-wAl"/>
+                            <constraint firstItem="2ny-2z-nWy" firstAttribute="height" secondItem="scz-fS-ihD" secondAttribute="height" id="G8x-x4-Wgy"/>
+                            <constraint firstItem="jpd-px-kQ7" firstAttribute="width" secondItem="Oo6-ab-TCE" secondAttribute="width" multiplier="0.9" id="Izw-ff-A8a"/>
+                            <constraint firstItem="jpd-px-kQ7" firstAttribute="top" secondItem="sP3-LP-bXe" secondAttribute="bottom" constant="30" id="O9r-8d-h0p"/>
+                            <constraint firstItem="sP3-LP-bXe" firstAttribute="trailing" secondItem="scz-fS-ihD" secondAttribute="trailing" id="PTp-np-IKU"/>
+                            <constraint firstItem="scz-fS-ihD" firstAttribute="top" secondItem="9UV-TL-hzj" secondAttribute="bottom" constant="40" id="Rm4-5h-QGC"/>
+                            <constraint firstItem="38g-7K-BRM" firstAttribute="height" secondItem="sP3-LP-bXe" secondAttribute="height" id="Rms-ak-VM7"/>
+                            <constraint firstItem="sP3-LP-bXe" firstAttribute="top" secondItem="scz-fS-ihD" secondAttribute="bottom" constant="20" id="Vdh-MP-6Qt"/>
+                            <constraint firstItem="9UV-TL-hzj" firstAttribute="centerY" secondItem="Rbh-h3-eDf" secondAttribute="centerY" multiplier="0.2" id="WGN-e3-4cz"/>
+                            <constraint firstItem="9UV-TL-hzj" firstAttribute="centerX" secondItem="Rbh-h3-eDf" secondAttribute="centerX" id="ci4-CO-9PD"/>
+                            <constraint firstItem="38g-7K-BRM" firstAttribute="centerY" secondItem="sP3-LP-bXe" secondAttribute="centerY" id="pP4-4x-2TO"/>
+                            <constraint firstItem="2ny-2z-nWy" firstAttribute="centerY" secondItem="scz-fS-ihD" secondAttribute="centerY" id="sOv-Fy-2GM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="descLabelView" destination="jpd-px-kQ7" id="uUo-JL-lJZ"/>
+                        <outlet property="statusLabelView" destination="2ny-2z-nWy" id="cpL-j6-jga"/>
+                        <outlet property="userIdLabelView" destination="38g-7K-BRM" id="ZC8-9E-zNU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7uX-ET-Cqw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-32" y="-5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="placeholderTextColor">
+            <color white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

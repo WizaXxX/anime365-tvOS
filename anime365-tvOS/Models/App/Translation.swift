@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TypeOfTranslation: String {
+enum TypeOfTranslation: String, CaseIterable {
     case subEn = "Английские субтитры"
     case voiceEn = "Английская озвучка"
     case voiceOther = "Разная озвучка"

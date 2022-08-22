@@ -15,6 +15,11 @@
 		E9134C8828A6A62B001D25EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9134C8628A6A62B001D25EC /* Main.storyboard */; };
 		E9134C8A28A6A62C001D25EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9134C8928A6A62C001D25EC /* Assets.xcassets */; };
 		E9134C8D28A6A62C001D25EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9134C8B28A6A62C001D25EC /* LaunchScreen.storyboard */; };
+		E919189528B3D37F00FEA503 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E919189428B3D37F00FEA503 /* SettingsViewController.swift */; };
+		E919189728B3D4DA00FEA503 /* Subscription.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E919189628B3D4DA00FEA503 /* Subscription.storyboard */; };
+		E919189928B3D83400FEA503 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E919189828B3D83400FEA503 /* SubscriptionViewController.swift */; };
+		E92F81C028B40408007B610D /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F81BF28B40408007B610D /* SessionSettings.swift */; };
+		E92F81C128B404EA007B610D /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F81BF28B40408007B610D /* SessionSettings.swift */; };
 		E93D0BFD28B27FAE00DAC11B /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93D0BFC28B27FAE00DAC11B /* TVServices.framework */; };
 		E93D0C0028B27FAE00DAC11B /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93D0BFF28B27FAE00DAC11B /* ContentProvider.swift */; };
 		E93D0C0428B27FAE00DAC11B /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -123,6 +128,10 @@
 		E9134C8728A6A62B001D25EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E9134C8928A6A62C001D25EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9134C8C28A6A62C001D25EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E919189428B3D37F00FEA503 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E919189628B3D4DA00FEA503 /* Subscription.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Subscription.storyboard; sourceTree = "<group>"; };
+		E919189828B3D83400FEA503 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		E92F81BF28B40408007B610D /* SessionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSettings.swift; sourceTree = "<group>"; };
 		E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93D0BFC28B27FAE00DAC11B /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
 		E93D0BFF28B27FAE00DAC11B /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
@@ -258,6 +267,7 @@
 				E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */,
 				E968976928A6C0E500C62ACA /* Networker.swift */,
 				E968976728A6B57900C62ACA /* Session.swift */,
+				E92F81BF28B40408007B610D /* SessionSettings.swift */,
 				E9134C8228A6A62B001D25EC /* AppDelegate.swift */,
 			);
 			path = System;
@@ -267,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				E9134C8628A6A62B001D25EC /* Main.storyboard */,
+				E919189628B3D4DA00FEA503 /* Subscription.storyboard */,
 				E9134C8B28A6A62C001D25EC /* LaunchScreen.storyboard */,
 			);
 			path = Views;
@@ -281,9 +292,11 @@
 				E9A4B75928A6F336001A58DD /* CatalogViewController.swift */,
 				E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */,
 				E98A4E8028A93CAF000295CD /* AnimeViewController.swift */,
+				E919189828B3D83400FEA503 /* SubscriptionViewController.swift */,
 				E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */,
 				E98A4E9228A9649C000295CD /* EpisodeViewController.swift */,
 				E98A4EA628A98A2D000295CD /* PlayerViewController.swift */,
+				E919189428B3D37F00FEA503 /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -459,6 +472,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E919189728B3D4DA00FEA503 /* Subscription.storyboard in Resources */,
 				E9134C8D28A6A62C001D25EC /* LaunchScreen.storyboard in Resources */,
 				E98A4E9F28A9734F000295CD /* TranslationCollectionViewCell.xib in Resources */,
 				E98A4E9B28A96EDA000295CD /* TypeOfTraslationCollectionViewCell.xib in Resources */,
@@ -555,6 +569,7 @@
 				E968976E28A6E4B200C62ACA /* UITextField+ShowError.swift in Sources */,
 				E98A4E6128A9029D000295CD /* SiteAnime.swift in Sources */,
 				E9134C8528A6A62B001D25EC /* LoginViewController.swift in Sources */,
+				E919189528B3D37F00FEA503 /* SettingsViewController.swift in Sources */,
 				E98A4E8F28A95E7A000295CD /* SiteTranslation.swift in Sources */,
 				E90CBB3228AFFCE600FB1692 /* Genre.swift in Sources */,
 				E968977228A6E74400C62ACA /* SessionData.swift in Sources */,
@@ -572,6 +587,7 @@
 				E968976828A6B57900C62ACA /* Session.swift in Sources */,
 				E98A4E8528A94E30000295CD /* Episode.swift in Sources */,
 				E98A4E7F28A92501000295CD /* Anime.swift in Sources */,
+				E92F81C028B40408007B610D /* SessionSettings.swift in Sources */,
 				E98A4EA128A97EF5000295CD /* SiteTranslationData.swift in Sources */,
 				E9C92E6028B01EB300AB2DD4 /* SiteAnimeDescription.swift in Sources */,
 				E98A4E8B28A95A40000295CD /* EpisodeWithTranslations.swift in Sources */,
@@ -583,6 +599,7 @@
 				E9F1454028ABAE8200C3A5B2 /* SearchViewController.swift in Sources */,
 				E968976A28A6C0E500C62ACA /* Networker.swift in Sources */,
 				E98A4E6A28A911DF000295CD /* SiteResult.swift in Sources */,
+				E919189928B3D83400FEA503 /* SubscriptionViewController.swift in Sources */,
 				E95DB93428AABEED00D3791B /* EpisodeToWatchCollectionViewCell.swift in Sources */,
 				E96646FF28AEA6850031E4EF /* MainCollectionViewCell.swift in Sources */,
 				E98A4E9328A9649C000295CD /* EpisodeViewController.swift in Sources */,
@@ -611,6 +628,7 @@
 				E93D0C1828B2856900DAC11B /* SiteGenre.swift in Sources */,
 				E93D0C1928B2856900DAC11B /* SiteAnime.swift in Sources */,
 				E93D0C2228B2859E00DAC11B /* Genre.swift in Sources */,
+				E92F81C128B404EA007B610D /* SessionSettings.swift in Sources */,
 				E93D0C1428B2856900DAC11B /* SiteDownloadTranslationData.swift in Sources */,
 				E93D0C0D28B2855800DAC11B /* SessionData.swift in Sources */,
 				E93D0C1028B2856400DAC11B /* Translation.swift in Sources */,

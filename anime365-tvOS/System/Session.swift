@@ -9,12 +9,15 @@ import Foundation
 import SwiftKeychainWrapper
 
 class Session {
-    private init() {}
+    private init() {
+        self.settings = SessionSettings()
+    }
     
     static let instance = Session()
     
     var sessionId: String = ""
     var userId: String = ""
+    var settings: SessionSettings
     
     func getKeyChainWrapper() -> KeychainWrapper {
         return KeychainWrapper(

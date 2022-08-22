@@ -15,8 +15,6 @@ class EpisodeToWatchCollectionViewCell: MainCollectionViewCell {
     
     var episode: EpisodeWithTranslations?
     var anime: Anime?
-    var episodeId: String?
-    var animeId: String?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -27,29 +25,20 @@ class EpisodeToWatchCollectionViewCell: MainCollectionViewCell {
     
     }
     
-    func configure(from data: [String: String]) {
+    func configure(episode: EpisodeWithTranslations, anime: Anime) {
         super.configure()
         
+        self.anime = anime
+        self.episode = episode
+        
         self.imageView.contentMode = .scaleAspectFill
+        self.episodeLabelView.text = episode.episodeFull
         
-        self.animeId = data.first?.key
-        self.episodeId = data.first?.value
-        
-        DispatchQueue.global().async { [weak self] in
-            guard let id = Int((self?.episodeId!)!) else { return }
-            Networker.shared.getEpisodeWithTranslations(episodeId: id) { result in
-                self?.episode = result
-                self?.episodeLabelView.text = result.episodeFull
-            }
-        }
-        DispatchQueue.global().async { [weak self] in
-            guard let id = self?.animeId else { return }
-            Networker.shared.getAnime(id: id) { result in
-                self?.anime = result
-                DispatchQueue.main.async {
-                    self?.labelView.text = result.title
-                    self?.imageView.image = result.posterUrl.getImage()
-                }
+        self.labelView.text = anime.titles["ru"]
+        DispatchQueue.global().async {
+            let image = anime.posterUrl.getImage()
+            DispatchQueue.main.async {
+                self.imageView.image = image
             }
         }
     }

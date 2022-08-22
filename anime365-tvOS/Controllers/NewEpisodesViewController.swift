@@ -11,7 +11,7 @@ class NewEpisodesViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var episodeIds = [[String: String]]()
+    var episodes = [(Anime, EpisodeWithTranslations)]()
     var needLoadData = false
     var spinner = UIActivityIndicatorView(style: .large)
     
@@ -33,6 +33,19 @@ class NewEpisodesViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(needReloadData),
+            name: .init(rawValue: "NeedReloadNewEpisodeData"),
+            object: nil)
+        
+    }
+    
+    @objc func needReloadData() {
+        needLoadData = true
+        DispatchQueue.main.async { [weak self] in
+            self?.loadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,13 +58,18 @@ class NewEpisodesViewController: UIViewController {
         
         spinner.startAnimating()
         needLoadData = false
-        episodeIds = [[String: String]]()
+        episodes = [(Anime, EpisodeWithTranslations)]()
         collectionView.reloadData()
         
         Networker.shared.getEpisoodesToWath { [weak self] data in
-            self?.episodeIds = data
-            self?.spinner.stopAnimating()
-            self?.collectionView.reloadData()
+            
+            Task {
+                self?.episodes = await Networker.shared.getNewEpisodesData(episodes: data)
+                DispatchQueue.main.async { [weak self] in
+                    self?.spinner.stopAnimating()
+                    self?.collectionView.reloadData()
+                }
+            }
         }
     }
 }
@@ -72,7 +90,7 @@ extension NewEpisodesViewController: UICollectionViewDelegate {
 extension NewEpisodesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return episodeIds.count
+        return episodes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -80,8 +98,8 @@ extension NewEpisodesViewController: UICollectionViewDataSource {
             withReuseIdentifier: cellName,
             for: indexPath) as! EpisodeToWatchCollectionViewCell
         
-        let episodeId = episodeIds[indexPath.row]
-        cell.configure(from: episodeId)
+        let episodeData = episodes[indexPath.row]
+        cell.configure(episode: episodeData.1, anime: episodeData.0)
         return cell
     }
 }
