@@ -426,11 +426,14 @@ extension Networker {
     func getNewEpisodeData(episodeId: String, animeId: String) async -> (Anime, EpisodeWithTranslations)? {
         guard let episodeIdInt = Int(episodeId) else { return nil }
         
-        guard let episode = await getEpisodeWithTranslationsAsync(episodeId: episodeIdInt) else { return nil }
-        guard let anime = await getAnimeAsync(id: animeId) else { return nil }
+        async let episodeData = getEpisodeWithTranslationsAsync(episodeId: episodeIdInt)
+        async let animeData = getAnimeAsync(id: animeId)
+
+        let result = await (animeData, episodeData)
+        guard let anime = result.0 else { return nil }
+        guard let episode = result.1 else { return nil }
         
         return (anime, episode)
-        
     }
 }
 
