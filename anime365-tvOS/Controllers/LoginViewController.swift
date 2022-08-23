@@ -40,6 +40,7 @@ class LoginViewController: UIViewController {
                 guard let userId = sessionData?.userId else { return }
                 
                 self?.setSessionData(sessionId: sessionId, userId: userId)
+                self?.saveSessionData(sessionId: sessionId, userId: userId)
                 
                 DispatchQueue.main.async { [weak self] in
                     self?.goToMainView()
@@ -50,7 +51,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if !needLogin() {
             goToMainView()
         }
@@ -62,10 +63,7 @@ class LoginViewController: UIViewController {
         
         guard let sessionId = wrapper.string(forKey: sessionIdKeyName) else { return true }
         if sessionId.isEmpty { return true }
-        Session.instance.sessionId = sessionId
-        
         guard let userId = wrapper.string(forKey: userIdKeyName) else { return true }
-        Session.instance.userId = userId
         
         setSessionData(sessionId: sessionId, userId: userId)
         
@@ -73,10 +71,11 @@ class LoginViewController: UIViewController {
     }
     
     private func setSessionData(sessionId: String, userId: String) {
-        
         Session.instance.sessionId = sessionId
         Session.instance.userId = userId
-        
+    }
+    
+    private func saveSessionData(sessionId: String, userId: String) {
         let wrapper = Session.instance.getKeyChainWrapper()
         wrapper.set(sessionId, forKey: sessionIdKeyName)
         wrapper.set(userId, forKey: userIdKeyName)

@@ -296,48 +296,42 @@
                                 <rect key="frame" x="1264" y="157" width="576" height="540"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a41-Ma-IRc">
-                                <rect key="frame" x="80" y="157" width="1152" height="132"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Тест"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Предпочитаемый вид перевода:"/>
-                                <connections>
-                                    <action selector="selectComforTranslationType" destination="MlK-iN-YvM" eventType="primaryActionTriggered" id="FIx-nY-aSh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5E-nw-Y2b">
-                                <rect key="frame" x="80" y="304" width="1152" height="132"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Тест"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Показывать новые серии только с предпочитаемым переводом:"/>
-                                <connections>
-                                    <action selector="selectShowNewEpisodesOnlyWithComfortTypeOfTranslation" destination="MlK-iN-YvM" eventType="primaryActionTriggered" id="YhZ-zN-ixX"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="foe-HL-GBT" customClass="FocusableUIView" customModule="anime365_tvOS" customModuleProvider="target">
+                                <rect key="frame" x="80" y="157" width="1152" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="P0C-yn-wPV"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6u3-af-7UD" customClass="FocusableUIView" customModule="anime365_tvOS" customModuleProvider="target">
+                                <rect key="frame" x="80" y="277" width="1152" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="LzC-2v-xfe"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aYp-19-afy"/>
                         <constraints>
+                            <constraint firstItem="6u3-af-7UD" firstAttribute="leading" secondItem="foe-HL-GBT" secondAttribute="leading" id="5hI-4x-ceM"/>
                             <constraint firstItem="mwy-61-mON" firstAttribute="width" secondItem="RkI-DN-rph" secondAttribute="width" multiplier="0.3" id="6kw-ya-AT9"/>
-                            <constraint firstItem="w5E-nw-Y2b" firstAttribute="leading" secondItem="aYp-19-afy" secondAttribute="leading" id="FL7-um-QoN"/>
-                            <constraint firstItem="a41-Ma-IRc" firstAttribute="width" secondItem="RkI-DN-rph" secondAttribute="width" multiplier="0.6" id="RKr-5h-yuC"/>
-                            <constraint firstItem="w5E-nw-Y2b" firstAttribute="width" secondItem="a41-Ma-IRc" secondAttribute="width" id="XQm-PW-LBG"/>
-                            <constraint firstItem="w5E-nw-Y2b" firstAttribute="height" secondItem="a41-Ma-IRc" secondAttribute="height" id="epJ-6v-IiT"/>
+                            <constraint firstItem="foe-HL-GBT" firstAttribute="top" secondItem="aYp-19-afy" secondAttribute="top" id="CJS-Px-a0G"/>
+                            <constraint firstItem="6u3-af-7UD" firstAttribute="trailing" secondItem="foe-HL-GBT" secondAttribute="trailing" id="GGo-f1-kMt"/>
+                            <constraint firstItem="6u3-af-7UD" firstAttribute="top" secondItem="foe-HL-GBT" secondAttribute="bottom" constant="20" id="Zfh-cV-Nxf"/>
+                            <constraint firstItem="foe-HL-GBT" firstAttribute="width" secondItem="RkI-DN-rph" secondAttribute="width" multiplier="0.6" id="epG-TD-GLO"/>
                             <constraint firstItem="mwy-61-mON" firstAttribute="height" secondItem="RkI-DN-rph" secondAttribute="height" multiplier="0.5" id="g7f-4m-TR1"/>
                             <constraint firstItem="aYp-19-afy" firstAttribute="trailing" secondItem="mwy-61-mON" secondAttribute="trailing" id="kFq-4R-vTW"/>
-                            <constraint firstItem="w5E-nw-Y2b" firstAttribute="top" secondItem="a41-Ma-IRc" secondAttribute="bottom" constant="15" id="lVR-Dw-1nq"/>
-                            <constraint firstItem="a41-Ma-IRc" firstAttribute="top" secondItem="aYp-19-afy" secondAttribute="top" id="qna-TX-laa"/>
                             <constraint firstItem="mwy-61-mON" firstAttribute="top" secondItem="aYp-19-afy" secondAttribute="top" id="sfC-Um-mEH"/>
-                            <constraint firstItem="a41-Ma-IRc" firstAttribute="leading" secondItem="aYp-19-afy" secondAttribute="leading" id="wL1-X7-CPW"/>
+                            <constraint firstItem="foe-HL-GBT" firstAttribute="leading" secondItem="aYp-19-afy" secondAttribute="leading" id="tWm-b6-qCW"/>
+                            <constraint firstItem="6u3-af-7UD" firstAttribute="width" secondItem="foe-HL-GBT" secondAttribute="width" id="xCj-tR-xSt"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" id="Y8E-T4-iJ3">
                         <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="comfortTranslationTypeButton" destination="a41-Ma-IRc" id="kIJ-25-DYR"/>
-                        <outlet property="showNewEpisodesOnlyWithComfortTypeOfTranslationButton" destination="w5E-nw-Y2b" id="Dry-Pu-wa9"/>
+                        <outlet property="comfortTranslationTypeView" destination="foe-HL-GBT" id="slV-VG-Nnf"/>
+                        <outlet property="showNewEpisodeOnlyWithComfortTypeOfTranslation" destination="6u3-af-7UD" id="Hjg-gF-sba"/>
                         <outlet property="subscriptionView" destination="mwy-61-mON" id="8O5-RQ-XS7"/>
                     </connections>
                 </viewController>

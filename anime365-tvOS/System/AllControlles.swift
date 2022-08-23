@@ -39,6 +39,11 @@ struct AllControlles {
         return storyBoard.instantiateViewController(withIdentifier: "SubscriptionViewController") as! SubscriptionViewController
     }
     
+    static func getSettingsLineViewController() -> SettingsLineViewController {
+        let storyBoard = UIStoryboard(name: "SettingsLine", bundle: .main)
+        return storyBoard.instantiateViewController(withIdentifier: "SettingsLineViewController") as! SettingsLineViewController
+    }
+    
     private static func getViewControllerInstance<T>(viewController: T, name: String) -> T {
         let storyBoard = UIStoryboard(name: "Main", bundle: .main)
         let viewController = storyBoard.instantiateViewController(withIdentifier: name) as! T

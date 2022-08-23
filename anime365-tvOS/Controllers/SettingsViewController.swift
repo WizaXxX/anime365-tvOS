@@ -10,8 +10,11 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var subscriptionView: UIView!
-    @IBOutlet weak var comfortTranslationTypeButton: UIButton!
-    @IBOutlet weak var showNewEpisodesOnlyWithComfortTypeOfTranslationButton: UIButton!
+    @IBOutlet weak var comfortTranslationTypeView: FocusableUIView!
+    @IBOutlet weak var showNewEpisodeOnlyWithComfortTypeOfTranslation: FocusableUIView!
+    
+    let comfortSettingVC = AllControlles.getSettingsLineViewController()
+    let showOnlyVC = AllControlles.getSettingsLineViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,63 +24,30 @@ class SettingsViewController: UIViewController {
         subVC.view.frame = subscriptionView.bounds
         subscriptionView.addSubview(subVC.view)
         subVC.didMove(toParent: self)
-            
-        if let type = Session.instance.settings.comfortTypeOfTranslation {
-            setTitleForComfortTypeOfTranslation(actionTitle: type.rawValue)
-        }
-        
-        setTitleForshowNewEpisodesOnlyWithComfortTypeOfTranslationButton()
-        
-    }
-    
-    @IBAction func selectComforTranslationType() {
-        let alert = UIAlertController(
-            title: "Типы переводов",
-            message: nil,
-            preferredStyle: .actionSheet)
-        
-        TypeOfTranslation.allCases.forEach { type in
-            alert.addAction(UIAlertAction(title: type.rawValue, style: .default, handler: { [weak self] action in
-                guard let actionTitle = action.title else { return }
-                guard let actionValue = TypeOfTranslation(rawValue: actionTitle) else { return }
                 
-                Session.instance.settings.saveComfortTypeOfTranslation(type: actionValue)
-                self?.setTitleForComfortTypeOfTranslation(actionTitle: actionTitle)
-            }))
-        }
-        present(alert, animated: true)
-    }
-    
-    @IBAction func selectShowNewEpisodesOnlyWithComfortTypeOfTranslation() {
-        let alert = UIAlertController(
-            title: "Показывть новые серии только с предпочитаемым переводом?",
-            message: nil,
-            preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(
-            title: "Да",
-            style: .default,
-            handler: selectedShowNewEpisodesOnlyWithComfortTypeOfTranslation))
-        alert.addAction(UIAlertAction(
-            title: "Нет",
-            style: .default,
-            handler: selectedShowNewEpisodesOnlyWithComfortTypeOfTranslation))
+        comfortSettingVC.configure(typeOfSetting: .comfortTypeOfTranslation)
+        addChild(comfortSettingVC)
+        comfortSettingVC.view.frame = comfortTranslationTypeView.bounds
+        comfortTranslationTypeView.addSubview(comfortSettingVC.view)
+        comfortSettingVC.didMove(toParent: self)
+        let tapForComfortTranslationTypeView = UITapGestureRecognizer(target: self, action:  #selector (self.changeComfortSetting (_:)))
+        comfortTranslationTypeView.addGestureRecognizer(tapForComfortTranslationTypeView)
         
-        present(alert, animated: true)
+        showOnlyVC.configure(typeOfSetting: .showNewEpisodesOnlyWithComfortTypeOfTranslation)
+        addChild(showOnlyVC)
+        showOnlyVC.view.frame = showNewEpisodeOnlyWithComfortTypeOfTranslation.bounds
+        showNewEpisodeOnlyWithComfortTypeOfTranslation.addSubview(showOnlyVC.view)
+        showOnlyVC.didMove(toParent: self)
+        let tapForShowNewEpisodeOnlyWithComfortTypeOfTranslation = UITapGestureRecognizer(target: self, action:  #selector (self.changeShowOnlySetting (_:)))
+        showNewEpisodeOnlyWithComfortTypeOfTranslation.addGestureRecognizer(tapForShowNewEpisodeOnlyWithComfortTypeOfTranslation)
+        
     }
     
-    private func selectedShowNewEpisodesOnlyWithComfortTypeOfTranslation(_ action: UIAlertAction) {
-        let value = action.title == "Да" ? true : false
-        Session.instance.settings.saveShowNewEpisodesOnlyWithComfortTypeOfTranslation(value: value)
-        setTitleForshowNewEpisodesOnlyWithComfortTypeOfTranslationButton()
+    @objc private func changeComfortSetting(_ sender: UITapGestureRecognizer){
+        comfortSettingVC.changeSetting()
     }
     
-    private func setTitleForComfortTypeOfTranslation(actionTitle: String) {
-        comfortTranslationTypeButton.setTitle("Предпочитаемый вид перевода:   \(actionTitle)", for: .normal)
-    }
-    
-    private func setTitleForshowNewEpisodesOnlyWithComfortTypeOfTranslationButton() {
-        let value = Session.instance.settings.showNewEpisodesOnlyWithComfortTypeOfTranslation ? "Да" : "Нет"
-        showNewEpisodesOnlyWithComfortTypeOfTranslationButton.setTitle(
-            "Показывать новые серии только с предпочитаемым переводом:  \(value)", for: .normal)
+    @objc private func changeShowOnlySetting(_ sender: UITapGestureRecognizer){
+        showOnlyVC.changeSetting()
     }
 }

@@ -81,6 +81,9 @@
 		E98A4EA528A9800C000295CD /* SiteStreamTranslationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4EA428A9800C000295CD /* SiteStreamTranslationData.swift */; };
 		E98A4EA728A98A2D000295CD /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A4EA628A98A2D000295CD /* PlayerViewController.swift */; };
 		E9A4B75A28A6F336001A58DD /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A4B75928A6F336001A58DD /* CatalogViewController.swift */; };
+		E9AF2A9C28B53FB900E8B45E /* SettingsLine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AF2A9B28B53FB900E8B45E /* SettingsLine.storyboard */; };
+		E9AF2A9E28B540AC00E8B45E /* SettingsLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AF2A9D28B540AC00E8B45E /* SettingsLineViewController.swift */; };
+		E9AF2AA128B5516900E8B45E /* FocusableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AF2AA028B5516900E8B45E /* FocusableUIView.swift */; };
 		E9C035D528AD526200B924B1 /* CatalogViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C035D428AD526200B924B1 /* CatalogViewControllerDelegate.swift */; };
 		E9C035D728AD57E400B924B1 /* UICollectionView+UpdateFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C035D628AD57E400B924B1 /* UICollectionView+UpdateFocus.swift */; };
 		E9C92E6028B01EB300AB2DD4 /* SiteAnimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C92E5F28B01EB300AB2DD4 /* SiteAnimeDescription.swift */; };
@@ -174,6 +177,9 @@
 		E98A4EA428A9800C000295CD /* SiteStreamTranslationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteStreamTranslationData.swift; sourceTree = "<group>"; };
 		E98A4EA628A98A2D000295CD /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		E9A4B75928A6F336001A58DD /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
+		E9AF2A9B28B53FB900E8B45E /* SettingsLine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsLine.storyboard; sourceTree = "<group>"; };
+		E9AF2A9D28B540AC00E8B45E /* SettingsLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLineViewController.swift; sourceTree = "<group>"; };
+		E9AF2AA028B5516900E8B45E /* FocusableUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableUIView.swift; sourceTree = "<group>"; };
 		E9C035D428AD526200B924B1 /* CatalogViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewControllerDelegate.swift; sourceTree = "<group>"; };
 		E9C035D628AD57E400B924B1 /* UICollectionView+UpdateFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+UpdateFocus.swift"; sourceTree = "<group>"; };
 		E9C92E5F28B01EB300AB2DD4 /* SiteAnimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteAnimeDescription.swift; sourceTree = "<group>"; };
@@ -277,6 +283,8 @@
 			isa = PBXGroup;
 			children = (
 				E9134C8628A6A62B001D25EC /* Main.storyboard */,
+				E9AF2A9B28B53FB900E8B45E /* SettingsLine.storyboard */,
+				E9AF2AA028B5516900E8B45E /* FocusableUIView.swift */,
 				E919189628B3D4DA00FEA503 /* Subscription.storyboard */,
 				E9134C8B28A6A62C001D25EC /* LaunchScreen.storyboard */,
 			);
@@ -296,6 +304,7 @@
 				E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */,
 				E98A4E9228A9649C000295CD /* EpisodeViewController.swift */,
 				E98A4EA628A98A2D000295CD /* PlayerViewController.swift */,
+				E9AF2A9D28B540AC00E8B45E /* SettingsLineViewController.swift */,
 				E919189428B3D37F00FEA503 /* SettingsViewController.swift */,
 			);
 			path = Controllers;
@@ -479,6 +488,7 @@
 				E98A4E8928A9507E000295CD /* EpisodeCollectionViewCell.xib in Resources */,
 				E98A4E7C28A92320000295CD /* AnimeCollectionViewCell.xib in Resources */,
 				E9134C8A28A6A62C001D25EC /* Assets.xcassets in Resources */,
+				E9AF2A9C28B53FB900E8B45E /* SettingsLine.storyboard in Resources */,
 				E9134C8828A6A62B001D25EC /* Main.storyboard in Resources */,
 				E95DB93528AABEED00D3791B /* EpisodeToWatchCollectionViewCell.xib in Resources */,
 			);
@@ -581,6 +591,7 @@
 				E9C035D728AD57E400B924B1 /* UICollectionView+UpdateFocus.swift in Sources */,
 				E98A4E7B28A92320000295CD /* AnimeCollectionViewCell.swift in Sources */,
 				E98A4E6828A905D5000295CD /* SiteGenre.swift in Sources */,
+				E9AF2AA128B5516900E8B45E /* FocusableUIView.swift in Sources */,
 				E98A4E8D28A95C73000295CD /* SiteEpisodeWithTranslations.swift in Sources */,
 				E9F1453E28AB872A00C3A5B2 /* TabBarViewController.swift in Sources */,
 				E98A4E9E28A9734F000295CD /* TranslationCollectionViewCell.swift in Sources */,
@@ -596,6 +607,7 @@
 				E98A4E6428A903F1000295CD /* SiteEpisode.swift in Sources */,
 				E9F1454428ABCDE100C3A5B2 /* AllControlles.swift in Sources */,
 				E98A4EA528A9800C000295CD /* SiteStreamTranslationData.swift in Sources */,
+				E9AF2A9E28B540AC00E8B45E /* SettingsLineViewController.swift in Sources */,
 				E9F1454028ABAE8200C3A5B2 /* SearchViewController.swift in Sources */,
 				E968976A28A6C0E500C62ACA /* Networker.swift in Sources */,
 				E98A4E6A28A911DF000295CD /* SiteResult.swift in Sources */,

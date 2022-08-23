@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum SettingsType: String {
+    case comfortTypeOfTranslation = "Предпочитаемый вид перевода:"
+    case showNewEpisodesOnlyWithComfortTypeOfTranslation = "Показывать новые серии только с предпочитаемым переводом:"
+}
+
 struct SessionSettings {
     
     init() {
