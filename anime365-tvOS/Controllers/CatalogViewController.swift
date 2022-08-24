@@ -16,6 +16,13 @@ class CatalogViewController: UIViewController {
     var animes: [Anime] = [Anime]()
     var spinner = UIActivityIndicatorView(style: .large)
     
+    var pageNumber = 1
+    var newPageDownloading = false
+    var pagesEnded = false
+    let maxItemCountOnOnePage = 20
+    
+    var searchString: String = ""
+    
     let cellName = "AnimeCollectionViewCell"
     
     override func viewDidLoad() {
@@ -36,26 +43,17 @@ class CatalogViewController: UIViewController {
         
     
     func loadData(searchString: String) {
+        self.searchString = searchString
         
+        pageNumber = 1
         animes.removeAll()
         spinner.startAnimating()
         collectionView.reloadData()
         
         Networker.shared.getAnimeFromSite(searchString: searchString) { [weak self] siteAnimes in
-            siteAnimes.forEach { anime in
-                self?.animes.append(Anime(
-                    id: anime.id,
-                    title: anime.title,
-                    posterUrlSmall: ImageFromInternet(url: anime.posterUrlSmall),
-                    posterUrl: ImageFromInternet(url: anime.posterUrl),
-                    titles: anime.titles,
-                    episodes: self?.getEpisodes(from: anime),
-                    genres: anime.genres?.map({Genre(id: $0.id, title: $0.title, url: $0.url)}),
-                    desc: anime.descriptions?.map({AnimeDescription(source: $0.source, value: $0.value)})))
-            }
-            
             DispatchQueue.main.async {
-                self?.collectionView.reloadData()
+                self?.animes.removeAll()
+                self?.addAnimesToList(siteAnimes: siteAnimes)
                 self?.spinner.stopAnimating()
             }
         }
@@ -73,6 +71,45 @@ class CatalogViewController: UIViewController {
                 episodeType: siteEpisode.episodeType))
         }
         return episodes
+    }
+    
+    private func addAnimesToList(siteAnimes: [SiteAnime]) {
+        var items = [IndexPath]()
+        siteAnimes.forEach { anime in
+            animes.append(Anime(
+                id: anime.id,
+                title: anime.title,
+                posterUrlSmall: ImageFromInternet(url: anime.posterUrlSmall),
+                posterUrl: ImageFromInternet(url: anime.posterUrl),
+                titles: anime.titles,
+                episodes: getEpisodes(from: anime),
+                genres: anime.genres?.map({Genre(id: $0.id, title: $0.title, url: $0.url)}),
+                desc: anime.descriptions?.map({AnimeDescription(source: $0.source, value: $0.value)})))
+            items.append(IndexPath(row: animes.count - 1, section: 0))
+        }
+        
+        collectionView.performBatchUpdates {
+            collectionView.insertItems(at: items)
+        }
+        
+    }
+    
+    private func loadNewPageData() {
+        if newPageDownloading { return }
+        newPageDownloading = true
+        
+        Networker.shared.getAnimeFromSite(
+            searchString: searchString,
+            offset: (maxItemCountOnOnePage * pageNumber)) { [weak self] siteAnimes in
+                if siteAnimes.isEmpty {
+                    self?.pagesEnded = true
+                    return
+                }
+                self?.pageNumber += 1
+                self?.addAnimesToList(siteAnimes: siteAnimes)
+                self?.newPageDownloading = false
+        }
+        
     }
 }
 
@@ -104,6 +141,16 @@ extension CatalogViewController: UICollectionViewDataSource {
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        guard let numberOfNextElement = context.nextFocusedIndexPath?.last else { return }
+        if numberOfNextElement >= (animes.count * 70 / 100),
+           animes.count == maxItemCountOnOnePage * pageNumber,
+           pagesEnded == false{
+            loadNewPageData()
+        }
+    }
+    
 }
 
 extension CatalogViewController: UICollectionViewDelegateFlowLayout {

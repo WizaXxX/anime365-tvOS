@@ -228,11 +228,14 @@ class Networker {
 
 extension Networker {
     
-    func getAnimeFromSite(searchString: String, completion: @escaping ([SiteAnime]) -> Void) {
+    func getAnimeFromSite(searchString: String, offset: Int = 0, completion: @escaping ([SiteAnime]) -> Void) {
         
         var params = ["limit": "20"]
         if !searchString.isEmpty {
             params["query"] = searchString
+        }
+        if offset != 0 {
+            params["offset"] = String(offset)
         }
         
         guard let url = getUrl(method: .getSerieses, params: params) else { return }
