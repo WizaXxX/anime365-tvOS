@@ -19,4 +19,6 @@ struct SiteAnime: Decodable {
     var episodes: [SiteEpisode]?
     var genres: [SiteGenre]?
     var descriptions: [SiteAnimeDescription]?
+    var myAnimeListScore: String
+    var numberOfEpisodes: Int
 }

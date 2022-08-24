@@ -53,6 +53,7 @@ class CatalogViewController: UIViewController {
         Networker.shared.getAnimeFromSite(searchString: searchString) { [weak self] siteAnimes in
             DispatchQueue.main.async {
                 self?.animes.removeAll()
+                self?.collectionView.reloadData()
                 self?.addAnimesToList(siteAnimes: siteAnimes)
                 self?.spinner.stopAnimating()
             }
@@ -84,14 +85,12 @@ class CatalogViewController: UIViewController {
                 titles: anime.titles,
                 episodes: getEpisodes(from: anime),
                 genres: anime.genres?.map({Genre(id: $0.id, title: $0.title, url: $0.url)}),
-                desc: anime.descriptions?.map({AnimeDescription(source: $0.source, value: $0.value)})))
+                desc: anime.descriptions?.map({AnimeDescription(source: $0.source, value: $0.value)}),
+                score: anime.myAnimeListScore,
+                numberOfEpisodes: anime.numberOfEpisodes))
             items.append(IndexPath(row: animes.count - 1, section: 0))
         }
-        
-        collectionView.performBatchUpdates {
-            collectionView.insertItems(at: items)
-        }
-        
+        collectionView.insertItems(at: items)
     }
     
     private func loadNewPageData() {
@@ -109,7 +108,6 @@ class CatalogViewController: UIViewController {
                 self?.addAnimesToList(siteAnimes: siteAnimes)
                 self?.newPageDownloading = false
         }
-        
     }
 }
 

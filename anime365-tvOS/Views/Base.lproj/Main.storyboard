@@ -135,6 +135,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cti-WX-8yx">
                                 <rect key="frame" x="1397" y="60" width="443" height="576"/>
+                                <color key="backgroundColor" red="0.88140058517456055" green="0.70498794317245483" blue="0.057583488523960114" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cti-WX-8yx" secondAttribute="height" multiplier="1:1.3" id="20V-3P-Jzk"/>
                                 </constraints>
@@ -203,6 +204,7 @@
                         <outlet property="genresLabel" destination="95p-oq-cLe" id="hAR-gh-r32"/>
                         <outlet property="imageView" destination="cti-WX-8yx" id="aIt-GN-dBx"/>
                         <outlet property="labelView" destination="6dj-6d-tl5" id="c4S-cS-fRm"/>
+                        <outlet property="ratingLabelView" destination="6o5-A8-BWw" id="IcF-pK-Cr4"/>
                         <segue destination="Dl7-sm-OLM" kind="show" id="Z1Y-63-Vxs"/>
                     </connections>
                 </viewController>

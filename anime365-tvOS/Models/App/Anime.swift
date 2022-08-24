@@ -16,4 +16,6 @@ struct Anime {
     var episodes: [Episode]?
     var genres: [Genre]?
     var desc: [AnimeDescription]?
+    var score: String
+    var numberOfEpisodes: Int
 }

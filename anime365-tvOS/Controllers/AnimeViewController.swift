@@ -13,6 +13,7 @@ class AnimeViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var genresLabel: UILabel!
+    @IBOutlet weak var ratingLabelView: UILabel!
     
     var anime: Anime?
     
@@ -23,8 +24,17 @@ class AnimeViewController: UIViewController {
         
         view.insetsLayoutMarginsFromSafeArea = false
         labelView.text = anime?.titles["ru"]
+        
         imageView.image = anime?.posterUrl.getImage()
-        anime?.genres?.forEach({genresLabel.text! += "\($0.title)       "})
+        imageView.layer.cornerRadius = 15
+        imageView.contentMode = .scaleToFill
+
+        if let score = anime?.score {
+            ratingLabelView.text = "Рейтинг: \(score) из 10"
+        } else {
+            ratingLabelView.text = ""
+        }
+        anime?.genres?.forEach({genresLabel.text! += "\($0.title)   "})
         
         collectionView.register(
             UINib(nibName: cellName, bundle: nil),

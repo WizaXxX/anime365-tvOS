@@ -13,10 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    
-    let sessionIdKeyName = "sessionId"
-    let userIdKeyName = "userId"
-    
+        
     @IBAction func pressLogin() {
         
         guard let email = emailTextField.text, emailTextField.text != "" else {
@@ -36,11 +33,9 @@ class LoginViewController: UIViewController {
             case .failure(let error):
                 print(error)
             case .success(let sessionData):
-                guard let sessionId = sessionData?.sessionId else { return }
-                guard let userId = sessionData?.userId else { return }
-                
-                self?.setSessionData(sessionId: sessionId, userId: userId)
-                self?.saveSessionData(sessionId: sessionId, userId: userId)
+                guard let currentSession = sessionData else { return }
+                Session.setSessionData(sessionData: currentSession)
+                Session.saveSessionData(sessionData: currentSession)
                 
                 DispatchQueue.main.async { [weak self] in
                     self?.goToMainView()
@@ -51,34 +46,16 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if !needLogin() {
             goToMainView()
         }
     }
         
     private func needLogin() -> Bool {
-        
-        let wrapper = Session.instance.getKeyChainWrapper()
-        
-        guard let sessionId = wrapper.string(forKey: sessionIdKeyName) else { return true }
-        if sessionId.isEmpty { return true }
-        guard let userId = wrapper.string(forKey: userIdKeyName) else { return true }
-        
-        setSessionData(sessionId: sessionId, userId: userId)
-        
+        guard let sessionData = Session.getSessionData() else { return true }
+        Session.setSessionData(sessionData: sessionData)
         return false
-    }
-    
-    private func setSessionData(sessionId: String, userId: String) {
-        Session.instance.sessionId = sessionId
-        Session.instance.userId = userId
-    }
-    
-    private func saveSessionData(sessionId: String, userId: String) {
-        let wrapper = Session.instance.getKeyChainWrapper()
-        wrapper.set(sessionId, forKey: sessionIdKeyName)
-        wrapper.set(userId, forKey: userIdKeyName)
     }
     
     private func changeEnable(to value: Bool) {
@@ -88,7 +65,7 @@ class LoginViewController: UIViewController {
     }
     
     private func goToMainView() {
-        Networker.shared.setSessionId()
+        Networker.shared.setSessionData()
         
         emailTextField.isHidden = true
         passwordTextField.isHidden = true

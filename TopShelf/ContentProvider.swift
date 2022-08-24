@@ -11,10 +11,9 @@ class ContentProvider: TVTopShelfContentProvider {
 
     override func loadTopShelfContent(completionHandler: @escaping (TVTopShelfContent?) -> Void) {
         
-        let wrapper = Session.instance.getKeyChainWrapper()
-        guard let sessionId = wrapper.string(forKey: "sessionId") else { return }
-        Session.instance.sessionId = sessionId
-        Networker.shared.setSessionId()
+        guard let sessionData = Session.getSessionData() else { return }
+        Session.setSessionData(sessionData: sessionData)
+        Networker.shared.setSessionData()
         
         Networker.shared.getEpisoodesToWath { data in
             Task {

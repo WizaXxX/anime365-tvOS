@@ -46,6 +46,7 @@ enum ErrorOfRequest: Error {
     case noData
     case noUserId
     case noSessionId
+    case noNeededCookie
 }
 
 class Networker {
@@ -55,8 +56,9 @@ class Networker {
     
     let domain = "smotret-anime.com"
     
-    func setSessionId() {
+    func setSessionData() {
         setCookie(name: "PHPSESSID", value: Session.instance.sessionId)
+        setCookie(name: Session.instance.sessionDataName, value: Session.instance.sessionDataValue)
     }
     
     func login(email: String, password: String, completion: @escaping (Result<SessionData?, Error>) -> Void) {
@@ -89,6 +91,21 @@ class Networker {
                         completion(.failure(ErrorOfRequest.noData))
                         return
                     }
+                    
+                    guard let cookieData = response.response?.allHeaderFields.first(where: {$0.key.description == "Set-Cookie"}) else {
+                        completion(.failure(ErrorOfRequest.noNeededCookie))
+                        return
+                    }
+                    guard let cookieValueString = cookieData.value as? String else {
+                        completion(.failure(ErrorOfRequest.noNeededCookie))
+                        return
+                    }
+                    
+                    guard let sessionCookiedData = self?.getSessionDataFromCookie(cookie: cookieValueString) else {
+                        completion(.failure(ErrorOfRequest.noNeededCookie))
+                        return
+                    }
+                    
                     guard let body = String(data: data, encoding: .utf8) else {
                         completion(.failure(ErrorOfRequest.noBody))
                         return
@@ -102,7 +119,11 @@ class Networker {
                         return
                     }
                     
-                    completion(.success(SessionData(sessionId: sessionId, userId: userId)))
+                    completion(.success(SessionData(
+                        sessionId: sessionId,
+                        userId: userId,
+                        sessionDataName: sessionCookiedData.0,
+                        sessionDataValue: sessionCookiedData.1)))
                     
                 case let .failure(error):
                     completion(.failure(error))
@@ -149,7 +170,8 @@ class Networker {
         let headers: HTTPHeaders = ["User-Agent": "anime-365-tvOS"]
         AF.request(url, method: .get, headers: headers).response { [weak self] response in
             if response.error != nil {
-                guard let isContain = String(data: response.data!, encoding: .utf8)?.contains("You should login first") else { return }
+                guard let data = response.data else { return }
+                guard let isContain = String(data: data, encoding: .utf8)?.contains("You should login first") else { return }
                 if isContain {
                     self?.logout()
                 }
@@ -210,6 +232,15 @@ class Networker {
         return userId
     }
     
+    private func getSessionDataFromCookie(cookie: String) -> (String, String)? {
+        var cookieData = cookie.groups(for: "(\\w{32})=([^deleted][^;]+)")
+        guard let sessionDataValue = cookieData[0].popLast() else { return nil }
+        guard let sessionDataName = cookieData[0].popLast() else { return nil }
+        
+        return (sessionDataName, sessionDataValue)
+        
+    }
+    
     private func getSessionId(from body: String) -> String? {
         let sessionIdCookie = HTTPCookieStorage.shared.cookies?.first{ [weak self] in
             $0.domain == self?.domain && $0.name == "PHPSESSID"
@@ -220,8 +251,7 @@ class Networker {
     }
     
     private func logout() {
-        let wrapper = Session.instance.getKeyChainWrapper()
-        wrapper.set("", forKey: "sessionId")
+        Session.setSessionData(sessionData: SessionData(sessionId: "", userId: "", sessionDataName: "", sessionDataValue: ""))
         exit(1)
     }
 }
@@ -354,14 +384,10 @@ extension Networker {
 extension Networker {
     func getAnime(id: String, completion: @escaping (Anime) -> Void) {
         guard let url = getUrl(method: .getAnime(id: id)) else { return }
-        sendGetRequestJSON(url: url, type: SiteResponse<SiteAnime>.self) { result in
+        sendGetRequestJSON(url: url, type: SiteResponse<SiteAnime>.self) { [weak self] result in
             guard let data = result?.data else { return }
-            completion(Anime(
-                id: data.id,
-                title: data.title,
-                posterUrlSmall: ImageFromInternet(url: data.posterUrlSmall),
-                posterUrl: ImageFromInternet(url: data.posterUrl),
-                titles: data.titles))
+            guard let anime = self?.convertSiteAnimeToAnime(siteAnime: data) else { return }
+            completion(anime)
         }
     }
     
@@ -369,12 +395,18 @@ extension Networker {
         guard let url = getUrl(method: .getAnime(id: id)) else { return nil }
         let result = await sendGetRequestJSONAsync(url: url, type: SiteResponse<SiteAnime>.self)
         guard let data = result?.data else { return nil }
+        return convertSiteAnimeToAnime(siteAnime: data)
+    }
+    
+    func convertSiteAnimeToAnime(siteAnime: SiteAnime) -> Anime {
         return Anime(
-            id: data.id,
-            title: data.title,
-            posterUrlSmall: ImageFromInternet(url: data.posterUrlSmall),
-            posterUrl: ImageFromInternet(url: data.posterUrl),
-            titles: data.titles)
+            id: siteAnime.id,
+            title: siteAnime.title,
+            posterUrlSmall: ImageFromInternet(url: siteAnime.posterUrlSmall),
+            posterUrl: ImageFromInternet(url: siteAnime.posterUrl),
+            titles: siteAnime.titles,
+            score: siteAnime.myAnimeListScore,
+            numberOfEpisodes: siteAnime.numberOfEpisodes)
     }
 }
 

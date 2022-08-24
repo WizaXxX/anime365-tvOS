@@ -10,5 +10,6 @@ import Foundation
 struct SessionData {
     let sessionId: String
     let userId: String
-    
+    let sessionDataName: String
+    let sessionDataValue: String
 }
