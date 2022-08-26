@@ -22,6 +22,7 @@ class CatalogViewController: UIViewController {
     let maxItemCountOnOnePage = 20
     
     var searchString: String = ""
+    var lastRequestUUID = UUID()
     
     let cellName = "AnimeCollectionViewCell"
     
@@ -49,8 +50,10 @@ class CatalogViewController: UIViewController {
         animes.removeAll()
         spinner.startAnimating()
         collectionView.reloadData()
+        lastRequestUUID = UUID()
         
-        Networker.shared.getAnimeFromSite(searchString: searchString) { [weak self] siteAnimes in
+        Networker.shared.getAnimeFromSite(searchString: searchString, uuid: lastRequestUUID) { [weak self] siteAnimes, uuid in
+            if uuid != self?.lastRequestUUID { return }
             DispatchQueue.main.async {
                 self?.animes.removeAll()
                 self?.collectionView.reloadData()
@@ -99,7 +102,7 @@ class CatalogViewController: UIViewController {
         
         Networker.shared.getAnimeFromSite(
             searchString: searchString,
-            offset: (maxItemCountOnOnePage * pageNumber)) { [weak self] siteAnimes in
+            offset: (maxItemCountOnOnePage * pageNumber)) { [weak self] siteAnimes, _ in
                 if siteAnimes.isEmpty {
                     self?.pagesEnded = true
                     return

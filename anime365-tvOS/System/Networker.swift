@@ -258,7 +258,7 @@ class Networker {
 
 extension Networker {
     
-    func getAnimeFromSite(searchString: String, offset: Int = 0, completion: @escaping ([SiteAnime]) -> Void) {
+    func getAnimeFromSite(searchString: String, uuid: UUID? = nil, offset: Int = 0, completion: @escaping ([SiteAnime], UUID?) -> Void) {
         
         var params = ["limit": "20"]
         if !searchString.isEmpty {
@@ -271,7 +271,7 @@ extension Networker {
         guard let url = getUrl(method: .getSerieses, params: params) else { return }
         sendGetRequestJSON(url: url, type: SiteResponse<[SiteAnime]>.self) { result in
             guard let data = result?.data else { return }
-            completion(data)
+            completion(data, uuid)
         }
     }
 }
