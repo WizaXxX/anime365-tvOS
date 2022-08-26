@@ -135,7 +135,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cti-WX-8yx">
                                 <rect key="frame" x="1397" y="60" width="443" height="576"/>
-                                <color key="backgroundColor" red="0.88140058517456055" green="0.70498794317245483" blue="0.057583488523960114" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cti-WX-8yx" secondAttribute="height" multiplier="1:1.3" id="20V-3P-Jzk"/>
                                 </constraints>
