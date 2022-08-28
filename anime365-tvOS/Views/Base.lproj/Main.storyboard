@@ -225,17 +225,18 @@
                     <connections>
                         <segue destination="6ju-lR-jU0" kind="relationship" relationship="viewControllers" id="faS-sy-diI"/>
                         <segue destination="lpQ-nq-Irw" kind="relationship" relationship="viewControllers" id="Zrj-DD-UUK"/>
-                        <segue destination="MlK-iN-YvM" kind="relationship" relationship="viewControllers" id="Fxt-RE-T5z"/>
+                        <segue destination="4oa-Mc-WaG" kind="relationship" relationship="viewControllers" id="XWK-ES-f6O"/>
+                        <segue destination="MlK-iN-YvM" kind="relationship" relationship="viewControllers" id="fIG-zR-q0o"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgO-6e-adU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2327" y="-40"/>
         </scene>
-        <!--Новые серии-->
+        <!--Серии к просмотру-->
         <scene sceneID="UBp-MR-aa9">
             <objects>
-                <viewController storyboardIdentifier="NewEpisodesViewController" id="lpQ-nq-Irw" customClass="NewEpisodesViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewEpisodesViewController" id="lpQ-nq-Irw" customClass="EpisodesToWatchViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="quO-RF-Det"/>
                         <viewControllerLayoutGuide type="bottom" id="4bo-Oc-fR4"/>
@@ -272,7 +273,7 @@
                             <constraint firstItem="ahi-Zl-pxf" firstAttribute="trailing" secondItem="sI2-RV-e7O" secondAttribute="trailing" id="crZ-a5-QEz"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Новые серии" id="wFN-KY-RI2"/>
+                    <tabBarItem key="tabBarItem" title="Серии к просмотру" id="wFN-KY-RI2"/>
                     <navigationItem key="navigationItem" id="lWh-pV-vnM"/>
                     <connections>
                         <outlet property="collectionView" destination="sI2-RV-e7O" id="9zi-mS-arS"/>
@@ -281,6 +282,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0q-6E-wzL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-205" y="1750"/>
+        </scene>
+        <!--Новые серии-->
+        <scene sceneID="Wtr-fu-Qrz">
+            <objects>
+                <viewController id="4oa-Mc-WaG" customClass="NewEpisodesViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8cG-Ud-Uzm"/>
+                        <viewControllerLayoutGuide type="bottom" id="NnR-Ef-rnp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WbY-ef-L6B">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pi7-qK-6J5">
+                                <rect key="frame" x="80" y="157" width="1760" height="863"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y03-I2-LTJ">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="AaE-qk-ee0">
+                                        <rect key="frame" x="0.0" y="50" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gcl-KN-BtL">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="" id="Qx6-xa-QyK" customClass="NewEpisodesCollectionReusableView" customModule="anime365_tvOS" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="1760" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Vuy-Kd-n5u"/>
+                        <constraints>
+                            <constraint firstItem="Vuy-Kd-n5u" firstAttribute="bottom" secondItem="pi7-qK-6J5" secondAttribute="bottom" id="POz-4S-Tg5"/>
+                            <constraint firstItem="pi7-qK-6J5" firstAttribute="leading" secondItem="Vuy-Kd-n5u" secondAttribute="leading" id="ezS-XB-dIN"/>
+                            <constraint firstItem="pi7-qK-6J5" firstAttribute="top" secondItem="Vuy-Kd-n5u" secondAttribute="top" id="hfP-ed-YWo"/>
+                            <constraint firstItem="Vuy-Kd-n5u" firstAttribute="trailing" secondItem="pi7-qK-6J5" secondAttribute="trailing" id="sKH-RD-whe"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Новые серии" id="SdH-Be-hNf"/>
+                    <connections>
+                        <outlet property="collectionView" destination="pi7-qK-6J5" id="bt5-bg-yms"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m2J-fO-9V1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-377" y="3426"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="RJc-NC-u7A">

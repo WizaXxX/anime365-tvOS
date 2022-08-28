@@ -18,6 +18,7 @@ enum Methods {
     case getAnime(id: String)
     case episodeWatched(id: String)
     case getSubscriptionData
+    case getNewEpisodes(page: Int)
     
     var value: String {
         switch self {
@@ -37,6 +38,8 @@ enum Methods {
             return "animelist/edit/\(id)"
         case .getSubscriptionData:
             return "users/profile"
+        case .getNewEpisodes(let page):
+            return "page/\(String(page))"
         }
     }
 }
@@ -405,6 +408,7 @@ extension Networker {
             posterUrlSmall: ImageFromInternet(url: siteAnime.posterUrlSmall),
             posterUrl: ImageFromInternet(url: siteAnime.posterUrl),
             titles: siteAnime.titles,
+            episodes: siteAnime.episodes?.map({Episode(id: $0.id, numerOfEpisode: Int($0.numerOfEpisode) ?? 0, tittle: $0.tittle, episodeType: $0.episodeType)}),
             score: siteAnime.myAnimeListScore,
             numberOfEpisodes: siteAnime.numberOfEpisodes)
     }
@@ -498,5 +502,50 @@ extension Networker {
         }
         
         return nil
+    }
+}
+
+extension Networker {
+    func getNewEpisodesAsync(pageNumber: Int) async -> [NewEpisodesData] {
+        
+        var episodesData = [NewEpisodesData]()
+        var siteEpisodesData: [SiteNewEpisodesData] = [SiteNewEpisodesData]()
+
+        guard let url = getUrl(method: .getNewEpisodes(page: pageNumber)) else { return episodesData }
+        guard let body = await sendGetRequestAsync(url: url) else { return episodesData }
+        guard let doc = try? SwiftSoup.parse(body) else { return episodesData }
+        guard let allEpisodesBlock = try? doc.select("div[id=m-index-recent-episodes]") else { return episodesData }
+        if allEpisodesBlock.isEmpty() { return episodesData }
+        guard let data = try? allEpisodesBlock.select("div[class=m-new-episodes collection with-header z-depth-1]") else { return episodesData }
+        
+        for item in data {
+            guard let headerName = try? item.select("div.collection-header").select("h3").text() else { continue }
+            guard let date = headerName.groups(for: "([0-9]{2}.[0-9]{2}.[0-9]{4})").last?.last else { continue }
+            
+            var newEpisodesData = SiteNewEpisodesData(date: date, espisodes: [SiteShortEpisodeData]())
+            
+            guard let episodesBlock = try? item.select("div[class=m-new-episode collection-item avatar]") else { continue }
+            for episodeBlock in episodesBlock {
+                guard let linkBlock = try? episodeBlock.select("a[href]") else { continue }
+                guard let link = try? linkBlock.first()?.attr("href") else { continue }
+                var partOfData = link.groups(for: "-([0-9]*)/.*seriya-([0-9]*)")
+                guard let episodeId = partOfData[0].popLast() else { continue }
+                guard let animeId = partOfData[0].popLast() else { continue }
+                newEpisodesData.espisodes.append(SiteShortEpisodeData(animeId: animeId, episodeId: episodeId))
+            }
+            siteEpisodesData.append(newEpisodesData)
+        }
+        
+        for itemDate in siteEpisodesData {
+            var data = NewEpisodesData(date: itemDate.date, episodes: [ShortEpisodeData]())
+            
+            for item in itemDate.espisodes {
+                guard let animeData = await getAnimeAsync(id: item.animeId) else { continue }
+                guard let episode = animeData.episodes?.first(where: {String($0.id) == item.episodeId}) else { continue }
+                data.episodes.append(ShortEpisodeData(anime: animeData, episode: episode))
+            }
+            episodesData.append(data)
+        }
+        return episodesData
     }
 }

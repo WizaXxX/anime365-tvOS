@@ -30,8 +30,8 @@ struct AllControlles {
         return getViewControllerInstance(viewController: PlayerViewController(), name: "PlayerViewController")
     }
     
-    static func getNewEpisodesViewController() -> NewEpisodesViewController {
-        return getViewControllerInstance(viewController: NewEpisodesViewController(), name: "NewEpisodesViewController")
+    static func getNewEpisodesViewController() -> EpisodesToWatchViewController {
+        return getViewControllerInstance(viewController: EpisodesToWatchViewController(), name: "NewEpisodesViewController")
     }
     
     static func getSubscriptionViewController() -> SubscriptionViewController {
