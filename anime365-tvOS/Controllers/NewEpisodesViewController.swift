@@ -41,14 +41,14 @@ class NewEpisodesViewController: UIViewController, LoadedUIViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: cellHeaderName)
         
-        loadData()
-            
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if needLoadData {
             newEpisodes = [NewEpisodesData]()
             collectionView.reloadData()
+            pageNumber = 1
+            needLoadData = false
             loadData()
         }
     }

@@ -538,14 +538,36 @@ extension Networker {
         
         for itemDate in siteEpisodesData {
             var data = NewEpisodesData(date: itemDate.date, episodes: [ShortEpisodeData]())
-            
-            for item in itemDate.espisodes {
-                guard let animeData = await getAnimeAsync(id: item.animeId) else { continue }
-                guard let episode = animeData.episodes?.first(where: {String($0.id) == item.episodeId}) else { continue }
-                data.episodes.append(ShortEpisodeData(anime: animeData, episode: episode))
-            }
+
+            guard let episodes = try? await getShortEpisodesData(siteEpisodes: itemDate.espisodes) else { continue }
+            data.episodes = episodes
+
             episodesData.append(data)
         }
         return episodesData
     }
+    
+    func getShortEpisodesData(siteEpisodes: [SiteShortEpisodeData]) async throws -> [ShortEpisodeData] {
+        return try await withThrowingTaskGroup(of: ShortEpisodeData.self) { group in
+            var episodes = [ShortEpisodeData]()
+            episodes.reserveCapacity(siteEpisodes.count)
+            
+            for item in siteEpisodes {
+                group.addTask{
+                    return try await self.getShortEpisodeData(animeId: item.animeId, episodeId: item.episodeId)
+                }
+            }
+            for try await episode in group {
+                episodes.append(episode)
+            }
+            return episodes
+        }
+    }
+    
+    private func getShortEpisodeData(animeId: String, episodeId: String) async throws -> ShortEpisodeData {
+        guard let animeData = await getAnimeAsync(id: animeId) else { throw ErrorOfRequest.noData }
+        guard let episode = animeData.episodes?.first(where: {String($0.id) == episodeId}) else { throw ErrorOfRequest.noData }
+        return ShortEpisodeData(anime: animeData, episode: episode)
+    }
+    
 }
