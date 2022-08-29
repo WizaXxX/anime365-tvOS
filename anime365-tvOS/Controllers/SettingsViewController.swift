@@ -50,4 +50,42 @@ class SettingsViewController: UIViewController {
     @objc private func changeShowOnlySetting(_ sender: UITapGestureRecognizer){
         showOnlyVC.changeSetting()
     }
+        
+    private func getVCToChangeFocus(view: FocusableUIView) -> SettingsLineViewController? {
+        var vc: SettingsLineViewController? = nil
+        
+        if view == comfortTranslationTypeView {
+            vc = comfortSettingVC
+        } else if view == showNewEpisodeOnlyWithComfortTypeOfTranslation {
+            vc = showOnlyVC
+        }
+        
+        return vc
+    }
+    
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        
+        if let view = context.nextFocusedView as? FocusableUIView {
+            if let vc = getVCToChangeFocus(view: view) {
+                coordinator.addCoordinatedAnimations {
+                    view.backgroundColor = .white
+                    view.transform = .identity
+                    vc.settingNameLabelView.textColor = .darkGray
+                    vc.settingValueLabelView.textColor = .gray
+                }
+            }
+        }
+        
+        if let view = context.previouslyFocusedView as? FocusableUIView {
+            if let vc = getVCToChangeFocus(view: view) {
+                coordinator.addCoordinatedAnimations {
+                    view.backgroundColor = .clear
+                    view.transform = CGAffineTransform(scaleX: view.scale, y: view.scale)
+                    vc.settingNameLabelView.textColor = .secondaryLabel
+                    vc.settingValueLabelView.textColor = .quaternaryLabel
+                }
+            }
+        }
+    }
 }

@@ -8,19 +8,23 @@
 import UIKit
 import ParallaxView
 
-class FocusableUIView: ParallaxView {
+class FocusableUIView: UIView {
 
     override var canBecomeFocused: Bool {
         return true
     }
     
+    let scale = 0.95
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        cornerRadius = 15
+        layer.cornerRadius = 15
+        transform = CGAffineTransform(scaleX: scale, y: scale)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        cornerRadius = 15
+        layer.cornerRadius = 15
+        transform = CGAffineTransform(scaleX: scale, y: scale)
     }
 }

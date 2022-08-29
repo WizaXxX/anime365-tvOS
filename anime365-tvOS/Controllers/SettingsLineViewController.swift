@@ -47,7 +47,7 @@ class SettingsLineViewController: UIViewController {
         }
     }
     
-    fileprivate func changeComfortTypeSetting() {
+    private func changeComfortTypeSetting() {
         let alert = UIAlertController(
             title: "Типы переводов",
             message: nil,
@@ -100,5 +100,4 @@ class SettingsLineViewController: UIViewController {
         valueSetting = action.title
         settingValueLabelView.text = action.title
     }
-    
 }
