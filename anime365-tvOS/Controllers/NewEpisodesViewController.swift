@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewEpisodesViewController: UIViewController {
+class NewEpisodesViewController: UIViewController, LoadedUIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -15,6 +15,7 @@ class NewEpisodesViewController: UIViewController {
     var newEpisodes = [NewEpisodesData]()
     var pageNumber = 1
     var dataLoading = false
+    var needLoadData = false
     
     let cellName = "EpisodeToWatchCollectionViewCell"
     let cellHeaderName = "NewEpisodesCollectionReusableView"
@@ -42,6 +43,14 @@ class NewEpisodesViewController: UIViewController {
         
         loadData()
             
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if needLoadData {
+            newEpisodes = [NewEpisodesData]()
+            collectionView.reloadData()
+            loadData()
+        }
     }
     
     func loadData() {

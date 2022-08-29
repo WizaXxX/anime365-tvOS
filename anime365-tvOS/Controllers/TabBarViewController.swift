@@ -21,8 +21,10 @@ extension TabBarViewController: UITabBarControllerDelegate {
       
     func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        guard let vc = toVC as? EpisodesToWatchViewController else { return nil }
-        vc.needLoadData = true
+        if var vc = toVC as? LoadedUIViewController {
+            vc.needLoadData = true
+        }
+        
         return nil
     }
 }

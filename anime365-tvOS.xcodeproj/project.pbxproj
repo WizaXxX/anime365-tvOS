@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E5EB1BF529939E0022E4C19 /* Pods_TopShelf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84188013BC0DB4D8113E565 /* Pods_TopShelf.framework */; };
 		BD1F91D5717B71D2226B79F1 /* Pods_anime365_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66ABA2E1145093E04EE69BFD /* Pods_anime365_tvOS.framework */; };
+		E9060C2528BCD9330069FC7A /* LoadedUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9060C2428BCD9330069FC7A /* LoadedUIViewController.swift */; };
 		E90CA37228BBC54400A64A49 /* NewEpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90CA37128BBC54400A64A49 /* NewEpisodesViewController.swift */; };
 		E90CA37528BBC75E00A64A49 /* NewEpisodesCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90CA37328BBC75E00A64A49 /* NewEpisodesCollectionReusableView.swift */; };
 		E90CA37628BBC75E00A64A49 /* NewEpisodesCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E90CA37428BBC75E00A64A49 /* NewEpisodesCollectionReusableView.xib */; };
@@ -135,6 +136,7 @@
 		8A6025DBE0121808A8DE9E74 /* Pods-anime365-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anime365-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-anime365-tvOS/Pods-anime365-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A84188013BC0DB4D8113E565 /* Pods_TopShelf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TopShelf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5E25695AD81E98D7568417A /* Pods-TopShelf.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopShelf.release.xcconfig"; path = "Target Support Files/Pods-TopShelf/Pods-TopShelf.release.xcconfig"; sourceTree = "<group>"; };
+		E9060C2428BCD9330069FC7A /* LoadedUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedUIViewController.swift; sourceTree = "<group>"; };
 		E90CA37128BBC54400A64A49 /* NewEpisodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEpisodesViewController.swift; sourceTree = "<group>"; };
 		E90CA37328BBC75E00A64A49 /* NewEpisodesCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEpisodesCollectionReusableView.swift; sourceTree = "<group>"; };
 		E90CA37428BBC75E00A64A49 /* NewEpisodesCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewEpisodesCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				E9C035D428AD526200B924B1 /* CatalogViewControllerDelegate.swift */,
+				E9060C2428BCD9330069FC7A /* LoadedUIViewController.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				E98A4E6A28A911DF000295CD /* SiteResult.swift in Sources */,
 				E919189928B3D83400FEA503 /* SubscriptionViewController.swift in Sources */,
 				E95DB93428AABEED00D3791B /* EpisodeToWatchCollectionViewCell.swift in Sources */,
+				E9060C2528BCD9330069FC7A /* LoadedUIViewController.swift in Sources */,
 				E96646FF28AEA6850031E4EF /* MainCollectionViewCell.swift in Sources */,
 				E98A4E9328A9649C000295CD /* EpisodeViewController.swift in Sources */,
 				E98A4E8128A93CAF000295CD /* AnimeViewController.swift in Sources */,

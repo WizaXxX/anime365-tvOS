@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EpisodesToWatchViewController: UIViewController {
+class EpisodesToWatchViewController: UIViewController, LoadedUIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
