@@ -8,6 +8,20 @@
 import Foundation
 
 struct Anime {
+    
+    init(from siteAnime: SiteAnime) {
+        id = siteAnime.id
+        title = siteAnime.title
+        posterUrlSmall = ImageFromInternet(url: siteAnime.posterUrlSmall)
+        posterUrl = ImageFromInternet(url: siteAnime.posterUrl)
+        titles = siteAnime.titles
+        episodes = siteAnime.episodes?.map({ Episode(from: $0) })
+        genres = siteAnime.genres?.map({ Genre(from: $0) })
+        desc = siteAnime.descriptions?.map({ AnimeDescription(from: $0) })
+        score = siteAnime.myAnimeListScore
+        numberOfEpisodes = siteAnime.numberOfEpisodes
+    }
+    
     var id: Int
     var title: String
     var posterUrlSmall: ImageFromInternet

@@ -226,7 +226,8 @@
                         <segue destination="6ju-lR-jU0" kind="relationship" relationship="viewControllers" id="faS-sy-diI"/>
                         <segue destination="lpQ-nq-Irw" kind="relationship" relationship="viewControllers" id="Zrj-DD-UUK"/>
                         <segue destination="4oa-Mc-WaG" kind="relationship" relationship="viewControllers" id="XWK-ES-f6O"/>
-                        <segue destination="MlK-iN-YvM" kind="relationship" relationship="viewControllers" id="fIG-zR-q0o"/>
+                        <segue destination="mha-oz-B00" kind="relationship" relationship="viewControllers" id="Lur-7w-K4Q"/>
+                        <segue destination="MlK-iN-YvM" kind="relationship" relationship="viewControllers" id="9kZ-DE-B5M"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgO-6e-adU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -394,6 +395,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AM3-ZO-kfX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2327" y="1750"/>
+        </scene>
+        <!--Рейтинг новых аниме-->
+        <scene sceneID="LY5-EG-qa5">
+            <objects>
+                <viewController id="mha-oz-B00" customClass="RatingAnimeViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TNu-T1-r4T"/>
+                        <viewControllerLayoutGuide type="bottom" id="F2P-7X-Hes"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mcO-AF-xAv">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nsL-xn-S7o">
+                                <rect key="frame" x="80" y="157" width="1760" height="863"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UhU-gU-JZe">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="WWu-XM-ANF">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wNa-Fg-bYe">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ULA-t5-zAE"/>
+                        <constraints>
+                            <constraint firstItem="nsL-xn-S7o" firstAttribute="leading" secondItem="ULA-t5-zAE" secondAttribute="leading" id="N6l-Tp-IwH"/>
+                            <constraint firstItem="nsL-xn-S7o" firstAttribute="top" secondItem="ULA-t5-zAE" secondAttribute="top" id="gOL-Dw-1Cj"/>
+                            <constraint firstItem="ULA-t5-zAE" firstAttribute="trailing" secondItem="nsL-xn-S7o" secondAttribute="trailing" id="hCp-bd-Dob"/>
+                            <constraint firstItem="ULA-t5-zAE" firstAttribute="bottom" secondItem="nsL-xn-S7o" secondAttribute="bottom" id="pLP-jp-IP4"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Рейтинг новых аниме" id="05i-w7-KyR"/>
+                    <connections>
+                        <outlet property="collectionView" destination="nsL-xn-S7o" id="AZm-kX-cWW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n62-O8-HDP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2327" y="3426"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="jby-Ws-FPh">

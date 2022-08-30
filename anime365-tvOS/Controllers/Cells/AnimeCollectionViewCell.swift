@@ -11,6 +11,7 @@ class AnimeCollectionViewCell: MainCollectionViewCell {
     
     @IBOutlet weak var labelView: UILabelViewWithTextLoopAnimation!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var scoreLabelView: UILabel!
     
     var anime: Anime?
     
@@ -28,8 +29,11 @@ class AnimeCollectionViewCell: MainCollectionViewCell {
         super.configure()
         
         self.anime = anime
+        
         self.labelView.text = anime.titles["ru"]
         self.labelView.sizeToFit()
+        
+        self.scoreLabelView.text = anime.score
         DispatchQueue.global().async {
             let image = anime.posterUrl.getImage()
             DispatchQueue.main.async {
@@ -37,7 +41,6 @@ class AnimeCollectionViewCell: MainCollectionViewCell {
             }
         }
         self.imageView.contentMode = .scaleAspectFill
-        
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
@@ -48,7 +51,7 @@ class AnimeCollectionViewCell: MainCollectionViewCell {
                 labelView.startLoopAnimation()
             }
         }
-        
+
         if let view = context.previouslyFocusedView as? AnimeCollectionViewCell {
             view.labelView.layer.removeAllAnimations()
             view.labelView.transform = .identity

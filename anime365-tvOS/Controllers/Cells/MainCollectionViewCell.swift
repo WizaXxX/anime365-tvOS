@@ -27,7 +27,7 @@ class MainCollectionViewCell: ParallaxCollectionViewCell {
         parallaxViewActions.setupUnfocusedState = { [weak self] (view) in
             guard let _self = self else { return }
             view.transform = CGAffineTransform(scaleX: _self.scale, y: _self.scale)
-
+            
             view.layer.shadowOffset = CGSize(width: 0, height: _self.bounds.height * 0.015)
             view.layer.shadowRadius = 5
         }
@@ -35,18 +35,16 @@ class MainCollectionViewCell: ParallaxCollectionViewCell {
         parallaxViewActions.setupFocusedState = { [weak self] (view) in
             guard let _self = self else { return }
             view.transform = .identity
-
+            
             view.layer.shadowOffset = CGSize(width: 0, height: _self.bounds.height * 0.02)
             view.layer.shadowRadius = 15
         }
     }
         
     func configure() {
-        
         transform = CGAffineTransform(scaleX: scale, y: scale)
+        
         layer.cornerRadius = 15
         clipsToBounds = true
-        
-    }
-    
+    }    
 }

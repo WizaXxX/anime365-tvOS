@@ -8,6 +8,13 @@
 import Foundation
 
 struct Episode {
+    init(from siteEpisode: SiteEpisode) {
+        id = siteEpisode.id
+        numerOfEpisode = Int(siteEpisode.numerOfEpisode) ?? 0
+        tittle = siteEpisode.tittle
+        episodeType = siteEpisode.episodeType
+    }
+    
     var id: Int
     var numerOfEpisode: Int
     var tittle: String

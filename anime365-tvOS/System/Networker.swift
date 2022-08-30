@@ -19,6 +19,7 @@ enum Methods {
     case episodeWatched(id: String)
     case getSubscriptionData
     case getNewEpisodes(page: Int)
+    case getRatingsAnimeList
     
     var value: String {
         switch self {
@@ -40,6 +41,8 @@ enum Methods {
             return "users/profile"
         case .getNewEpisodes(let page):
             return "page/\(String(page))"
+        case .getRatingsAnimeList:
+            return ""
         }
     }
 }
@@ -389,7 +392,7 @@ extension Networker {
         guard let url = getUrl(method: .getAnime(id: id)) else { return }
         sendGetRequestJSON(url: url, type: SiteResponse<SiteAnime>.self) { [weak self] result in
             guard let data = result?.data else { return }
-            guard let anime = self?.convertSiteAnimeToAnime(siteAnime: data) else { return }
+            let anime = Anime(from: data)
             completion(anime)
         }
     }
@@ -398,19 +401,7 @@ extension Networker {
         guard let url = getUrl(method: .getAnime(id: id)) else { return nil }
         let result = await sendGetRequestJSONAsync(url: url, type: SiteResponse<SiteAnime>.self)
         guard let data = result?.data else { return nil }
-        return convertSiteAnimeToAnime(siteAnime: data)
-    }
-    
-    func convertSiteAnimeToAnime(siteAnime: SiteAnime) -> Anime {
-        return Anime(
-            id: siteAnime.id,
-            title: siteAnime.title,
-            posterUrlSmall: ImageFromInternet(url: siteAnime.posterUrlSmall),
-            posterUrl: ImageFromInternet(url: siteAnime.posterUrl),
-            titles: siteAnime.titles,
-            episodes: siteAnime.episodes?.map({Episode(id: $0.id, numerOfEpisode: Int($0.numerOfEpisode) ?? 0, tittle: $0.tittle, episodeType: $0.episodeType)}),
-            score: siteAnime.myAnimeListScore,
-            numberOfEpisodes: siteAnime.numberOfEpisodes)
+        return Anime(from: data)
     }
 }
 
@@ -538,8 +529,6 @@ extension Networker {
         
         for itemDate in siteEpisodesData {
             var data = NewEpisodesData(date: itemDate.date, episodes: [ShortEpisodeData]())
-            
-            print(itemDate.espisodes)
             guard let episodes = try? await getShortEpisodesData(siteEpisodes: itemDate.espisodes) else { continue }
             let finalEpisodes = itemDate.espisodes.compactMap { episode in
                 episodes.first(where: {String($0.episode.id) == episode.episodeId})
@@ -571,6 +560,55 @@ extension Networker {
         guard let animeData = await getAnimeAsync(id: animeId) else { throw ErrorOfRequest.noData }
         guard let episode = animeData.episodes?.first(where: {String($0.id) == episodeId}) else { throw ErrorOfRequest.noData }
         return ShortEpisodeData(anime: animeData, episode: episode)
+    }
+    
+}
+
+extension Networker {
+    func getRatingsAnimeList(pageNumber: Int) async -> [Anime] {
+        
+        var animes = [Anime]()
+        var animeIds: [String] = [String]()
+        
+        guard let url = getUrl(method: .getRatingsAnimeList, params: ["pageT": String(pageNumber)]) else { return animes }
+        guard let body = await sendGetRequestAsync(url: url) else { return animes }
+        guard let doc = try? SwiftSoup.parse(body) else { return animes }
+        guard let allEpisodesBlock = try? doc.select("div[id=m-index-top-airing]") else { return animes }
+        if allEpisodesBlock.isEmpty() { return animes }
+        guard let data = try? allEpisodesBlock.select("h5[class=line-1]") else { return animes }
+        
+        for item in data {
+            guard let linkBlock = try? item.select("a[href]").attr("href") else { continue }
+            var partOfData = linkBlock.groups(for: "-([0-9]*)$")
+            guard let animeId = partOfData[0].popLast() else { continue }
+            animeIds.append(animeId)
+        }
+        guard let notSortedAnimes = try? await getListOfAnime(siteAnimes: animeIds) else { return animes }
+        
+        animeIds.forEach { id in
+            guard let anime = notSortedAnimes.first(where: {String($0.id) == id}) else { return }
+            animes.append(anime)
+        }
+        
+        return animes
+    }
+    
+    func getListOfAnime(siteAnimes: [String]) async throws -> [Anime] {
+        return try await withThrowingTaskGroup(of: Anime.self) { group in
+            var animes = [Anime]()
+            
+            for item in siteAnimes {
+                group.addTask{
+                    guard let anime = await self.getAnimeAsync(id: item) else { throw ErrorOfRequest.noData }
+                    return anime
+                }
+            }
+            
+            for try await anime in group {
+                animes.append(anime)
+            }
+            return animes
+        }
     }
     
 }

@@ -8,6 +8,11 @@
 import Foundation
 
 struct AnimeDescription {
+    init(from siteDesc: SiteAnimeDescription) {
+        source = siteDesc.source
+        value = siteDesc.value
+    }
+    
     var source: String
     var value: String
 }

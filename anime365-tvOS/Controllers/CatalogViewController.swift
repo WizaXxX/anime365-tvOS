@@ -68,11 +68,7 @@ class CatalogViewController: UIViewController {
         var episodes: [Episode] = [Episode]()
         guard let siteEpisodes = anime.episodes else { return episodes }
         for siteEpisode in siteEpisodes {
-            episodes.append(Episode(
-                id: siteEpisode.id,
-                numerOfEpisode: Int(siteEpisode.numerOfEpisode) ?? 0,
-                tittle: siteEpisode.tittle,
-                episodeType: siteEpisode.episodeType))
+            episodes.append(Episode(from: siteEpisode))
         }
         return episodes
     }
@@ -80,17 +76,7 @@ class CatalogViewController: UIViewController {
     private func addAnimesToList(siteAnimes: [SiteAnime]) {
         var items = [IndexPath]()
         siteAnimes.forEach { anime in
-            animes.append(Anime(
-                id: anime.id,
-                title: anime.title,
-                posterUrlSmall: ImageFromInternet(url: anime.posterUrlSmall),
-                posterUrl: ImageFromInternet(url: anime.posterUrl),
-                titles: anime.titles,
-                episodes: getEpisodes(from: anime),
-                genres: anime.genres?.map({Genre(id: $0.id, title: $0.title, url: $0.url)}),
-                desc: anime.descriptions?.map({AnimeDescription(source: $0.source, value: $0.value)}),
-                score: anime.myAnimeListScore,
-                numberOfEpisodes: anime.numberOfEpisodes))
+            animes.append(Anime(from: anime))
             items.append(IndexPath(row: animes.count - 1, section: 0))
         }
         collectionView.insertItems(at: items)
@@ -147,7 +133,7 @@ extension CatalogViewController: UICollectionViewDataSource {
         guard let numberOfNextElement = context.nextFocusedIndexPath?.last else { return }
         if numberOfNextElement >= (animes.count * 70 / 100),
            animes.count == maxItemCountOnOnePage * pageNumber,
-           pagesEnded == false{
+           pagesEnded == false {
             loadNewPageData()
         }
     }

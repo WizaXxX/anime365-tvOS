@@ -3,6 +3,7 @@
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,37 +19,62 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QaZ-Pr-cDi">
-                        <rect key="frame" x="80" y="60" width="698" height="893"/>
+                        <rect key="frame" x="80" y="60" width="698" height="848"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRB-E1-1zJ" customClass="UILabelViewWithTextLoopAnimation" customModule="anime365_tvOS" customModuleProvider="target">
-                        <rect key="frame" x="90" y="955" width="74" height="60"/>
+                        <rect key="frame" x="90" y="910" width="79" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="Bq1-yg-6kI"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="28"/>
+                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="30"/>
                         <color key="textColor" systemColor="secondaryLabelColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mth-4m-qtE">
+                        <rect key="frame" x="80" y="968" width="50" height="54"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="mth-4m-qtE" secondAttribute="height" multiplier="1:1" id="nLt-iN-7Oz"/>
+                            <constraint firstAttribute="height" constant="50" id="yGD-Fv-OSp"/>
+                        </constraints>
+                        <imageReference key="image" image="star.square" catalog="system" symbolScale="large"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXY-zI-zhV">
+                        <rect key="frame" x="140" y="970" width="92" height="50"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="35"/>
+                        <color key="textColor" systemColor="placeholderTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="7PP-Ag-gPX"/>
             <constraints>
+                <constraint firstItem="7PP-Ag-gPX" firstAttribute="bottom" secondItem="mth-4m-qtE" secondAttribute="bottom" id="1Zb-aj-sBp"/>
+                <constraint firstItem="mth-4m-qtE" firstAttribute="top" secondItem="qRB-E1-1zJ" secondAttribute="bottom" id="2Kt-xY-b1q"/>
                 <constraint firstItem="qRB-E1-1zJ" firstAttribute="leading" secondItem="QaZ-Pr-cDi" secondAttribute="leading" constant="10" id="2lU-LR-PWb"/>
-                <constraint firstItem="7PP-Ag-gPX" firstAttribute="bottom" secondItem="qRB-E1-1zJ" secondAttribute="bottom" constant="5" id="CBs-Oc-2oG"/>
                 <constraint firstItem="7PP-Ag-gPX" firstAttribute="leading" secondItem="QaZ-Pr-cDi" secondAttribute="leading" id="DcC-tR-2UR"/>
+                <constraint firstItem="bXY-zI-zhV" firstAttribute="centerY" secondItem="mth-4m-qtE" secondAttribute="centerY" id="Oy6-yo-IGm"/>
+                <constraint firstItem="mth-4m-qtE" firstAttribute="leading" secondItem="7PP-Ag-gPX" secondAttribute="leading" id="QXE-Bj-sTh"/>
+                <constraint firstItem="bXY-zI-zhV" firstAttribute="height" secondItem="mth-4m-qtE" secondAttribute="height" id="THZ-As-Lhu"/>
                 <constraint firstItem="qRB-E1-1zJ" firstAttribute="top" secondItem="QaZ-Pr-cDi" secondAttribute="bottom" constant="2" id="VP9-70-VPP"/>
                 <constraint firstItem="7PP-Ag-gPX" firstAttribute="top" secondItem="QaZ-Pr-cDi" secondAttribute="top" id="i66-ed-3v0"/>
                 <constraint firstItem="7PP-Ag-gPX" firstAttribute="trailing" secondItem="QaZ-Pr-cDi" secondAttribute="trailing" id="tZs-UF-Ilu"/>
+                <constraint firstItem="bXY-zI-zhV" firstAttribute="leading" secondItem="mth-4m-qtE" secondAttribute="trailing" constant="10" id="zWm-1o-3n5"/>
             </constraints>
             <size key="customSize" width="778" height="1032"/>
             <connections>
                 <outlet property="imageView" destination="QaZ-Pr-cDi" id="wOJ-1j-QjM"/>
                 <outlet property="labelView" destination="qRB-E1-1zJ" id="twB-lr-M72"/>
+                <outlet property="scoreLabelView" destination="bXY-zI-zhV" id="LCg-Cd-sG8"/>
             </connections>
             <point key="canvasLocation" x="550" y="525"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="star.square" catalog="system" width="128" height="115"/>
+        <systemColor name="placeholderTextColor">
+            <color white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
