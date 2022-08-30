@@ -538,9 +538,13 @@ extension Networker {
         
         for itemDate in siteEpisodesData {
             var data = NewEpisodesData(date: itemDate.date, episodes: [ShortEpisodeData]())
-
+            
+            print(itemDate.espisodes)
             guard let episodes = try? await getShortEpisodesData(siteEpisodes: itemDate.espisodes) else { continue }
-            data.episodes = episodes
+            let finalEpisodes = itemDate.espisodes.compactMap { episode in
+                episodes.first(where: {String($0.episode.id) == episode.episodeId})
+            }
+            data.episodes = finalEpisodes
 
             episodesData.append(data)
         }
@@ -550,7 +554,6 @@ extension Networker {
     func getShortEpisodesData(siteEpisodes: [SiteShortEpisodeData]) async throws -> [ShortEpisodeData] {
         return try await withThrowingTaskGroup(of: ShortEpisodeData.self) { group in
             var episodes = [ShortEpisodeData]()
-            episodes.reserveCapacity(siteEpisodes.count)
             
             for item in siteEpisodes {
                 group.addTask{

@@ -9,7 +9,7 @@ import UIKit
 
 class EpisodeToWatchCollectionViewCell: MainCollectionViewCell {
     
-    @IBOutlet weak var labelView: UILabel!
+    @IBOutlet weak var labelView: UILabelViewWithTextLoopAnimation!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var episodeLabelView: UILabel!
     
@@ -54,6 +54,8 @@ class EpisodeToWatchCollectionViewCell: MainCollectionViewCell {
         self.episodeLabelView.text = episode.tittle
         
         self.labelView.text = anime.titles["ru"]
+        self.labelView.sizeToFit()
+        
         DispatchQueue.global().async {
             let image = anime.posterUrl.getImage()
             DispatchQueue.main.async {
@@ -61,4 +63,20 @@ class EpisodeToWatchCollectionViewCell: MainCollectionViewCell {
             }
         }
     }
+    
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        
+        if let view = context.nextFocusedView {
+            if view == self {
+                labelView.startLoopAnimation()
+            }
+        }
+        
+        if let view = context.previouslyFocusedView as? EpisodeToWatchCollectionViewCell {
+            view.labelView.layer.removeAllAnimations()
+            view.labelView.transform = .identity
+        }
+    }
+    
 }

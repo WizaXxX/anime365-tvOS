@@ -103,6 +103,8 @@
 		E9F1453E28AB872A00C3A5B2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */; };
 		E9F1454028ABAE8200C3A5B2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */; };
 		E9F1454428ABCDE100C3A5B2 /* AllControlles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */; };
+		E9F77A4428BE4BD5004604F2 /* UILabelViewWithTextLoopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F77A4328BE4BD5004604F2 /* UILabelViewWithTextLoopAnimation.swift */; };
+		E9F77A4528BE4C89004604F2 /* UILabelViewWithTextLoopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F77A4328BE4BD5004604F2 /* UILabelViewWithTextLoopAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +209,7 @@
 		E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllControlles.swift; sourceTree = "<group>"; };
+		E9F77A4328BE4BD5004604F2 /* UILabelViewWithTextLoopAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelViewWithTextLoopAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				E9134C8628A6A62B001D25EC /* Main.storyboard */,
+				E9F77A4328BE4BD5004604F2 /* UILabelViewWithTextLoopAnimation.swift */,
 				E9AF2A9B28B53FB900E8B45E /* SettingsLine.storyboard */,
 				E9AF2AA028B5516900E8B45E /* FocusableUIView.swift */,
 				E919189628B3D4DA00FEA503 /* Subscription.storyboard */,
@@ -612,6 +616,7 @@
 				E919189528B3D37F00FEA503 /* SettingsViewController.swift in Sources */,
 				E98A4E8F28A95E7A000295CD /* SiteTranslation.swift in Sources */,
 				E90CBB3228AFFCE600FB1692 /* Genre.swift in Sources */,
+				E9F77A4428BE4BD5004604F2 /* UILabelViewWithTextLoopAnimation.swift in Sources */,
 				E968977228A6E74400C62ACA /* SessionData.swift in Sources */,
 				E97E8A6028BBE42F00DAC4B1 /* NewEpisodesData.swift in Sources */,
 				E90CA37228BBC54400A64A49 /* NewEpisodesViewController.swift in Sources */,
@@ -667,6 +672,7 @@
 				E93D0C1F28B2858000DAC11B /* UICollectionView+UpdateFocus.swift in Sources */,
 				E93D0C1528B2856900DAC11B /* SiteEpisode.swift in Sources */,
 				E93D0C1128B2856400DAC11B /* Episode.swift in Sources */,
+				E9F77A4528BE4C89004604F2 /* UILabelViewWithTextLoopAnimation.swift in Sources */,
 				E93D0C1D28B2856900DAC11B /* SiteTranslationData.swift in Sources */,
 				E97E8A6328BBE4EB00DAC4B1 /* NewEpisodesData.swift in Sources */,
 				E97E8A6428BBE4EF00DAC4B1 /* ShortEpisodeData.swift in Sources */,
