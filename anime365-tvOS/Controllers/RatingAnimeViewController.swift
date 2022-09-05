@@ -57,7 +57,10 @@ class RatingAnimeViewController: UIViewController, LoadedUIViewController {
         Task {
             let data = await Networker.shared.getRatingsAnimeList(pageNumber: pageNumber)
             spinner.stopAnimating()
-            if animes.contains(where: {$0.id == data.first?.id}) { pagesEnded = true }
+            if animes.contains(where: {$0.id == data.first?.id}) {
+                pagesEnded = true
+                return
+            }
             if animes.count == 0 {
                 animes = data
                 collectionView.reloadData()
