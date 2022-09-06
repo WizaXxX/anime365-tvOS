@@ -10,6 +10,8 @@ target 'anime365-tvOS' do
   pod 'RealmSwift', '~>10'
   pod 'SwiftSoup'
   pod 'ParallaxView'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift'
 end
 
 target 'TopShelf' do
@@ -18,4 +20,6 @@ target 'TopShelf' do
   pod 'SwiftKeychainWrapper'
   pod 'Alamofire'
   pod 'SwiftSoup'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift'
 end

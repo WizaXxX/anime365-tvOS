@@ -36,6 +36,7 @@ class LoginViewController: UIViewController {
                 guard let currentSession = sessionData else { return }
                 Session.setSessionData(sessionData: currentSession)
                 Session.saveSessionData(sessionData: currentSession)
+                CloudHelper.shared.saveInitData()
                 
                 DispatchQueue.main.async { [weak self] in
                     self?.goToMainView()
@@ -46,9 +47,17 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if !needLogin() {
-            goToMainView()
+            emailTextField.isHidden = true
+            passwordTextField.isHidden = true
+            loginButton.isHidden = true
+            
+            CloudHelper.shared.getUserData(completion: {
+                DispatchQueue.main.async { [weak self] in
+                    self?.goToMainView()
+                }
+            })
         }
     }
         

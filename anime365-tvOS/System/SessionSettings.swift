@@ -12,34 +12,32 @@ enum SettingsType: String {
     case showNewEpisodesOnlyWithComfortTypeOfTranslation = "Показывать новые серии только с предпочитаемым переводом:"
 }
 
-struct SessionSettings {
+class SessionSettings {
     
     init() {
-        wrapper = UserDefaults(suiteName: "group.anime365.tvos.app")!
-        let type = wrapper.string(forKey: nameOfcomfortTypeOfTranslation)
-        if let typeString = type, let typeValue = TypeOfTranslation(rawValue: typeString) {
-            comfortTypeOfTranslation = typeValue
+        showNewEpisodesOnlyWithComfortTypeOfTranslation = false
+    }
+    
+    init(from data: CloudUserData) {
+        if let typeValue = TypeOfTranslation(rawValue: data.settings.comfortTypeOfTranslation) {
+            self.comfortTypeOfTranslation = typeValue
         }
-        
-        showNewEpisodesOnlyWithComfortTypeOfTranslation = wrapper.bool(
-            forKey: nameOfshowNewEpisodesOnlyWithComfortTypeOfTranslation)
-        
+        self.showNewEpisodesOnlyWithComfortTypeOfTranslation = data.settings.showNewEpisodesOnlyWithComfortTypeOfTranslation
     }
     
     var comfortTypeOfTranslation: TypeOfTranslation?
     var showNewEpisodesOnlyWithComfortTypeOfTranslation: Bool
-    let wrapper: UserDefaults
     
     let nameOfcomfortTypeOfTranslation = "TypeOfTranslation"
     let nameOfshowNewEpisodesOnlyWithComfortTypeOfTranslation = "showNewEpisodesOnlyWithComfortTypeOfTranslation"
     
-    mutating func saveComfortTypeOfTranslation(type: TypeOfTranslation) {
+    func saveComfortTypeOfTranslation(type: TypeOfTranslation) {
         self.comfortTypeOfTranslation = type
-        wrapper.set(type.rawValue, forKey: nameOfcomfortTypeOfTranslation)
+        CloudHelper.shared.saveSettings()
     }
     
-    mutating func saveShowNewEpisodesOnlyWithComfortTypeOfTranslation(value: Bool) {
+    func saveShowNewEpisodesOnlyWithComfortTypeOfTranslation(value: Bool) {
         self.showNewEpisodesOnlyWithComfortTypeOfTranslation = value
-        wrapper.set(value, forKey: nameOfshowNewEpisodesOnlyWithComfortTypeOfTranslation)
+        CloudHelper.shared.saveSettings()
     }
 }
