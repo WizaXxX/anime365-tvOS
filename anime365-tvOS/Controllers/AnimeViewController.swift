@@ -57,8 +57,8 @@ extension AnimeViewController: UICollectionViewDelegate {
         guard let episode = cell.episode else { return }
         guard let currentAnime = anime else { return }
         
-        let vc = AllControlles.getEpisodeViewController()
-        vc.configure(from: episode, anime: currentAnime)
+        let vc = AllControlles.getPlayerViewController()
+        vc.configure(anime: currentAnime, episodeWithoutTranslation: episode)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

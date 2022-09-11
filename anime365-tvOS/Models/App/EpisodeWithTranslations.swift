@@ -15,3 +15,19 @@ struct EpisodeWithTranslations {
     var isActive: Bool
     var translations: [Translation]
 }
+
+extension EpisodeWithTranslations {
+    func getTranslation() -> Translation {
+        var translation: Translation?
+        
+        if let typeOfTranslation = Session.instance.settings.comfortTypeOfTranslation {
+            translation = translations.first(where: {$0.type == typeOfTranslation})
+        }
+        
+        if translation == nil {
+            translation = translations.first
+        }
+        
+        return translation!
+    }
+}

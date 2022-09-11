@@ -309,7 +309,7 @@ extension Networker {
         }
     }
     
-    func getEpisodeWithTranslationsAsync(episodeId: Int) async -> EpisodeWithTranslations? {
+    func getEpisodeWithTranslationsAsync(episodeId: Int, applyUserSettings: Bool = true) async -> EpisodeWithTranslations? {
         guard let url = getUrl(method: .getEpisodeWithTranslation(id: String(episodeId))) else { return nil }
         let result = await sendGetRequestJSONAsync(url: url, type: SiteResponse<SiteEpisodeWithTranslations>.self)
         guard let data = result?.data else { return nil }
@@ -329,6 +329,10 @@ extension Networker {
                 author: $0.authorsSummary,
                 width: $0.width,
                 height: $0.height)}))
+        
+        if !applyUserSettings {
+            return episode
+        }
         
         if Session.instance.settings.showNewEpisodesOnlyWithComfortTypeOfTranslation,
            let typeOfTranslation = Session.instance.settings.comfortTypeOfTranslation  {
@@ -390,7 +394,7 @@ extension Networker {
 extension Networker {
     func getAnime(id: String, completion: @escaping (Anime) -> Void) {
         guard let url = getUrl(method: .getAnime(id: id)) else { return }
-        sendGetRequestJSON(url: url, type: SiteResponse<SiteAnime>.self) { [weak self] result in
+        sendGetRequestJSON(url: url, type: SiteResponse<SiteAnime>.self) { result in
             guard let data = result?.data else { return }
             let anime = Anime(from: data)
             completion(anime)

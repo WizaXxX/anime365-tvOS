@@ -46,8 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Task {
             guard let data = await Networker.shared.getNewEpisodeData(episodeId: episodeId, animeId: animeId) else { return }
-            let vc = AllControlles.getEpisodeViewController()
-            vc.configure(from: data.1, anime: data.0)
+            let vc = AllControlles.getPlayerViewController()
+            vc.configure(anime: data.0, episode: data.1, translation: data.1.getTranslation())
             navController.pushViewController(vc, animated: true)
         }
         

@@ -81,8 +81,11 @@ extension EpisodesToWatchViewController: UICollectionViewDelegate {
         guard let episode = cell.episode else { return }
         guard let currentAnime = cell.anime else { return }
 
-        let vc = AllControlles.getEpisodeViewController()
-        vc.configure(from: episode, anime: currentAnime)
+        let vc = AllControlles.getPlayerViewController()
+        vc.configure(
+            anime: currentAnime,
+            episode: episode,
+            translation: episode.getTranslation())
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -22,8 +22,12 @@ class EpisodeViewController: UIViewController {
     let cellNameTypeOfTraslationCollectionViewCell = "TypeOfTraslationCollectionViewCell"
     let cellNameTranslationCollectionViewCell = "TranslationCollectionViewCell"
     
+    weak var playerVC: PlayerViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Переводы"
         
         if episodeWithTranslations != nil {
             loadData()
@@ -78,13 +82,11 @@ extension EpisodeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? TranslationCollectionViewCell else { return }
-        Networker.shared.getTranslationData(translationId: cell.translation!.id) { [weak self] result in
-            guard let currentAnime = self?.anime else { return }
-            guard let currentEpisode = self?.episodeWithTranslations else { return }
-            
-            let vc = AllControlles.getPlayerViewController()
-            vc.configure(anime: currentAnime, episode: currentEpisode, translationData: result)
-            self?.navigationController?.pushViewController(vc, animated: true)
+        
+        if let vc = playerVC, let translation = cell.translation {
+            vc.translation = translation
+            vc.loadTranslationData()
+            return
         }
     }
     
