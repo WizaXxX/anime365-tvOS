@@ -151,7 +151,21 @@ class PlayerViewController: AVPlayerViewController {
             options: [.displayInline, .singleSelection],
             children: qualityActions)
         
-        let menu = UIMenu(title: "Настройки", image: UIImage(systemName: "gearshape"), children: [qualitySubmenu])
+        guard let streamHeight = stream?.height else { return }
+        var image: UIImage?
+        if streamHeight == 1080 {
+            image = UIImage(named: "1080p")
+        } else if streamHeight == 720 {
+            image = UIImage(named: "720p")
+        } else if streamHeight == 480 {
+            image = UIImage(named: "480p")
+        } else if streamHeight == 360 {
+            image = UIImage(named: "360p")
+        } else {
+            image = UIImage(named: "?p")
+        }
+        
+        let menu = UIMenu(title: "Настройки", image: image, children: [qualitySubmenu])
         transportBarCustomMenuItems = [menu]
     }
             
