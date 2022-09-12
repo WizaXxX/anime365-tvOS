@@ -23,6 +23,7 @@ class PlayerViewController: AVPlayerViewController {
     var episodeWatched = false
     var nextEpisodeButtonShow = false
     var timeObserverToken: Any?
+    var closeView = true
 
     let extendedLanguageTag = "und"
     
@@ -32,6 +33,7 @@ class PlayerViewController: AVPlayerViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        closeView = true
         
         if let episode = episodeWithoutTranslation {
             Task {
@@ -46,7 +48,7 @@ class PlayerViewController: AVPlayerViewController {
             return
         }
         
-        if translation != nil {
+        if translation != nil && translationData == nil {
             loadTranslationData()
         }
         else {
@@ -60,14 +62,22 @@ class PlayerViewController: AVPlayerViewController {
         player = nil
     }
     
-    private func clearView() {
-        if let token = timeObserverToken {
-            self.player?.removeTimeObserver(token)
+    func clearView() {
+        
+        if !closeView {
+            return
         }
+        
+        if let token = timeObserverToken {
+            player?.removeTimeObserver(token)
+        }
+        episodeWithoutTranslation = nil
         episodeWithTranslation = nil
+        anime = nil
         translationData = nil
         translation = nil
         stream = nil
+        nextEpisode = nil
     }
     
     func loadTranslationData(saveCurrentTime: Bool = true) {
@@ -108,6 +118,7 @@ class PlayerViewController: AVPlayerViewController {
             }
         }
         guard let nextEpisodeTranslation = translation else { return }
+        player?.pause()
         DispatchQueue.main.async { [weak self] in
             self?.clearView()
             self?.configure(anime: currentAnime, episode: episodeWithTranslation, translation: nextEpisodeTranslation)
@@ -210,6 +221,19 @@ class PlayerViewController: AVPlayerViewController {
             nextEpisodeButtonShow = true
         }
     }
+    
+    private func goToAnimeVC() {
+        guard let currentAnime = self.anime else { return }
+        
+        player?.pause()
+        currentTime = player?.currentItem?.currentTime()
+        closeView = false
+        
+        let vc = AllControlles.getAnimeViewController()
+        vc.configure(from: currentAnime)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 // MARK: Assets opearations
@@ -237,7 +261,16 @@ extension PlayerViewController {
         }
         
         contextualActions.removeAll()
+        
         infoViewActions.removeAll()
+        let watchLater = UIAction(
+            title: "Перейти к аниме",
+            image: UIImage(systemName: "arrowshape.turn.up.right.circle.fill")) { [weak self] _ in
+                self?.goToAnimeVC()
+                
+            }
+        infoViewActions.append(watchLater)
+        
         setCustomInfoViewControllers()
         
         let item = AVPlayerItem(asset: mixComposition)
@@ -298,6 +331,12 @@ extension PlayerViewController {
         metadataRating.value = anime?.score as? NSCopying & NSObjectProtocol
         metadataRating.extendedLanguageTag = extendedLanguageTag
         extMetadata.append(metadataRating)
+        
+        let metadataArtwork = AVMutableMetadataItem()
+        metadataArtwork.identifier = .commonIdentifierArtwork
+        metadataArtwork.value = anime?.posterUrl.getImage().pngData() as? NSCopying & NSObjectProtocol
+        metadataArtwork.extendedLanguageTag = extendedLanguageTag
+        extMetadata.append(metadataArtwork)
         
         return extMetadata
     }

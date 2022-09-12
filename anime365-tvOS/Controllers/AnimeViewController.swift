@@ -57,6 +57,12 @@ extension AnimeViewController: UICollectionViewDelegate {
         guard let episode = cell.episode else { return }
         guard let currentAnime = anime else { return }
         
+        if let foundVC = navigationController?.children.first(where: {$0 is PlayerViewController}) as? PlayerViewController {
+            foundVC.closeView = true
+            foundVC.clearView()
+            navigationController?.viewControllers.removeAll(where: {$0 == foundVC})
+        }
+        
         let vc = AllControlles.getPlayerViewController()
         vc.configure(anime: currentAnime, episodeWithoutTranslation: episode)
         navigationController?.pushViewController(vc, animated: true)
