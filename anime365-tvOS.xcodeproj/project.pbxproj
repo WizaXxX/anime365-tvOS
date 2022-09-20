@@ -28,7 +28,7 @@
 		E92F81C128B404EA007B610D /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F81BF28B40408007B610D /* SessionSettings.swift */; };
 		E93D0BFD28B27FAE00DAC11B /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93D0BFC28B27FAE00DAC11B /* TVServices.framework */; };
 		E93D0C0028B27FAE00DAC11B /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93D0BFF28B27FAE00DAC11B /* ContentProvider.swift */; };
-		E93D0C0428B27FAE00DAC11B /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E93D0C0428B27FAE00DAC11B /* TopShelf.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E93D0C0B28B2831100DAC11B /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968976728A6B57900C62ACA /* Session.swift */; };
 		E93D0C0C28B283EE00DAC11B /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968976928A6C0E500C62ACA /* Networker.swift */; };
 		E93D0C0D28B2855800DAC11B /* SessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968977128A6E74400C62ACA /* SessionData.swift */; };
@@ -107,6 +107,7 @@
 		E9C035D728AD57E400B924B1 /* UICollectionView+UpdateFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C035D628AD57E400B924B1 /* UICollectionView+UpdateFocus.swift */; };
 		E9C92E6028B01EB300AB2DD4 /* SiteAnimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C92E5F28B01EB300AB2DD4 /* SiteAnimeDescription.swift */; };
 		E9C92E6228B01EF400AB2DD4 /* AnimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C92E6128B01EF400AB2DD4 /* AnimeDescription.swift */; };
+		E9D40EAC28DA40240026D5F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E92B780F28C66BC000092122 /* GoogleService-Info.plist */; };
 		E9F1453E28AB872A00C3A5B2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1453D28AB872A00C3A5B2 /* TabBarViewController.swift */; };
 		E9F1454028ABAE8200C3A5B2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1453F28ABAE8200C3A5B2 /* SearchViewController.swift */; };
 		E9F1454428ABCDE100C3A5B2 /* AllControlles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1454328ABCDE100C3A5B2 /* AllControlles.swift */; };
@@ -126,15 +127,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E93D0C0528B27FAE00DAC11B /* Embed App Extensions */ = {
+		E93D0C0528B27FAE00DAC11B /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E93D0C0428B27FAE00DAC11B /* TopShelf.appex in Embed App Extensions */,
+				E93D0C0428B27FAE00DAC11B /* TopShelf.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -467,7 +468,7 @@
 				E9134C7C28A6A62B001D25EC /* Frameworks */,
 				E9134C7D28A6A62B001D25EC /* Resources */,
 				AF8B0FCFE6BCB754C172FAD0 /* [CP] Embed Pods Frameworks */,
-				E93D0C0528B27FAE00DAC11B /* Embed App Extensions */,
+				E93D0C0528B27FAE00DAC11B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -505,7 +506,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					E9134C7E28A6A62B001D25EC = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -558,6 +559,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9D40EAC28DA40240026D5F9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,7 +898,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.91;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "wizaxxx.anime365-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -926,7 +928,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.91;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "wizaxxx.anime365-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

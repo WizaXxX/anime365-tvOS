@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1340"
+   LastUpgradeVersion = "1400"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E97F85F828B276E700DA0E3B"
+               BlueprintIdentifier = "E93D0BFA28B27FAE00DAC11B"
                BuildableName = "TopShelf.appex"
                BlueprintName = "TopShelf"
                ReferencedContainer = "container:anime365-tvOS.xcodeproj">

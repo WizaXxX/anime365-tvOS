@@ -6,6 +6,7 @@
 //
 
 import TVServices
+import FirebaseCore
 
 class ContentProvider: TVTopShelfContentProvider {
 
@@ -15,6 +16,18 @@ class ContentProvider: TVTopShelfContentProvider {
         Session.setSessionData(sessionData: sessionData)
         Networker.shared.setSessionData()
         
+        FirebaseApp.configure()
+        CloudHelper.shared.getUserData(completion: {
+            DispatchQueue.main.async { [weak self] in
+                self?.getEpisodesToWatch(completionHandler: completionHandler)
+            }
+        })
+    }
+}
+
+extension ContentProvider {
+    
+    private func getEpisodesToWatch(completionHandler: @escaping (TVTopShelfContent?) -> Void) {
         Networker.shared.getEpisoodesToWath { data in
             Task {
                 let episodes = await Networker.shared.getNewEpisodesData(episodes: data)
@@ -38,5 +51,6 @@ class ContentProvider: TVTopShelfContentProvider {
             }
         }
     }
+    
 }
 
