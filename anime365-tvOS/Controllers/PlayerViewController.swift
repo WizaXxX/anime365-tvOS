@@ -305,8 +305,10 @@ extension PlayerViewController {
         
         
         var episodeTitle = ""
-        if let translation = translation, let episodeFullName = episodeWithTranslation?.episodeFull {
-            episodeTitle = "\(episodeFullName) - \(translation.type.rawValue) (\(translation.author))"
+        if let translation = translation,
+           let episodeFullName = episodeWithTranslation?.episodeFull,
+           let numberOfEpisodes = anime?.numberOfEpisodes {
+            episodeTitle = "\(episodeFullName) из \(numberOfEpisodes) (\(translation.type.rawValue) \(translation.author))"
         } else {
             episodeTitle = episodeWithTranslation?.episodeFull ?? ""
         }
