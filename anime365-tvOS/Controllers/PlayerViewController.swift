@@ -198,7 +198,8 @@ class PlayerViewController: AVPlayerViewController {
         setupView()
     }
     
-    private func checkTime(time: CMTime) {
+    private func checkTime() {
+        print(Date())
         guard let durationCM = player?.currentItem?.duration else { return }
         guard let currentTimeCM = player?.currentTime() else { return }
         
@@ -287,10 +288,25 @@ extension PlayerViewController {
         }
         
         player?.play()
-        timeObserverToken = player?.addPeriodicTimeObserver(
-            forInterval: CMTime(seconds: 30.0, preferredTimescale: 1),
-            queue: DispatchQueue.global(),
-            using: {self.checkTime(time: $0)})
+        addBoundaryTimeObserver()
+    }
+    
+    private func addBoundaryTimeObserver() {
+        guard let duration = player?.currentItem?.duration else { return }
+        var times = [NSValue]()
+        var currentTime = CMTime.zero
+        
+        let interval = CMTimeMultiplyByFloat64(duration, multiplier: 0.01)
+        while currentTime < duration {
+            currentTime = currentTime + interval
+            times.append(NSValue(time: currentTime))
+        }
+        
+        timeObserverToken = player?.addBoundaryTimeObserver(
+            forTimes: times,
+            queue: .global(),
+            using: {self.checkTime()})
+        
     }
     
     private func getMetadata() -> [AVMutableMetadataItem] {
