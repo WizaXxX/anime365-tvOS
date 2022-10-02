@@ -62,7 +62,6 @@ extension HistoryViewController: UITableViewDelegate {
         
         if let view = context.nextFocusedView as? HistoryTableViewCell {
             coordinator.addCoordinatedAnimations {
-//                view.backgroundColor = .clear
                 view.titleLabel.textColor = .darkGray
                 view.timeLabel.textColor = .gray
             }
@@ -70,7 +69,6 @@ extension HistoryViewController: UITableViewDelegate {
         
         if let view = context.previouslyFocusedView as? HistoryTableViewCell {
             coordinator.addCoordinatedAnimations {
-//                view.backgroundColor = .clear
                 view.titleLabel.textColor = .secondaryLabel
                 view.timeLabel.textColor = .quaternaryLabel
             }
