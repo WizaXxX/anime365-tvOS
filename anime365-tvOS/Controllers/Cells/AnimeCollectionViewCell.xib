@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="20037" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="21225" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="appleTV" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,8 +22,8 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QaZ-Pr-cDi">
                         <rect key="frame" x="80" y="60" width="698" height="848"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRB-E1-1zJ" customClass="UILabelViewWithTextLoopAnimation" customModule="anime365_tvOS" customModuleProvider="target">
-                        <rect key="frame" x="90" y="910" width="79" height="60"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enablesMarqueeWhenAncestorFocused="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRB-E1-1zJ">
+                        <rect key="frame" x="90" y="910" width="683" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="Bq1-yg-6kI"/>
                         </constraints>
@@ -53,6 +54,7 @@
                 <constraint firstItem="mth-4m-qtE" firstAttribute="top" secondItem="qRB-E1-1zJ" secondAttribute="bottom" id="2Kt-xY-b1q"/>
                 <constraint firstItem="qRB-E1-1zJ" firstAttribute="leading" secondItem="QaZ-Pr-cDi" secondAttribute="leading" constant="10" id="2lU-LR-PWb"/>
                 <constraint firstItem="7PP-Ag-gPX" firstAttribute="leading" secondItem="QaZ-Pr-cDi" secondAttribute="leading" id="DcC-tR-2UR"/>
+                <constraint firstItem="7PP-Ag-gPX" firstAttribute="trailing" secondItem="qRB-E1-1zJ" secondAttribute="trailing" constant="5" id="KDw-IP-MJa"/>
                 <constraint firstItem="bXY-zI-zhV" firstAttribute="centerY" secondItem="mth-4m-qtE" secondAttribute="centerY" id="Oy6-yo-IGm"/>
                 <constraint firstItem="mth-4m-qtE" firstAttribute="leading" secondItem="7PP-Ag-gPX" secondAttribute="leading" id="QXE-Bj-sTh"/>
                 <constraint firstItem="bXY-zI-zhV" firstAttribute="height" secondItem="mth-4m-qtE" secondAttribute="height" id="THZ-As-Lhu"/>
@@ -73,10 +75,10 @@
     <resources>
         <image name="star.square" catalog="system" width="128" height="115"/>
         <systemColor name="placeholderTextColor">
-            <color white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

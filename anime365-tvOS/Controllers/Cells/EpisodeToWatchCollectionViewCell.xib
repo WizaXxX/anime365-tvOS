@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="20037" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="21225" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="appleTV" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,8 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="778" height="1032"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgP-j0-woa" customClass="UILabelViewWithTextLoopAnimation" customModule="anime365_tvOS" customModuleProvider="target">
-                        <rect key="frame" x="90" y="915" width="132" height="50"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enablesMarqueeWhenAncestorFocused="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgP-j0-woa">
+                        <rect key="frame" x="90" y="915" width="683" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="QHN-A2-Var"/>
                         </constraints>
@@ -42,6 +43,7 @@
             </view>
             <viewLayoutGuide key="safeArea" id="7PP-Ag-gPX"/>
             <constraints>
+                <constraint firstItem="7PP-Ag-gPX" firstAttribute="trailing" secondItem="LgP-j0-woa" secondAttribute="trailing" constant="5" id="3Kk-Tb-yi5"/>
                 <constraint firstItem="LgP-j0-woa" firstAttribute="top" secondItem="3AZ-fY-EHL" secondAttribute="bottom" constant="2" id="4Vq-ls-F3d"/>
                 <constraint firstItem="3AZ-fY-EHL" firstAttribute="top" secondItem="7PP-Ag-gPX" secondAttribute="top" id="6fV-7h-dUR"/>
                 <constraint firstItem="7PP-Ag-gPX" firstAttribute="trailing" secondItem="3AZ-fY-EHL" secondAttribute="trailing" id="Jtw-Q3-84B"/>
@@ -62,7 +64,7 @@
     </objects>
     <resources>
         <systemColor name="secondaryLabelColor">
-            <color white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
