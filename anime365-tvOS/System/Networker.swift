@@ -305,7 +305,8 @@ extension Networker {
                 episodeInt: Int(data.episodeInt) ?? 0,
                 episodeType: data.episodeType,
                 isActive: data.isActive == 1 ? true : false,
-                translations: translations))
+                translations: translations,
+                seriesId: data.seriesId))
         }
     }
     
@@ -328,7 +329,8 @@ extension Networker {
                 typeLang: $0.typeLang,
                 author: $0.authorsSummary,
                 width: $0.width,
-                height: $0.height)}))
+                height: $0.height)}),
+            seriesId: data.seriesId)
         
         if !applyUserSettings {
             return episode

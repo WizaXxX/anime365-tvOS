@@ -15,4 +15,5 @@ struct SiteEpisodeWithTranslations: Decodable {
     var isActive: Int
     var isFirstUploaded: Int
     var translations: [SiteTranslation]
+    var seriesId: Int
 }

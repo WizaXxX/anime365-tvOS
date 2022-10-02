@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="21225" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="fBs-An-CcD" customClass="HistoryTableViewCell" customModule="anime365_tvOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fBs-An-CcD" id="S0Q-fX-qc8">
+                <rect key="frame" x="0.0" y="0.0" width="1920" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enablesMarqueeWhenAncestorFocused="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpH-6V-fV2">
+                        <rect key="frame" x="20" y="0.0" width="1725.5" height="44"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGS-VD-ETh">
+                        <rect key="frame" x="1785.5" y="0.0" width="134.5" height="44"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <color key="textColor" systemColor="quaternaryLabelColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="hpH-6V-fV2" secondAttribute="trailing" multiplier="1.1" id="8k0-xZ-Axx"/>
+                    <constraint firstItem="hpH-6V-fV2" firstAttribute="leading" secondItem="S0Q-fX-qc8" secondAttribute="leading" constant="20" id="gJf-Hr-nKs"/>
+                    <constraint firstItem="BGS-VD-ETh" firstAttribute="leading" secondItem="hpH-6V-fV2" secondAttribute="trailing" constant="40" id="hKp-cg-2Up"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="1ks-Xo-ai1"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="BGS-VD-ETh" firstAttribute="top" secondItem="1ks-Xo-ai1" secondAttribute="top" id="1QM-dq-vCT"/>
+                <constraint firstItem="1ks-Xo-ai1" firstAttribute="trailing" secondItem="BGS-VD-ETh" secondAttribute="trailing" id="2wI-lQ-PoA"/>
+                <constraint firstItem="1ks-Xo-ai1" firstAttribute="bottom" secondItem="hpH-6V-fV2" secondAttribute="bottom" id="DUL-xu-CY4"/>
+                <constraint firstItem="1ks-Xo-ai1" firstAttribute="top" secondItem="hpH-6V-fV2" secondAttribute="top" id="ffS-DV-Bps"/>
+                <constraint firstItem="BGS-VD-ETh" firstAttribute="bottom" secondItem="1ks-Xo-ai1" secondAttribute="bottom" id="n6f-Pd-9eH"/>
+            </constraints>
+            <connections>
+                <outlet property="timeLabel" destination="BGS-VD-ETh" id="Xuf-ry-RLl"/>
+                <outlet property="titleLabel" destination="hpH-6V-fV2" id="89y-i6-G71"/>
+            </connections>
+            <point key="canvasLocation" x="-32" y="-36"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="quaternaryLabelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="20037" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JiF-kM-UpU">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="21225" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JiF-kM-UpU">
     <device id="appleTV" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -228,13 +229,14 @@
                         <segue destination="4oa-Mc-WaG" kind="relationship" relationship="viewControllers" id="XWK-ES-f6O"/>
                         <segue destination="mha-oz-B00" kind="relationship" relationship="viewControllers" id="Lur-7w-K4Q"/>
                         <segue destination="MlK-iN-YvM" kind="relationship" relationship="viewControllers" id="9kZ-DE-B5M"/>
+                        <segue destination="Tlg-1I-7vY" kind="relationship" relationship="viewControllers" id="RdV-C5-WsT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgO-6e-adU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2327" y="-40"/>
         </scene>
-        <!--Серии к просмотру-->
+        <!--К просмотру-->
         <scene sceneID="UBp-MR-aa9">
             <objects>
                 <viewController storyboardIdentifier="NewEpisodesViewController" id="lpQ-nq-Irw" customClass="EpisodesToWatchViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -274,7 +276,7 @@
                             <constraint firstItem="ahi-Zl-pxf" firstAttribute="trailing" secondItem="sI2-RV-e7O" secondAttribute="trailing" id="crZ-a5-QEz"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Серии к просмотру" id="wFN-KY-RI2"/>
+                    <tabBarItem key="tabBarItem" title="К просмотру" id="wFN-KY-RI2"/>
                     <navigationItem key="navigationItem" id="lWh-pV-vnM"/>
                     <connections>
                         <outlet property="collectionView" destination="sI2-RV-e7O" id="9zi-mS-arS"/>
@@ -446,6 +448,42 @@
             </objects>
             <point key="canvasLocation" x="2327" y="3426"/>
         </scene>
+        <!--History View Controller-->
+        <scene sceneID="z69-vJ-SIe">
+            <objects>
+                <viewController id="Tlg-1I-7vY" customClass="HistoryViewController" customModule="anime365_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TMU-sG-HHK"/>
+                        <viewControllerLayoutGuide type="bottom" id="U5T-kB-2fE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BGL-oo-yG5">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="6qN-QG-mw9">
+                                <rect key="frame" x="80" y="157" width="1760" height="863"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ABB-6H-xRe"/>
+                        <constraints>
+                            <constraint firstItem="6qN-QG-mw9" firstAttribute="leading" secondItem="ABB-6H-xRe" secondAttribute="leading" id="42w-Mf-Ycp"/>
+                            <constraint firstItem="ABB-6H-xRe" firstAttribute="trailing" secondItem="6qN-QG-mw9" secondAttribute="trailing" id="CIJ-3u-0yA"/>
+                            <constraint firstItem="ABB-6H-xRe" firstAttribute="bottom" secondItem="6qN-QG-mw9" secondAttribute="bottom" id="njQ-gu-has"/>
+                            <constraint firstItem="6qN-QG-mw9" firstAttribute="top" secondItem="ABB-6H-xRe" secondAttribute="top" id="y15-8A-kSA"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" id="sx1-0m-fwK">
+                        <imageReference key="image" image="list.and.film" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="tableView" destination="6qN-QG-mw9" id="3Rx-tL-vwg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lb1-lZ-yPU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2355" y="5153"/>
+        </scene>
         <!--Search View Controller-->
         <scene sceneID="jby-Ws-FPh">
             <objects>
@@ -575,8 +613,9 @@
     </scenes>
     <resources>
         <image name="gearshape.fill" catalog="system" width="128" height="128"/>
+        <image name="list.and.film" catalog="system" width="128" height="87"/>
         <systemColor name="secondaryLabelColor">
-            <color white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

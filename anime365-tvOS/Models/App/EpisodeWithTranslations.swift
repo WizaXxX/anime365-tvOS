@@ -14,6 +14,7 @@ struct EpisodeWithTranslations {
     var episodeType: String
     var isActive: Bool
     var translations: [Translation]
+    var seriesId: Int
 }
 
 extension EpisodeWithTranslations {
