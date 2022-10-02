@@ -26,6 +26,8 @@
 		E92B781228C6720500092122 /* CloudHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B781128C6720500092122 /* CloudHelper.swift */; };
 		E92F81C028B40408007B610D /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F81BF28B40408007B610D /* SessionSettings.swift */; };
 		E92F81C128B404EA007B610D /* SessionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F81BF28B40408007B610D /* SessionSettings.swift */; };
+		E930E42F28E7307D00A527DF /* CloudUserEpisodeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E930E42E28E7307D00A527DF /* CloudUserEpisodeHistory.swift */; };
+		E930E43028E735C500A527DF /* CloudUserEpisodeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E930E42E28E7307D00A527DF /* CloudUserEpisodeHistory.swift */; };
 		E93D0BFD28B27FAE00DAC11B /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93D0BFC28B27FAE00DAC11B /* TVServices.framework */; };
 		E93D0C0028B27FAE00DAC11B /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93D0BFF28B27FAE00DAC11B /* ContentProvider.swift */; };
 		E93D0C0428B27FAE00DAC11B /* TopShelf.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -164,6 +166,7 @@
 		E92B780F28C66BC000092122 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E92B781128C6720500092122 /* CloudHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudHelper.swift; sourceTree = "<group>"; };
 		E92F81BF28B40408007B610D /* SessionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSettings.swift; sourceTree = "<group>"; };
+		E930E42E28E7307D00A527DF /* CloudUserEpisodeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudUserEpisodeHistory.swift; sourceTree = "<group>"; };
 		E93D0BFB28B27FAE00DAC11B /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93D0BFC28B27FAE00DAC11B /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
 		E93D0BFF28B27FAE00DAC11B /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
@@ -366,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				E945D5CA28C7BF030096F4EA /* CloudUserData.swift */,
+				E930E42E28E7307D00A527DF /* CloudUserEpisodeHistory.swift */,
 				E945D5CC28C7BF220096F4EA /* CloudUserSettings.swift */,
 			);
 			path = Cloud;
@@ -680,6 +684,7 @@
 				E90CA37528BBC75E00A64A49 /* NewEpisodesCollectionReusableView.swift in Sources */,
 				E9AF2A9E28B540AC00E8B45E /* SettingsLineViewController.swift in Sources */,
 				E9F1454028ABAE8200C3A5B2 /* SearchViewController.swift in Sources */,
+				E930E42F28E7307D00A527DF /* CloudUserEpisodeHistory.swift in Sources */,
 				E968976A28A6C0E500C62ACA /* Networker.swift in Sources */,
 				E98A4E6A28A911DF000295CD /* SiteResult.swift in Sources */,
 				E919189928B3D83400FEA503 /* SubscriptionViewController.swift in Sources */,
@@ -709,6 +714,7 @@
 				E93D0C1D28B2856900DAC11B /* SiteTranslationData.swift in Sources */,
 				E97E8A6328BBE4EB00DAC4B1 /* NewEpisodesData.swift in Sources */,
 				E97E8A6428BBE4EF00DAC4B1 /* ShortEpisodeData.swift in Sources */,
+				E930E43028E735C500A527DF /* CloudUserEpisodeHistory.swift in Sources */,
 				E93D0C1E28B2858000DAC11B /* UITextField+ShowError.swift in Sources */,
 				E93D0C1228B2856400DAC11B /* AnimeDescription.swift in Sources */,
 				E93D0C0028B27FAE00DAC11B /* ContentProvider.swift in Sources */,

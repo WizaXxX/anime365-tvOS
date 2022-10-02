@@ -18,6 +18,7 @@ class PlayerViewController: AVPlayerViewController {
     var translation: Translation?
     var stream: SiteStreamTranslationData?
     var nextEpisode: EpisodeWithTranslations?
+    var episodeHistoryData: CloudUserEpisodeHistory?
     
     var currentTime: CMTime?
     var episodeWatched = false
@@ -78,6 +79,7 @@ class PlayerViewController: AVPlayerViewController {
         translation = nil
         stream = nil
         nextEpisode = nil
+        episodeHistoryData = nil
     }
     
     func loadTranslationData(saveCurrentTime: Bool = true) {
@@ -86,6 +88,7 @@ class PlayerViewController: AVPlayerViewController {
         if saveCurrentTime {
             currentTime = player?.currentItem?.currentTime()
         }
+        
         Networker.shared.getTranslationData(translationId: translation.id) { [weak self] result in
             self?.translationData = result
             self?.translationData?.stream.sort(by: {$0.height > $1.height})
@@ -199,13 +202,14 @@ class PlayerViewController: AVPlayerViewController {
     }
     
     private func checkTime() {
-        print(Date())
         guard let durationCM = player?.currentItem?.duration else { return }
         guard let currentTimeCM = player?.currentTime() else { return }
         
         let duration = CMTimeGetSeconds(durationCM)
         let currentTime = CMTimeGetSeconds(currentTimeCM)
         let partOfVideo = (duration - currentTime) / duration * 100
+        
+        saveEpisodeHistory(Int64(currentTime))
         
         if partOfVideo < 16, !episodeWatched {
 
@@ -233,6 +237,20 @@ class PlayerViewController: AVPlayerViewController {
         let vc = AllControlles.getAnimeViewController()
         vc.configure(from: currentAnime)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func saveEpisodeHistory(_ currentTime: Int64) {
+        guard let episodeId = episodeWithTranslation?.id,
+              let animeTitle = anime?.titles["ru"],
+              let episodeTitle = episodeWithTranslation?.episodeFull,
+              let currentTranslationId = translation?.id else { return }
+        
+        let title = "\(animeTitle) (\(episodeTitle))"
+        CloudHelper.shared.saveEpisodeHistory(
+            id: episodeId,
+            time: currentTime,
+            title: title,
+            translationId: currentTranslationId)
     }
     
 }
@@ -289,6 +307,7 @@ extension PlayerViewController {
         
         player?.play()
         addBoundaryTimeObserver()
+        checkEpisodeInHistory()
     }
     
     private func addBoundaryTimeObserver() {
@@ -307,6 +326,62 @@ extension PlayerViewController {
             queue: .global(),
             using: {self.checkTime()})
         
+    }
+    
+    private func checkEpisodeInHistory() {
+        
+        if self.episodeHistoryData != nil {
+            continueWatch()
+            return
+        }
+        
+        guard let episodeId = episodeWithTranslation?.id,
+              let episodeHistoryData = Session.instance.settings.episodeHistory.first(where: {$0.id == episodeId})
+        else { return }
+        
+        self.episodeHistoryData = episodeHistoryData
+        
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+
+        let timeString = formatter.string(from: TimeInterval(episodeHistoryData.time))
+        guard let time = timeString else { return }
+        
+        let alert = UIAlertController(
+            title: "Продолжить просмотр с \(time) ?",
+            message: nil,
+            preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(
+            title: "Да",
+            style: .default,
+            handler: { [weak self] _ in
+                self?.continueWatch()
+            }))
+        alert.addAction(UIAlertAction(
+            title: "Нет",
+            style: .cancel,
+            handler: { [weak self] _ in
+                self?.episodeHistoryData = nil
+            }))
+                        
+        present(alert, animated: true)
+        
+    }
+    
+    private func continueWatch() {
+        guard let time = episodeHistoryData?.time,
+              let translationId = episodeHistoryData?.translationId else { return }
+        
+        if translationId != translation?.id {
+            translation = episodeWithTranslation?.translations.first(where: {$0.id == translationId})
+            loadTranslationData(saveCurrentTime: false)
+        } else {
+            player?.seek(to: CMTime(seconds: Double(time), preferredTimescale: 1))
+            episodeHistoryData = nil
+        }
     }
     
     private func getMetadata() -> [AVMutableMetadataItem] {

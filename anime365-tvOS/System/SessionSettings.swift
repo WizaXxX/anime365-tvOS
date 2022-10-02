@@ -16,6 +16,7 @@ class SessionSettings {
     
     init() {
         showNewEpisodesOnlyWithComfortTypeOfTranslation = false
+        episodeHistory = [CloudUserEpisodeHistory]()
     }
     
     init(from data: CloudUserData) {
@@ -23,10 +24,16 @@ class SessionSettings {
             self.comfortTypeOfTranslation = typeValue
         }
         self.showNewEpisodesOnlyWithComfortTypeOfTranslation = data.settings.showNewEpisodesOnlyWithComfortTypeOfTranslation
+        if let episodeHistory = data.episodeHistory {
+            self.episodeHistory = episodeHistory
+        } else {
+            self.episodeHistory = [CloudUserEpisodeHistory]()
+        }
     }
     
     var comfortTypeOfTranslation: TypeOfTranslation?
     var showNewEpisodesOnlyWithComfortTypeOfTranslation: Bool
+    var episodeHistory: [CloudUserEpisodeHistory]
     
     let nameOfcomfortTypeOfTranslation = "TypeOfTranslation"
     let nameOfshowNewEpisodesOnlyWithComfortTypeOfTranslation = "showNewEpisodesOnlyWithComfortTypeOfTranslation"

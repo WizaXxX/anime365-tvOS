@@ -20,7 +20,8 @@ class CloudHelper {
     func saveInitData() {
         let data = CloudUserData(
             id: Session.instance.userId,
-            settings: CloudUserSettings(comfortTypeOfTranslation: "", showNewEpisodesOnlyWithComfortTypeOfTranslation: false))
+            settings: CloudUserSettings(comfortTypeOfTranslation: "", showNewEpisodesOnlyWithComfortTypeOfTranslation: false),
+            episodeHistory: [CloudUserEpisodeHistory]())
         try? db
             .collection(userCollectionName)
             .document(Session.instance.userId)
@@ -48,6 +49,29 @@ class CloudHelper {
             .collection(userCollectionName)
             .document(Session.instance.userId)
             .setData(from: userData, merge: true)
+    }
+    
+    func saveEpisodeHistory(id: Int, time: Int64, title: String, translationId: Int) {
+        let episodeHistoryIndex = Session.instance.settings.episodeHistory.firstIndex(where: {$0.id == id})
+        if let episodeHistoryIndex = episodeHistoryIndex {
+            Session.instance.settings.episodeHistory[episodeHistoryIndex].time = time
+            Session.instance.settings.episodeHistory[episodeHistoryIndex].date = Date()
+            Session.instance.settings.episodeHistory[episodeHistoryIndex].translationId = translationId
+            
+        } else {
+            Session.instance.settings.episodeHistory.append(CloudUserEpisodeHistory(
+                date: Date(),
+                id: id,
+                time: time,
+                title: title,
+                translationId: translationId))
+        }
+        
+        let userData = CloudUserData()
+        try? db
+            .collection(userCollectionName)
+            .document(Session.instance.userId)
+            .setData(from: userData, mergeFields: ["episodeHistory"])
     }
     
 }

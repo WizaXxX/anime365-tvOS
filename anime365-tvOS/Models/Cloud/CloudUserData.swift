@@ -10,11 +10,13 @@ import Foundation
 struct CloudUserData: Codable {
     var id: String
     var settings: CloudUserSettings
+    var episodeHistory: [CloudUserEpisodeHistory]?
 }
 
 extension CloudUserData {
     init() {
         self.id = Session.instance.userId
         self.settings = CloudUserSettings()
+        self.episodeHistory = Session.instance.settings.episodeHistory
     }
 }
