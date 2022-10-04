@@ -27,6 +27,7 @@ class PlayerViewController: AVPlayerViewController {
     var closeView = true
 
     let extendedLanguageTag = "und"
+    let notificationName = "NeedReloadNewEpisodeData"
     
     private lazy var skipAction = UIAction(title: "Следующая серия") { [weak self] _ in
         self?.goToNextEpisode()
@@ -185,40 +186,90 @@ class PlayerViewController: AVPlayerViewController {
         transportBarCustomMenuItems = [menu]
     }
     
-    private func getAnimeStatus() {
-        Task { [weak self] in
-            let status = await anime?.getStatus()
+    private func setAnimeStatus(status: AnimeStatus?) {
+        var statusActions = [
+            UIAction(
+                title: "Запланировано",
+                state: (status?.rawValue == 0 ? .on : .off),
+                handler: { self.changeAnimeStatus(action: $0) }),
+            UIAction(
+                title: "Смотрю",
+                state: (status?.rawValue == 1 ? .on : .off),
+                handler: { self.changeAnimeStatus(action: $0) }),
+            UIAction(
+                title: "Просмотрено",
+                state: (status?.rawValue == 2 ? .on : .off),
+                handler: { self.changeAnimeStatus(action: $0) }),
+            UIAction(
+                title: "Отложено",
+                state: (status?.rawValue == 3 ? .on : .off),
+                handler: { self.changeAnimeStatus(action: $0) }),
+            UIAction(
+                title: "Брошено",
+                state: (status?.rawValue == 4 ? .on : .off),
+                handler: { self.changeAnimeStatus(action: $0) })
+        ]
         
-            var statusActions = [
-                UIAction(title: "Запланировано", state: (status?.rawValue == 0 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) }),
-                UIAction(title: "Смотрю", state: (status?.rawValue == 1 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) }),
-                UIAction(title: "Просмотрено", state: (status?.rawValue == 2 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) }),
-                UIAction(title: "Отложено", state: (status?.rawValue == 3 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) }),
-                UIAction(title: "Брошено", state: (status?.rawValue == 4 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) })
-            ]
-            
-            if status != nil {
-                statusActions.append(UIAction(title: "Удалить из списка", state: .off, handler: {_ in}))
-            }
-            
-            let statusSubmenu = UIMenu(
-                title: "Статус",
-                options: [.displayInline, .singleSelection],
-                children: statusActions)
-            
-            var image = UIImage(systemName: "checklist.unchecked")
-            if status == .viewed {
-                image = UIImage(systemName: "checklist.checked")
-            } else if status == .look {
-                image = UIImage(systemName: "checklist")
-            }
-            
-            let menuStatus = UIMenu(title: "Статус", image: image, children: [statusSubmenu])
-            transportBarCustomMenuItems.insert(menuStatus, at: 0)
+        if status != nil && status != .delete {
+            statusActions.append(UIAction(
+                title: "Удалить из списка",
+                state: .off,
+                handler: { self.changeAnimeStatus(action: $0) }))
+        }
+        
+        let statusSubmenu = UIMenu(
+            title: "Статус",
+            options: [.displayInline, .singleSelection],
+            children: statusActions)
+        
+        var image = UIImage(systemName: "checklist.unchecked")
+        if status == .viewed {
+            image = UIImage(systemName: "checklist.checked")
+        } else if status == .look {
+            image = UIImage(systemName: "checklist")
+        }
+        
+        let menuStatus = UIMenu(title: "Статус", image: image, children: [statusSubmenu])
+        if transportBarCustomMenuItems.count == 2 {
+            transportBarCustomMenuItems.remove(at: 0)
+        }
+        transportBarCustomMenuItems.insert(menuStatus, at: 0)
+    }
+    
+    private func getAnimeStatus() {
+        Task {
+            let status = await anime?.getStatus()
+            setAnimeStatus(status: status)
         }
     }
     
     private func changeAnimeStatus(action: UIAction) {
+        var status = AnimeStatus.delete
+        
+        switch action.title {
+        case "Запланировано":
+            status = .scheduled
+        case "Смотрю":
+            status = .look
+        case "Просмотрено":
+            status = .viewed
+        case "Отложено":
+            status = .postponed
+        case "Брошено":
+            status = .thrown
+        case "Удалить из списка":
+            status = .delete
+        default:
+            return
+        }
+        
+        Task {
+            guard let id = self.anime?.id else { return }
+            Networker.shared.sendAnimeStatusAsync(animeId: String(id), animeStatus: status)
+            NotificationCenter.default.post(name: .init(rawValue: notificationName), object: nil)
+        }
+        
+        setAnimeStatus(status: status)
         
     }
             
@@ -256,7 +307,7 @@ class PlayerViewController: AVPlayerViewController {
             guard let episodeId = episodeWithTranslation?.episodeInt else { return }
 
             Networker.shared.episodeWatched(animeId: String(animeId), episodeNumber: episodeId)
-            NotificationCenter.default.post(name: .init(rawValue: "NeedReloadNewEpisodeData"), object: nil)
+            NotificationCenter.default.post(name: .init(rawValue: notificationName), object: nil)
             episodeWatched = true
         }
         

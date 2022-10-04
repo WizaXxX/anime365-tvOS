@@ -13,6 +13,7 @@ enum AnimeStatus: Int {
     case viewed = 2
     case postponed = 3
     case thrown = 4
+    case delete = 99
 }
 
 struct Anime {

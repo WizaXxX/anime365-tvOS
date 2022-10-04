@@ -21,6 +21,7 @@ enum Methods {
     case getNewEpisodes(page: Int)
     case getRatingsAnimeList
     case getAnimeStatus(id: String)
+    case sendAnimeStatus(id: String)
     
     var value: String {
         switch self {
@@ -45,6 +46,8 @@ enum Methods {
         case .getRatingsAnimeList:
             return ""
         case .getAnimeStatus(let id):
+            return "animelist/edit/\(id)"
+        case .sendAnimeStatus(let id):
             return "animelist/edit/\(id)"
         }
     }
@@ -480,6 +483,36 @@ extension Networker {
         
         return appStatus
         
+    }
+    
+    func sendAnimeStatusAsync(animeId: String, animeStatus: AnimeStatus) {
+        guard let url = getUrl(method: .sendAnimeStatus(id: animeId), params: ["mode": "mini"]) else { return }
+        
+        let uuid = UUID().uuidString
+        setCookie(name: "csrf", value: uuid)
+        
+        let headers: HTTPHeaders = [
+            "User-Agent": "anime-365-tvOS",
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
+        
+        let parameters = [
+            "UsersRates[status]": "\(animeStatus.rawValue)",
+            "csrf": uuid
+        ]
+        
+        AF.request(
+            url,
+            method: .post,
+            parameters: parameters,
+            encoder: .urlEncodedForm,
+            headers: headers).response { response in
+                switch response.result {
+                case let .failure(error):
+                    print(error)
+                default: return
+                }
+        }
     }
 }
 
