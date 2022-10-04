@@ -180,7 +180,46 @@ class PlayerViewController: AVPlayerViewController {
         }
         
         let menu = UIMenu(title: "Настройки", image: image, children: [qualitySubmenu])
+        
+        getAnimeStatus()
         transportBarCustomMenuItems = [menu]
+    }
+    
+    private func getAnimeStatus() {
+        Task { [weak self] in
+            let status = await anime?.getStatus()
+        
+            var statusActions = [
+                UIAction(title: "Запланировано", state: (status?.rawValue == 0 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) }),
+                UIAction(title: "Смотрю", state: (status?.rawValue == 1 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) }),
+                UIAction(title: "Просмотрено", state: (status?.rawValue == 2 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) }),
+                UIAction(title: "Отложено", state: (status?.rawValue == 3 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) }),
+                UIAction(title: "Брошено", state: (status?.rawValue == 4 ? .on : .off), handler: { self?.changeAnimeStatus(action: $0) })
+            ]
+            
+            if status != nil {
+                statusActions.append(UIAction(title: "Удалить из списка", state: .off, handler: {_ in}))
+            }
+            
+            let statusSubmenu = UIMenu(
+                title: "Статус",
+                options: [.displayInline, .singleSelection],
+                children: statusActions)
+            
+            var image = UIImage(systemName: "checklist.unchecked")
+            if status == .viewed {
+                image = UIImage(systemName: "checklist.checked")
+            } else if status == .look {
+                image = UIImage(systemName: "checklist")
+            }
+            
+            let menuStatus = UIMenu(title: "Статус", image: image, children: [statusSubmenu])
+            transportBarCustomMenuItems.insert(menuStatus, at: 0)
+        }
+    }
+    
+    private func changeAnimeStatus(action: UIAction) {
+        
     }
             
     private func tryToLoadNextEpisode() {

@@ -20,6 +20,7 @@ enum Methods {
     case getSubscriptionData
     case getNewEpisodes(page: Int)
     case getRatingsAnimeList
+    case getAnimeStatus(id: String)
     
     var value: String {
         switch self {
@@ -43,6 +44,8 @@ enum Methods {
             return "page/\(String(page))"
         case .getRatingsAnimeList:
             return ""
+        case .getAnimeStatus(let id):
+            return "animelist/edit/\(id)"
         }
     }
 }
@@ -440,6 +443,43 @@ extension Networker {
                 default: return
                 }
         }
+    }
+    
+    func getAnimeStatusAsync(animeId: String) async -> AnimeStatus? {
+        guard let url = getUrl(method: .getAnimeStatus(id: animeId), params: ["mode": "mini"]) else { return nil }
+        
+        let uuid = UUID().uuidString
+        setCookie(name: "csrf", value: uuid)
+        
+        let headers: HTTPHeaders = [
+            "User-Agent": "anime-365-tvOS",
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
+        
+        let parameters = [
+            "csrf": uuid
+        ]
+        
+        let response = await AF.request(url, method: .get, parameters: parameters, headers: headers)
+            .serializingData()
+            .response
+        
+        if response.error != nil {
+           return nil
+        }
+        
+        guard let responseData = response.data else { return nil }
+        guard let body = String(data: responseData, encoding: .utf8) else { return nil }
+        guard let doc = try? SwiftSoup.parse(body) else { return nil }
+        
+        guard let statusBlock = try? doc.select("select[id=UsersRates_status]") else { return nil }
+        guard let status = try? statusBlock.select("option[selected=selected]") else { return nil }
+        guard let statusCodeString = try? status.val() else { return nil }
+        guard let statusCodeInt = Int(statusCodeString) else { return nil }
+        guard let appStatus = AnimeStatus(rawValue: statusCodeInt) else { return nil }
+        
+        return appStatus
+        
     }
 }
 

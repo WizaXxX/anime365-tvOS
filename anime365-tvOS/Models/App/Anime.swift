@@ -7,6 +7,14 @@
 
 import Foundation
 
+enum AnimeStatus: Int {
+    case scheduled = 0
+    case look = 1
+    case viewed = 2
+    case postponed = 3
+    case thrown = 4
+}
+
 struct Anime {
     
     init(from siteAnime: SiteAnime) {
@@ -32,4 +40,8 @@ struct Anime {
     var desc: [AnimeDescription]?
     var score: String
     var numberOfEpisodes: Int
+    
+    func getStatus() async -> AnimeStatus? {
+        return await Networker.shared.getAnimeStatusAsync(animeId: String(id))
+    }
 }
