@@ -25,6 +25,7 @@ class PlayerViewController: AVPlayerViewController {
     var nextEpisodeButtonShow = false
     var timeObserverToken: Any?
     var closeView = true
+    var needLoadHistory = true
 
     let extendedLanguageTag = "und"
     let notificationName = "NeedReloadNewEpisodeData"
@@ -90,6 +91,7 @@ class PlayerViewController: AVPlayerViewController {
             currentTime = player?.currentItem?.currentTime()
         }
         
+        needLoadHistory = false
         Networker.shared.getTranslationData(translationId: translation.id) { [weak self] result in
             self?.translationData = result
             self?.translationData?.stream.sort(by: {$0.height > $1.height})
@@ -288,6 +290,7 @@ class PlayerViewController: AVPlayerViewController {
     private func changeQuality(quality: Int) {
         currentTime = player?.currentItem?.currentTime()
         stream = translationData?.stream.first(where: {$0.height == quality})
+        needLoadHistory = false
         setupView()
     }
     
@@ -336,11 +339,13 @@ class PlayerViewController: AVPlayerViewController {
               let currentTranslationId = translation?.id else { return }
         
         let title = "\(animeTitle) (\(episodeTitle))"
-        CloudHelper.shared.saveEpisodeHistory(
-            id: episodeId,
-            time: currentTime,
-            title: title,
-            translationId: currentTranslationId)
+        DispatchQueue.main.async {
+            CloudHelper.shared.saveEpisodeHistory(
+                id: episodeId,
+                time: currentTime,
+                title: title,
+                translationId: currentTranslationId)
+        }
     }
     
 }
@@ -419,6 +424,11 @@ extension PlayerViewController {
     }
     
     private func checkEpisodeInHistory() {
+        
+        if !needLoadHistory {
+            needLoadHistory = true
+            return
+        }
         
         if self.episodeHistoryData != nil {
             continueWatch()

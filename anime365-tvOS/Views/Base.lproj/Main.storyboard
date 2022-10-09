@@ -579,6 +579,8 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Eub-SM-IQA"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Eub-SM-IQA" firstAttribute="bottom" secondItem="XAk-i5-eRP" secondAttribute="bottom" id="7Lw-tM-psw"/>
                             <constraint firstItem="ICt-IS-b14" firstAttribute="top" secondItem="Eub-SM-IQA" secondAttribute="top" constant="5" id="8Oe-iY-ZuW"/>
