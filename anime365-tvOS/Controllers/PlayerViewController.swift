@@ -91,7 +91,6 @@ class PlayerViewController: AVPlayerViewController {
             currentTime = player?.currentItem?.currentTime()
         }
         
-        needLoadHistory = false
         Networker.shared.getTranslationData(translationId: translation.id) { [weak self] result in
             self?.translationData = result
             self?.translationData?.stream.sort(by: {$0.height > $1.height})

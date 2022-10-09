@@ -85,6 +85,7 @@ extension EpisodeViewController: UICollectionViewDelegate {
         
         if let vc = playerVC, let translation = cell.translation {
             vc.translation = translation
+            vc.needLoadHistory = false
             vc.loadTranslationData()
             return
         }
