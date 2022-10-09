@@ -2,5 +2,4 @@
 
 Приложение для просмотра аниме с сайта https://smotret-anime.com/ на Apple TV
 
-https://user-images.githubusercontent.com/8429673/186932726-c5b70a60-e13b-4c4c-89d2-eea62a8ee66f.mp4
-
+[![Watch demo](https://i.ibb.co/xmQMtb3/2022-10-09-13-57-44.png)](https://youtu.be/Z5Elx_InaaY)
