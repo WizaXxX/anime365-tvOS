@@ -537,6 +537,10 @@ extension PlayerViewController {
         guard let urlOfSub = translationData?.subtitlesVttUrl else { return }
         guard let subtitleUrl = URL(string: urlOfSub) else { return }
         guard let subtitleData = try? Data(contentsOf: subtitleUrl) else { return }
+        guard let subText = String(data: subtitleData, encoding: .utf8) else { return }
+        
+        let subTextFinal = subText.replacingOccurrences(of: "00:00.000 --> 00:00.000", with: "00:00.000 --> 00:00.001")
+        guard let subDataFinal = subTextFinal.data(using: .utf8) else { return }
         
         guard let dir = try? FileManager.default.url(
             for: .cachesDirectory,
@@ -545,7 +549,8 @@ extension PlayerViewController {
             create: false)
         else { return }
         
-        try? subtitleData.write(to: dir.appendingPathComponent("sub.vtt"))
+        
+        try? subDataFinal.write(to: dir.appendingPathComponent("sub.vtt"))
         
         let pathToFile = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("sub.vtt").absoluteURL
         let subtitleAsset = AVURLAsset(url: pathToFile)
