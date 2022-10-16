@@ -47,6 +47,15 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let path = Bundle.main.path(forResource: "sub", ofType: "webvtt") {
+            do {
+                let data = try String(contentsOfFile: path, encoding: .utf8)
+                var sub = Subtitle(type: .webVTT, text: data, lines: [SubtitleLine]())
+                sub.parse()
+            } catch {
+                print(error)
+            }
+        }
         
         if !needLogin() {
             emailTextField.isHidden = true

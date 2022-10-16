@@ -402,6 +402,14 @@ extension PlayerViewController {
         player?.play()
         addBoundaryTimeObserver()
         checkEpisodeInHistory()
+        
+        player?.addPeriodicTimeObserver(
+            forInterval: CMTime(seconds: 1, preferredTimescale: 60),
+            queue: .global()) { time in
+//                CMTimeGetSeconds(time)
+                print(time)
+            }
+        
     }
     
     private func addBoundaryTimeObserver() {
