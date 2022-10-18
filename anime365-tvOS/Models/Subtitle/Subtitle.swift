@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import AVFoundation
+import UIKit
 
 enum TypeOfSubtitle {
     case webVTT
@@ -22,6 +24,14 @@ struct Subtitle {
         if type == .webVTT {
             parseWebVTT()
         }
+    }
+    
+    func show(time: CMTime) -> [SubtitleLine] {
+        let currentSecond = CMTimeGetSeconds(time)
+        let allLines = lines.filter { currentSecond >= $0.from && currentSecond <= $0.to }
+       
+        return allLines
+        
     }
     
     private mutating func parseWebVTT() {
@@ -47,7 +57,6 @@ struct Subtitle {
             let lastIndex = lines.count - 1
             lines[lastIndex].text += line
         }
-        print("123")
     }
     
     private func getSecondFromSubDate(_ timeString: String) -> Double? {

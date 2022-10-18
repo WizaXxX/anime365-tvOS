@@ -11,6 +11,8 @@ import AVFoundation
 
 class PlayerViewController: AVPlayerViewController {
     
+    var subtitleLabelView: UILabel!
+    
     var episodeWithTranslation: EpisodeWithTranslations?
     var episodeWithoutTranslation: Episode?
     var anime: Anime?
@@ -19,6 +21,8 @@ class PlayerViewController: AVPlayerViewController {
     var stream: SiteStreamTranslationData?
     var nextEpisode: EpisodeWithTranslations?
     var episodeHistoryData: CloudUserEpisodeHistory?
+    var subtitle: Subtitle?
+    
     
     var currentTime: CMTime?
     var episodeWatched = false
@@ -34,8 +38,18 @@ class PlayerViewController: AVPlayerViewController {
         self?.goToNextEpisode()
     }
     
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        subtitleLabelView = UILabel(frame: CGRect(x: 100, y: 100, width: view.frame.width, height: view.frame.height))
+        subtitleLabelView.backgroundColor = .blue
+        subtitleLabelView.textColor = .black
+        subtitleLabelView.textAlignment = .center
+        subtitleLabelView.text = "123123012378123"
+        subtitleLabelView.sizeToFit()
+        view.addSubview(subtitleLabelView)
+        
         closeView = true
         
         if let episode = episodeWithoutTranslation {
@@ -404,12 +418,30 @@ extension PlayerViewController {
         checkEpisodeInHistory()
         
         player?.addPeriodicTimeObserver(
-            forInterval: CMTime(seconds: 1, preferredTimescale: 60),
-            queue: .global()) { time in
-//                CMTimeGetSeconds(time)
-                print(time)
-            }
+            forInterval: CMTime(seconds: 0.2, preferredTimescale: 10000),
+            queue: .global(), using: showSubtitle)
+    }
+    
+    private func showSubtitle(_ time: CMTime) {
+        guard let subtitle = self.subtitle else { return }
         
+        let subtitles =  subtitle.show(time: time)
+        var linesToShow = [NSAttributedString]()
+        for line in subtitles {
+            let data = Data(line.text)
+            let subLine = NSAttributedString(data: data, )
+        }
+        DispatchQueue.main.async {
+            if linesToShow.isEmpty {
+                self.subtitleLabelView.text = ""
+            } else {
+                
+                for line in linesToShow {
+                    self.subtitleLabelView.attributedText = NSAttributedString.init(string: line.text, attributes: [.])
+                    self.subtitleLabelView.sizeToFit()
+                }
+            }
+        }
     }
     
     private func addBoundaryTimeObserver() {
@@ -542,6 +574,16 @@ extension PlayerViewController {
     }
     
     private func setSubtitles(mixComposition: inout AVMutableComposition) {
+        guard let path = Bundle.main.path(forResource: "sub", ofType: "webvtt") else { return }
+        do {
+            let data = try String(contentsOfFile: path, encoding: .utf8)
+            subtitle = Subtitle(type: .webVTT, text: data, lines: [SubtitleLine]())
+            subtitle?.parse()
+        } catch {
+            print(error)
+        }
+        return
+        
         guard let urlOfSub = translationData?.subtitlesVttUrl else { return }
         guard let subtitleUrl = URL(string: urlOfSub) else { return }
         guard let subtitleData = try? Data(contentsOf: subtitleUrl) else { return }
