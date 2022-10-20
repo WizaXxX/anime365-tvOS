@@ -106,6 +106,7 @@
 		E9985BA228FAD72E00741321 /* SubtitleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9985BA128FAD72E00741321 /* SubtitleLine.swift */; };
 		E9985BA428FADD5600741321 /* sub.webvtt in Resources */ = {isa = PBXBuildFile; fileRef = E9985BA328FADD5600741321 /* sub.webvtt */; };
 		E9A4B75A28A6F336001A58DD /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A4B75928A6F336001A58DD /* CatalogViewController.swift */; };
+		E9A811E3290045F000BA0E39 /* BottomAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A811E2290045F000BA0E39 /* BottomAlignedLabel.swift */; };
 		E9AF2A9C28B53FB900E8B45E /* SettingsLine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AF2A9B28B53FB900E8B45E /* SettingsLine.storyboard */; };
 		E9AF2A9E28B540AC00E8B45E /* SettingsLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AF2A9D28B540AC00E8B45E /* SettingsLineViewController.swift */; };
 		E9AF2AA128B5516900E8B45E /* FocusableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AF2AA028B5516900E8B45E /* FocusableUIView.swift */; };
@@ -225,6 +226,7 @@
 		E9985BA128FAD72E00741321 /* SubtitleLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleLine.swift; sourceTree = "<group>"; };
 		E9985BA328FADD5600741321 /* sub.webvtt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sub.webvtt; sourceTree = "<group>"; };
 		E9A4B75928A6F336001A58DD /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
+		E9A811E2290045F000BA0E39 /* BottomAlignedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAlignedLabel.swift; sourceTree = "<group>"; };
 		E9AF2A9B28B53FB900E8B45E /* SettingsLine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsLine.storyboard; sourceTree = "<group>"; };
 		E9AF2A9D28B540AC00E8B45E /* SettingsLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLineViewController.swift; sourceTree = "<group>"; };
 		E9AF2AA028B5516900E8B45E /* FocusableUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableUIView.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				E9134C8628A6A62B001D25EC /* Main.storyboard */,
+				E9A811E2290045F000BA0E39 /* BottomAlignedLabel.swift */,
 				E9AF2A9B28B53FB900E8B45E /* SettingsLine.storyboard */,
 				E9AF2AA028B5516900E8B45E /* FocusableUIView.swift */,
 				E919189628B3D4DA00FEA503 /* Subscription.storyboard */,
@@ -719,6 +722,7 @@
 				E92B781228C6720500092122 /* CloudHelper.swift in Sources */,
 				E96646FF28AEA6850031E4EF /* MainCollectionViewCell.swift in Sources */,
 				E98A4E9328A9649C000295CD /* EpisodeViewController.swift in Sources */,
+				E9A811E3290045F000BA0E39 /* BottomAlignedLabel.swift in Sources */,
 				E98A4E8128A93CAF000295CD /* AnimeViewController.swift in Sources */,
 				E9C035D528AD526200B924B1 /* CatalogViewControllerDelegate.swift in Sources */,
 				E97E8A6228BBE45D00DAC4B1 /* ShortEpisodeData.swift in Sources */,

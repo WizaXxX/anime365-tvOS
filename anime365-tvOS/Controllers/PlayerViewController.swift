@@ -11,7 +11,7 @@ import AVFoundation
 
 class PlayerViewController: AVPlayerViewController {
     
-    var subtitleLabelView: UILabel!
+    var subtitleLabelView: BottomAlignedLabel!
     
     var episodeWithTranslation: EpisodeWithTranslations?
     var episodeWithoutTranslation: Episode?
@@ -42,12 +42,16 @@ class PlayerViewController: AVPlayerViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        subtitleLabelView = UILabel(frame: CGRect(x: 100, y: 100, width: view.frame.width, height: view.frame.height))
-        subtitleLabelView.backgroundColor = .blue
-        subtitleLabelView.textColor = .black
+        let heightLabelView = view.frame.height * 0.93
+        subtitleLabelView = BottomAlignedLabel(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: view.frame.width,
+            height: heightLabelView))
+        
+        subtitleLabelView.textColor = .white
         subtitleLabelView.textAlignment = .center
-        subtitleLabelView.text = "123123012378123"
-        subtitleLabelView.sizeToFit()
+        subtitleLabelView.numberOfLines = 0
         view.addSubview(subtitleLabelView)
         
         closeView = true
@@ -149,14 +153,11 @@ class PlayerViewController: AVPlayerViewController {
         guard let urlToVideo = stream?.urls.first else { return }
         guard let videoUrl = URL(string: urlToVideo) else { return }
         
-        let videoAsset = AVURLAsset(url: videoUrl)
-        videoAsset.loadValuesAsynchronously(forKeys: ["playable"]) { [weak self] in
-            if videoAsset.tracks.count == 0 {
-                self?.setupPlayer()
-                return
-            }
-            DispatchQueue.main.async {
-                self?.setupAsset(videoAsset: videoAsset)
+        let asset = AVAsset(url: videoUrl)
+        Task {
+            try? await asset.load(.isPlayable, .duration)
+            DispatchQueue.main.async { [weak self] in
+                self?.setupAsset(from: asset)
             }
         }
     }
@@ -366,30 +367,14 @@ class PlayerViewController: AVPlayerViewController {
 // MARK: Assets opearations
 extension PlayerViewController {
     
-    private func setupAsset(videoAsset: AVURLAsset) {
-        
-        var mixComposition = AVMutableComposition()
-        let videoTrack = mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: .max)
-        let audioTrack = mixComposition.addMutableTrack(withMediaType: .audio, preferredTrackID: .max)
-
-        setSubtitles(mixComposition: &mixComposition)
-
-        do {
-            try videoTrack?.insertTimeRange(
-                CMTimeRangeMake(start: .zero, duration: videoAsset.duration),
-                of: videoAsset.tracks(withMediaType: .video).first!,
-                at: .zero)
-            try audioTrack?.insertTimeRange(
-                CMTimeRangeMake(start: .zero, duration: videoAsset.duration),
-                of: videoAsset.tracks(withMediaType: .audio).first!,
-                at: .zero)
-        } catch let err {
-            print(err.localizedDescription)
-        }
+    private func setupAsset(from asset: AVAsset) {
         
         contextualActions.removeAll()
-        
         infoViewActions.removeAll()
+        
+        setSubtitles()
+        setCustomInfoViewControllers()
+
         let watchLater = UIAction(
             title: "Перейти к аниме",
             image: UIImage(systemName: "arrowshape.turn.up.right.circle.fill")) { [weak self] _ in
@@ -398,9 +383,7 @@ extension PlayerViewController {
             }
         infoViewActions.append(watchLater)
         
-        setCustomInfoViewControllers()
-        
-        let item = AVPlayerItem(asset: mixComposition)
+        let item = AVPlayerItem(asset: asset)
         item.externalMetadata = getMetadata()
         
         if player?.currentItem ==  nil {
@@ -413,33 +396,48 @@ extension PlayerViewController {
             player?.seek(to: currentTime)
         }
         
-        player?.play()
-        addBoundaryTimeObserver()
-        checkEpisodeInHistory()
-        
         player?.addPeriodicTimeObserver(
             forInterval: CMTime(seconds: 0.2, preferredTimescale: 10000),
             queue: .global(), using: showSubtitle)
+        
+        player?.play()
+        addBoundaryTimeObserver()
+        checkEpisodeInHistory()
     }
     
     private func showSubtitle(_ time: CMTime) {
         guard let subtitle = self.subtitle else { return }
         
-        let subtitles =  subtitle.show(time: time)
-        var linesToShow = [NSAttributedString]()
+        let subtitles = subtitle.show(time: time)
+        let text = NSMutableAttributedString()
         for line in subtitles {
-            let data = Data(line.text)
-            let subLine = NSAttributedString(data: data, )
+            let data = Data(line.text.utf8)
+            guard let subLine = try? NSAttributedString(
+                data: data,
+                options: [.documentType: NSAttributedString.DocumentType.html,
+                          .characterEncoding: String.Encoding.utf8.rawValue],
+                documentAttributes: nil) else { continue }
+            if text.length != 0 {
+                text.append(NSAttributedString(string: "\n"))
+            }
+            text.append(subLine)
         }
+        
+        let range = NSRange(location: 0, length: text.length)
+        let font = UIFont(name: "Helvetica Bold", size: 70)
+        
+
+        text.addAttribute(.strokeColor, value: UIColor.black, range: range)
+        text.addAttribute(.strokeWidth, value: -4, range: range)
+        text.addAttribute(.foregroundColor, value: UIColor.white, range: range)
+        text.addAttribute(.font, value: font, range: range)
+        
         DispatchQueue.main.async {
-            if linesToShow.isEmpty {
+            if subtitles.isEmpty {
                 self.subtitleLabelView.text = ""
             } else {
-                
-                for line in linesToShow {
-                    self.subtitleLabelView.attributedText = NSAttributedString.init(string: line.text, attributes: [.])
-                    self.subtitleLabelView.sizeToFit()
-                }
+                self.subtitleLabelView.attributedText = text
+                self.subtitleLabelView.textAlignment = .center
             }
         }
     }
@@ -573,41 +571,14 @@ extension PlayerViewController {
         return extMetadata
     }
     
-    private func setSubtitles(mixComposition: inout AVMutableComposition) {
-        guard let path = Bundle.main.path(forResource: "sub", ofType: "webvtt") else { return }
-        do {
-            let data = try String(contentsOfFile: path, encoding: .utf8)
-            subtitle = Subtitle(type: .webVTT, text: data, lines: [SubtitleLine]())
-            subtitle?.parse()
-        } catch {
-            print(error)
-        }
-        return
-        
+    private func setSubtitles() {
         guard let urlOfSub = translationData?.subtitlesVttUrl else { return }
         guard let subtitleUrl = URL(string: urlOfSub) else { return }
         guard let subtitleData = try? Data(contentsOf: subtitleUrl) else { return }
         guard let subText = String(data: subtitleData, encoding: .utf8) else { return }
         
         let subTextFinal = subText.replacingOccurrences(of: "00:00.000 --> 00:00.000", with: "00:00.000 --> 00:00.001")
-        guard let subDataFinal = subTextFinal.data(using: .utf8) else { return }
-        
-        guard let dir = try? FileManager.default.url(
-            for: .cachesDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: false)
-        else { return }
-        
-        
-        try? subDataFinal.write(to: dir.appendingPathComponent("sub.vtt"))
-        
-        let pathToFile = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("sub.vtt").absoluteURL
-        let subtitleAsset = AVURLAsset(url: pathToFile)
-        let subtitleTrack = mixComposition.addMutableTrack(withMediaType: .text, preferredTrackID: .max)
-        try? subtitleTrack?.insertTimeRange(
-            CMTimeRangeMake(start: .zero, duration: subtitleAsset.duration),
-            of: subtitleAsset.tracks(withMediaType: .text).first!, at: .zero)
+        subtitle = Subtitle(type: .webVTT, text: subTextFinal)
     }
             
     private func setCustomInfoViewControllers() {

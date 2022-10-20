@@ -20,10 +20,11 @@ struct Subtitle {
     
     var lines: [SubtitleLine]
     
-    mutating func parse() {
-        if type == .webVTT {
-            parseWebVTT()
-        }
+    init(type: TypeOfSubtitle, text: String) {
+        self.type = type
+        self.text = text
+        self.lines = [SubtitleLine]()
+        self.parse()
     }
     
     func show(time: CMTime) -> [SubtitleLine] {
@@ -34,17 +35,23 @@ struct Subtitle {
         
     }
     
+    private mutating func parse() {
+        if type == .webVTT {
+            parseWebVTT()
+        }
+    }
+    
     private mutating func parseWebVTT() {
         let subLines = text.components(separatedBy: .newlines)
         for line in subLines {
             
-            if let range = line.range(of: "[0-9:]+.[0-9]{3} --> [0-9:]+.[0-9]{3}", options: .regularExpression) {
+            if line.range(of: "[0-9:]+.[0-9]{3} --> [0-9:]+.[0-9]{3}", options: .regularExpression) != nil {
                 let partOfTime = line.components(separatedBy: "-->")
                 if partOfTime.count != 2 { continue }
                 
                 guard let fromTime = getSecondFromSubDate(partOfTime[0]) else { continue }
                 guard let toTime = getSecondFromSubDate(partOfTime[1]) else { continue }
-                
+                                
                 lines.append(SubtitleLine(
                     from: fromTime,
                     to: toTime,
@@ -55,7 +62,10 @@ struct Subtitle {
             if lines.count == 0 || line.isEmpty { continue }
             
             let lastIndex = lines.count - 1
-            lines[lastIndex].text += line
+            if !lines[lastIndex].text.isEmpty {
+                lines[lastIndex].text += "<br>"
+            }
+            lines[lastIndex].text += "\(line)"
         }
     }
     
