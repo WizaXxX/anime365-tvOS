@@ -1,0 +1,27 @@
+
+/* Class = "UITabBarItem"; title = "Рейтинг новых аниме"; ObjectID = "05i-w7-KyR"; */
+"05i-w7-KyR.title" = "Рейтинг новых аниме";
+
+/* Class = "UITextField"; placeholder = "Пароль"; ObjectID = "09N-3g-prt"; */
+"09N-3g-prt.placeholder" = "Пароль";
+
+/* Class = "UILabel"; text = "Название аниме"; ObjectID = "6dj-6d-tl5"; */
+"6dj-6d-tl5.text" = "Название аниме";
+
+/* Class = "UILabel"; text = "Рейтинг: 9.99"; ObjectID = "6o5-A8-BWw"; */
+"6o5-A8-BWw.text" = "Рейтинг: 9.99";
+
+/* Class = "UITabBarItem"; title = "Новые серии"; ObjectID = "SdH-Be-hNf"; */
+"SdH-Be-hNf.title" = "Новые серии";
+
+/* Class = "UIButton"; configuration.title = "Войти"; ObjectID = "cgq-2y-xi5"; */
+"cgq-2y-xi5.configuration.title" = "Войти";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "cgq-2y-xi5"; */
+"cgq-2y-xi5.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "E-mail"; ObjectID = "i4K-W6-FhK"; */
+"i4K-W6-FhK.placeholder" = "E-mail";
+
+/* Class = "UITabBarItem"; title = "К просмотру"; ObjectID = "wFN-KY-RI2"; */
+"wFN-KY-RI2.title" = "К просмотру";

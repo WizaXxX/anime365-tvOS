@@ -66,7 +66,7 @@ class Networker {
     
     static let shared = Networker()
     
-    let domain = "smotret-anime.com"
+    let domain = "anime365.ru"
     
     func setSessionData() {
         setCookie(name: "PHPSESSID", value: Session.instance.sessionId)
