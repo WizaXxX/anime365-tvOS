@@ -353,8 +353,8 @@ class PlayerViewController: AVPlayerViewController {
               let currentTranslationId = translation?.id else { return }
         
         let title = "\(animeTitle) (\(episodeTitle))"
-        DispatchQueue.main.async {
-            CloudHelper.shared.saveEpisodeHistory(
+        do {
+            try? CloudHelper.shared.saveEpisodeHistory(
                 id: episodeId,
                 time: currentTime,
                 title: title,
@@ -577,7 +577,8 @@ extension PlayerViewController {
         guard let subtitleData = try? Data(contentsOf: subtitleUrl) else { return }
         guard let subText = String(data: subtitleData, encoding: .utf8) else { return }
         
-        let subTextFinal = subText.replacingOccurrences(of: "00:00.000 --> 00:00.000", with: "00:00.000 --> 00:00.001")
+        var subTextFinal = subText.replacingOccurrences(of: "00:00.000 --> 00:00.000", with: "00:00.000 --> 00:00.001")
+        subTextFinal = subTextFinal.replacingOccurrences(of: "\\h", with: " ")
         subtitle = Subtitle(type: .webVTT, text: subTextFinal)
     }
             
