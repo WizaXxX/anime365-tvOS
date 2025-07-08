@@ -56,7 +56,6 @@ class CatalogViewController: UIViewController {
             if uuid != self?.lastRequestUUID { return }
             DispatchQueue.main.async {
                 self?.animes.removeAll()
-                self?.collectionView.reloadData()
                 self?.addAnimesToList(siteAnimes: siteAnimes)
                 self?.spinner.stopAnimating()
             }
@@ -74,12 +73,22 @@ class CatalogViewController: UIViewController {
     }
     
     private func addAnimesToList(siteAnimes: [SiteAnime]) {
-        var items = [IndexPath]()
+        // Запоминаем текущее количество элементов
+        let currentCount = animes.count
+        // Вычисляем индексы для новых элементов
+        let indexPaths = (currentCount..<currentCount + siteAnimes.count).map {
+            IndexPath(item: $0, section: 0)
+        }
+        
+        // Добавляем новые элементы в массив
         siteAnimes.forEach { anime in
             animes.append(Anime(from: anime))
-            items.append(IndexPath(row: animes.count - 1, section: 0))
         }
-        collectionView.insertItems(at: items)
+        
+        // Анимируем вставку
+        collectionView.performBatchUpdates({
+            collectionView.insertItems(at: indexPaths)
+        }, completion: nil)
     }
     
     private func loadNewPageData() {
